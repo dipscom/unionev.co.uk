@@ -1,0 +1,62 @@
+/*
+ * Design tokens. Values mirror the Tailwind classes used on the original site.
+ * Breakpoints cannot be CSS variables inside @media, so they are documented here
+ * and used literally: md = 768px, lg = 1024px, xl = 1280px.
+ */
+:root {
+	/* Brand */
+	--green-900: #023a31;
+	--green-950: #011d19;
+	--green-hover: #033d34;
+	--green-tick: #024d41;
+	--mint: #d4ebe6;
+	--mint-tint: #eff7f5;
+
+	--orange: #ed4f22;
+	--orange-hover: #c44019;
+	--orange-light: #f0622d;
+	--orange-pale: #f5896a;
+	--orange-tint: #fdf1ee;
+
+	/* Neutrals (Tailwind gray scale) */
+	--white: #fff;
+	--gray-50: #f9fafb;
+	--gray-100: #f3f4f6;
+	--gray-200: #e5e7eb;
+	--gray-300: #d1d5db;
+	--gray-400: #9ca3af;
+	--gray-500: #6b7280;
+	--gray-600: #4b5563;
+	--gray-700: #374151;
+	--gray-800: #1f2937;
+	--gray-900: #111827;
+	--gray-950: #030712;
+	--red-400: #f87171;
+
+	/* Typography */
+	--font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+	/* Radii */
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+	--radius-2xl: 1rem;
+	--radius-3xl: 1.5rem;
+	--radius-full: 9999px;
+
+	/* Layout */
+	--w-6xl: 72rem;
+	--w-4xl: 56rem;
+	--w-3xl: 48rem;
+	--gutter: 1.5rem;
+	--section-y: 6rem;
+	--nav-height: 4.5625rem;
+
+	/* Shadows */
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+	/* Motion */
+	--transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
