@@ -11,16 +11,19 @@
 </script>
 
 <div class="faq">
-	<button
-		type="button"
-		class="faq__question"
-		aria-expanded={open}
-		aria-controls="{uid}-answer"
-		onclick={() => (open = !open)}
-	>
-		<span class="faq__text">{question}</span>
-		<span class={['faq__icon', open && 'faq__icon--open']} aria-hidden="true">+</span>
-	</button>
+	<!-- Heading wrapper lets screen reader users jump between questions -->
+	<h3 class="faq__heading">
+		<button
+			type="button"
+			class="faq__question"
+			aria-expanded={open}
+			aria-controls="{uid}-answer"
+			onclick={() => (open = !open)}
+		>
+			<span class="faq__text">{question}</span>
+			<span class={['faq__icon', open && 'faq__icon--open']} aria-hidden="true">+</span>
+		</button>
+	</h3>
 	<div id="{uid}-answer" class="faq__answer" hidden={!open}>
 		<p>{answer}</p>
 	</div>
@@ -31,6 +34,10 @@
 		overflow: hidden;
 		border: 1px solid var(--gray-100);
 		border-radius: var(--radius-2xl);
+	}
+	.faq__heading {
+		font-size: inherit;
+		font-weight: inherit;
 	}
 	.faq__question {
 		display: flex;

@@ -23,6 +23,7 @@
 						{:else}
 							{partner.name}
 						{/if}
+						{#if partner.url}<span class="visually-hidden"> (opens in a new tab)</span>{/if}
 					</svelte:element>
 					<span class="partners__role">{partner.role}</span>
 				</li>
@@ -43,7 +44,7 @@
 	}
 	.partners__label {
 		margin-bottom: 1.5rem;
-		color: var(--gray-400);
+		color: var(--gray-500);
 		font-size: 0.75rem;
 		line-height: 1rem;
 		font-weight: 600;
@@ -81,7 +82,7 @@
 		width: auto;
 	}
 	.partners__role {
-		color: var(--gray-400);
+		color: var(--gray-500);
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}

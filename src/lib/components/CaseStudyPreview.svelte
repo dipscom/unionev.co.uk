@@ -4,30 +4,35 @@
 
 <section class="section section--md preview">
 	<div class="container container--narrow">
-		<a href="#case-study" class="preview__card">
+		<div class="preview__card">
 			<div class="preview__copy">
 				<span class="eyebrow">Case Study</span>
 				<h2 class="preview__title">{caseStudy.title}</h2>
 				<p class="preview__summary">{caseStudy.summary}</p>
-				<span class="preview__link">Read the case study →</span>
+				<!-- The link's ::after covers the card, so the whole card stays clickable
+				     while the link's accessible name stays short -->
+				<a href="#case-study" class="preview__link">Read the case study →</a>
 			</div>
-			<dl class="preview__stats">
-				{#each caseStudy.stats as stat (stat.label)}
-					<div class="preview__stat">
-						<dt class="preview__label">{stat.label}</dt>
-						<dd class="preview__value">{stat.value}</dd>
-					</div>
-				{/each}
+			<div>
+				<dl class="preview__stats">
+					{#each caseStudy.stats as stat (stat.label)}
+						<div class="preview__stat">
+							<dt class="preview__label">{stat.label}</dt>
+							<dd class="preview__value">{stat.value}</dd>
+						</div>
+					{/each}
+				</dl>
 				{#if caseStudy.reportedAt}
 					<p class="preview__asof">As of {caseStudy.reportedAt}</p>
 				{/if}
-			</dl>
-		</a>
+			</div>
+		</div>
 	</div>
 </section>
 
 <style>
 	.preview__card {
+		position: relative;
 		display: grid;
 		gap: 2rem;
 		padding: 2rem;
@@ -38,7 +43,7 @@
 			border-color var(--transition),
 			box-shadow var(--transition);
 	}
-	.preview__card:hover {
+	.preview__card:has(.preview__link:hover) {
 		border-color: rgb(2 58 49 / 0.2);
 		box-shadow: var(--shadow-md);
 	}
@@ -60,6 +65,12 @@
 		font-weight: 600;
 		text-decoration: underline;
 		text-underline-offset: 0.25em;
+	}
+	.preview__link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
 	}
 	.preview__stats {
 		display: grid;
@@ -89,6 +100,7 @@
 		line-height: 1.25rem;
 	}
 	.preview__asof {
+		margin-top: 1rem;
 		color: var(--gray-500);
 		font-size: 0.75rem;
 	}

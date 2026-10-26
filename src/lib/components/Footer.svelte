@@ -31,7 +31,9 @@
 			<div class="footer__col">
 				<p class="footer__heading">Contact</p>
 				<a href={mailto}>{site.email}</a>
-				<a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href={site.linkedin} target="_blank" rel="noopener noreferrer"
+					>LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a
+				>
 			</div>
 
 			<div class="footer__col">
@@ -84,7 +86,7 @@
 	}
 	.footer__tagline {
 		max-width: 20rem;
-		color: var(--gray-500);
+		color: var(--gray-400);
 		font-size: 0.875rem;
 		line-height: 1.625;
 	}
@@ -102,11 +104,11 @@
 		color: var(--white);
 	}
 	.footer__note {
-		color: var(--gray-500);
+		color: var(--gray-400);
 	}
 	.footer__heading {
 		margin-bottom: 0.25rem;
-		color: var(--gray-600);
+		color: var(--gray-400);
 		font-size: 0.75rem;
 		line-height: 1rem;
 		font-weight: 600;
@@ -121,7 +123,7 @@
 		gap: 0.75rem;
 		padding-top: 1.5rem;
 		border-top: 1px solid var(--gray-800);
-		color: var(--gray-600);
+		color: var(--gray-400);
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}

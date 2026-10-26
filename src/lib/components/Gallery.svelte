@@ -12,21 +12,22 @@
 		href?: string;
 	};
 
+	// `alt` describes the photo; `caption` describes the project.
 	// Captions still need the location of each project (see docs/open-points.md)
 	const photos: Photo[] = [
 		{
 			src: images.gallery1,
-			alt: 'Union EV vehicle on site',
+			alt: 'Yellow Renault 5 with a Union EV number plate',
 			caption: 'Union EV on site for a charger installation'
 		},
 		{
 			src: images.gallery2,
-			alt: 'EV being charged',
+			alt: 'Driver plugging a charging cable into a red car',
 			caption: 'A resident charging at a Union EV charge point'
 		},
 		{
 			src: images.install,
-			alt: 'Union EV charge point installation',
+			alt: 'Union EV charge post serving bays 2 and 4, beside a stone wall',
 			caption: 'A completed Union EV charge point installation'
 		}
 	];

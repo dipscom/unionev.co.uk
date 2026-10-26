@@ -12,11 +12,17 @@
 	--mint: #d4ebe6;
 	--mint-tint: #eff7f5;
 
-	--orange: #ed4f22;
-	--orange-hover: #c44019;
-	--orange-light: #f0622d;
+	/*
+	 * One brand orange, darkened from the original #ed4f22 for WCAG AA
+	 * (docs/accessibility-audit.md): 5.1:1 with white text, 4.9:1 on --gray-50.
+	 * It drops to 2.5:1 on --green-900, so small text and focus rings on the dark
+	 * green sections use --orange-pale (5.3:1) instead.
+	 */
+	--orange: #c44019;
+	--orange-hover: #a3350f;
 	--orange-pale: #f5896a;
 	--orange-tint: #fdf1ee;
+	--focus-ring: var(--orange);
 
 	/* Neutrals (Tailwind gray scale) */
 	--white: #fff;

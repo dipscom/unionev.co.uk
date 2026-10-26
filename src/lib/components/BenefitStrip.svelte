@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { benefits } from '../content/partners';
+	import Icon from './Icon.svelte';
 </script>
 
 <section class="strip">
@@ -8,7 +9,7 @@
 			{#if i > 0}
 				<li class="strip__divider" aria-hidden="true">|</li>
 			{/if}
-			<li>✓ {benefit}</li>
+			<li class="strip__item"><Icon name="check" size="1rem" />{benefit}</li>
 		{/each}
 	</ul>
 </section>
@@ -29,6 +30,11 @@
 		justify-content: center;
 		gap: 2rem;
 		padding-inline: 0;
+	}
+	.strip__item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
 	}
 	.strip__divider {
 		display: none;

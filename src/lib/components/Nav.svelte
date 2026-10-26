@@ -11,8 +11,18 @@
 
 	let { base = '' }: Props = $props();
 	let open = $state(false);
+	let toggle: HTMLButtonElement;
 	const close = () => (open = false);
+
+	function onkeydown(event: KeyboardEvent) {
+		if (open && event.key === 'Escape') {
+			close();
+			toggle.focus();
+		}
+	}
 </script>
+
+<svelte:window {onkeydown} />
 
 <nav class="nav" aria-label="Main">
 	<div class="container nav__bar">
@@ -29,6 +39,7 @@
 		<button
 			type="button"
 			class="nav__toggle"
+			bind:this={toggle}
 			aria-label="Toggle menu"
 			aria-expanded={open}
 			aria-controls="mobile-menu"

@@ -16,6 +16,7 @@
 		"test": "npm run test:e2e"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.10.2",
 		"@eslint/js": "^10.0.1",
 		"@playwright/test": "^1.60.0",
 		"@sveltejs/adapter-static": "^4.0.0",

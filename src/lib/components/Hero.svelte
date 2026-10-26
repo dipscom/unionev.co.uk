@@ -10,7 +10,7 @@
 		<div class="hero__copy">
 			<h1 class="hero__title">
 				EV Charging for Your Site.
-				<span class="text-accent-light">Fully Managed.</span>
+				<span class="text-accent">Fully Managed.</span>
 			</h1>
 			<p class="hero__lead">
 				We design, install, operate and maintain EV charging for residential sites, workplaces,
@@ -90,7 +90,7 @@
 		position: absolute;
 		inset: 0;
 		transform: translate(1rem, 1rem);
-		background: rgb(237 79 34 / 0.1);
+		background: rgb(196 64 25 / 0.1);
 		border-radius: var(--radius-3xl);
 	}
 	.hero__image {

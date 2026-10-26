@@ -55,7 +55,7 @@ button {
 }
 
 :focus-visible {
-	outline: 2px solid var(--orange);
+	outline: 2px solid var(--focus-ring);
 	outline-offset: 2px;
 }
 
@@ -92,6 +92,7 @@ button {
 	background: var(--gray-50);
 }
 .section--dark {
+	--focus-ring: var(--orange-pale);
 	background: var(--green-900);
 	color: var(--white);
 }
@@ -161,7 +162,7 @@ button {
 	text-transform: uppercase;
 }
 .eyebrow--light {
-	color: var(--orange-light);
+	color: var(--orange-pale);
 	letter-spacing: 0.1em;
 }
 
@@ -222,9 +223,6 @@ button {
 
 .text-accent {
 	color: var(--orange);
-}
-.text-accent-light {
-	color: var(--orange-light);
 }
 
 /* Buttons */
@@ -312,7 +310,9 @@ button.card:hover {
 	line-height: 1.25rem;
 }
 .check-list__mark {
+	display: flex;
 	flex-shrink: 0;
+	/* Centres the 16px icon on the first 20px line of text */
 	margin-top: 0.125rem;
 }
 .check-list--good .check-list__mark {
