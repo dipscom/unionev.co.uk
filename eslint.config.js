@@ -36,6 +36,9 @@ export default defineConfig(
 	{
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// Links are in-page anchors, mailto: or external URLs; the site has no routed internal links yet
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

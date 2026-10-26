@@ -1,19 +1,18 @@
 <script lang="ts">
-	import '@fontsource/inter/latin-300.css';
-	import '@fontsource/inter/latin-400.css';
-	import '@fontsource/inter/latin-500.css';
-	import '@fontsource/inter/latin-600.css';
-	import '@fontsource/inter/latin-700.css';
-	import '@fontsource/inter/latin-800.css';
+	import '@fontsource-variable/inter/wght.css';
+	import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 	import '../styles/global.css';
-	import favicon from '#lib/assets/favicon.svg';
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin="anonymous" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<link rel="manifest" href="/site.webmanifest" />
+	<meta name="theme-color" content="#023a31" />
 </svelte:head>
 
 {@render children()}

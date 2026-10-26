@@ -138,8 +138,14 @@ button {
 	text-align: center;
 	margin-bottom: 4rem;
 }
+.section-head--compact {
+	margin-bottom: 3rem;
+}
 .section-head--md {
 	margin-bottom: 3.5rem;
+}
+.section-head--xs {
+	margin-bottom: 2rem;
 }
 .section-head--sm {
 	margin-bottom: 2.5rem;
@@ -149,6 +155,7 @@ button {
 	display: inline-block;
 	color: var(--orange);
 	font-size: 0.875rem;
+	line-height: 1.25rem;
 	font-weight: 600;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
@@ -168,11 +175,25 @@ button {
 .section-title--sm {
 	font-size: 1.875rem;
 	line-height: 2.25rem;
-	margin-top: 0;
+	margin: 0 0 0.75rem;
+}
+.section-title--md {
+	font-size: 1.875rem;
+	line-height: 1.25;
+}
+@media (min-width: 768px) {
+	.section-title--md {
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
 }
 .section-title--dark {
+	margin-top: 0.75rem;
 	color: var(--white);
 	font-weight: 800;
+}
+.section-title--tight {
+	line-height: 1.25;
 }
 
 .section-lead {
@@ -181,6 +202,19 @@ button {
 	color: var(--gray-500);
 	font-size: 1.125rem;
 	line-height: 1.75rem;
+}
+.section-lead--xl {
+	max-width: 36rem;
+}
+.section-lead--full {
+	max-width: none;
+}
+.section-lead--relaxed {
+	line-height: 1.625;
+}
+.section-lead--sm {
+	font-size: 1rem;
+	line-height: 1.5rem;
 }
 .section-lead--dark {
 	color: var(--gray-300);
@@ -199,7 +233,7 @@ button {
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
-	border: 1px solid transparent;
+	border: 0;
 	border-radius: var(--radius-xl);
 	padding: 1rem 2rem;
 	font-size: 1rem;
@@ -218,7 +252,7 @@ button {
 	background: var(--orange-hover);
 }
 .btn--outline {
-	border-color: rgb(255 255 255 / 0.2);
+	border: 1px solid rgb(255 255 255 / 0.2);
 	color: var(--white);
 	font-weight: 600;
 }
@@ -289,6 +323,8 @@ button {
 	display: flex;
 	align-items: flex-start;
 	gap: 0.75rem;
+}
+.check-list__text {
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 }
@@ -327,4 +363,11 @@ button {
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
 	}
+}
+
+/* Fill a sized wrapper with an <Image> */
+.img-fill {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

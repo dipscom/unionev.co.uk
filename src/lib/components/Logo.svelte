@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { images } from '../content/images';
+	import union_logo from '../images/union_logo.svg';
 	import Image from './Image.svelte';
 
 	type Props = {
@@ -11,7 +11,7 @@
 </script>
 
 <Image
-	src={images.logo}
+	src={union_logo}
 	alt="Union EV Charging"
 	fit="contain"
 	loading="eager"

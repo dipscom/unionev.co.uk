@@ -4,10 +4,6 @@ const cdn = (hash: string, key: string) =>
 	`https://cdn.sintra.ai/img/${hash}/g:ce/rs:fill:0:0:0/${key}.jpg`;
 
 export const images = {
-	logo: cdn(
-		'GuPL-m2gHiM0d2L7wJyhPNKqAtpvkwlQBOBZ5wlP3us',
-		'czM6Ly9zaW50cmEtYnJhaW5haS1tZWRpYS9jZjk4MDNjMC02NTAwLTRmOWItOTZhNS0yNGQzYzZkOGI5MWQvN2ExZmNmMmMtYzY0Yy00M2JiLWIwYzYtZTVjYjFlNzZkOGNjLVVuaW9uRVZfRnVsbHN0YWNrX0dyZWVuXzR4LnBuZw'
-	),
 	hero: cdn(
 		'ASL2WbfoRws5AqajMHXXcygd5z8ZD2lNjyQ_fPuCQ3o',
 		'czM6Ly9zaW50cmEtYnJhaW5haS1tZWRpYS9jZjk4MDNjMC02NTAwLTRmOWItOTZhNS0yNGQzYzZkOGI5MWQvMWFkMzE5M2UtNTMzNy00MWZlLThhYWMtNGU4NjU3NzQxN2E5LUNoYXJnaW5nX2NhYmxlX2RldGFpbA'

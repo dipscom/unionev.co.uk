@@ -23,8 +23,6 @@
 	}: Props = $props();
 </script>
 
-<!-- hrefs here are in-page anchors, mailto: or external URLs, never app routes -->
-<!-- eslint-disable svelte/no-navigation-without-resolve -->
 <a
 	{href}
 	class={[
@@ -43,4 +41,3 @@
 		{@render children()}
 	{/if}
 </a>
-<!-- eslint-enable svelte/no-navigation-without-resolve -->
