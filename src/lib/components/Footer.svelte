@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { navLinks } from '../content/nav';
-	import { mailto, site } from '../content/site';
+	import { driverSupport, mailto, site } from '../content/site';
 	import Logo from './Logo.svelte';
 
 	type Props = {
@@ -9,6 +9,15 @@
 	};
 
 	let { base = '' }: Props = $props();
+
+	const legal = [
+		site.registered,
+		site.companyNumber && `Company No. ${site.companyNumber}`,
+		site.registeredOffice && `Registered office: ${site.registeredOffice}`,
+		site.insurance
+	]
+		.filter(Boolean)
+		.join(' · ');
 </script>
 
 <footer class="footer">
@@ -26,6 +35,12 @@
 			</div>
 
 			<div class="footer__col">
+				<p class="footer__heading">Drivers</p>
+				<p class="footer__note">Already charging with us?</p>
+				<a href={driverSupport}>Driver support</a>
+			</div>
+
+			<div class="footer__col">
 				<p class="footer__heading">Quick Links</p>
 				{#each navLinks as link (link.href)}
 					<a href={base + link.href}>{link.label}</a>
@@ -36,7 +51,7 @@
 
 		<div class="footer__bottom">
 			<p>© {site.year} {site.legalName}. All rights reserved.</p>
-			<p>{site.registered}</p>
+			<p>{legal}</p>
 		</div>
 	</div>
 </footer>
@@ -85,6 +100,9 @@
 	}
 	.footer__col a:hover {
 		color: var(--white);
+	}
+	.footer__note {
+		color: var(--gray-500);
 	}
 	.footer__heading {
 		margin-bottom: 0.25rem;

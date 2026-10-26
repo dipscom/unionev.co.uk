@@ -2,15 +2,19 @@
 	type Props = {
 		quote: string;
 		author: string;
+		/** e.g. "Chair, Residents' Association"; only for named, permission-approved testimonials */
+		role?: string | null;
 	};
 
-	let { quote, author }: Props = $props();
+	let { quote, author, role }: Props = $props();
 </script>
 
 <figure class="card card--shadow quote">
 	<div class="quote__mark" aria-hidden="true">“</div>
 	<blockquote class="quote__text">{quote}</blockquote>
-	<figcaption class="quote__author">— {author}</figcaption>
+	<figcaption class="quote__author">
+		— {author}{#if role}<span class="quote__role">, {role}</span>{/if}
+	</figcaption>
 </figure>
 
 <style>
@@ -34,5 +38,8 @@
 		font-size: 0.875rem;
 		font-weight: 600;
 		line-height: 1.25rem;
+	}
+	.quote__role {
+		font-weight: 400;
 	}
 </style>

@@ -19,7 +19,7 @@
 		{/each}
 	</div>
 	<p class="faq-more">
-		Still have a question? <a href="#contact">Get in touch</a> and we'll get back to you same day.
+		Still have a question? <a href="#contact">Get in touch</a> and we'll get back to you.
 	</p>
 </Section>
 

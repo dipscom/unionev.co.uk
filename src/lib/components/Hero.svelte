@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { images } from '../content/images';
+	import { site } from '../content/site';
 	import Button from './Button.svelte';
 	import Image from './Image.svelte';
 </script>
@@ -8,21 +9,16 @@
 	<div class="container hero__grid">
 		<div class="hero__copy">
 			<h1 class="hero__title">
-				EV Charging for Your Development.
-				<span class="text-accent-light">Flexible Funding. Fully Managed.</span>
+				EV Charging for Your Site.
+				<span class="text-accent-light">Fully Managed.</span>
 			</h1>
 			<p class="hero__lead">
-				We install, operate, and maintain a complete EV charging network at your site, with full,
-				part-funded or zero-capex options available depending on the project and site. You receive a
-				share of the revenue, while we manage everything else.
-			</p>
-			<p class="hero__sub">
-				From free site survey through to live operation, ongoing maintenance, and ESG reporting —
-				one partner, one relationship, nothing left for you to manage.
+				We design, install, operate and maintain EV charging for residential sites, workplaces,
+				destinations and depots, and share the revenue with you. {site.funding}
 			</p>
 			<div class="hero__actions">
-				<Button href="#contact" sublabel="Start the Conversation">See What's Possible</Button>
-				<Button href="#what-we-do" variant="outline">What We Do</Button>
+				<Button href="#contact">{site.primaryCta}</Button>
+				<Button href="#case-study" variant="outline">See the case study</Button>
 			</div>
 		</div>
 
@@ -53,7 +49,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 3rem;
-		align-items: center;
+		align-items: start;
 	}
 	.hero__copy {
 		padding-block: 3rem;
@@ -66,21 +62,21 @@
 		font-weight: 800;
 	}
 	.hero__lead {
-		margin-bottom: 1.5rem;
+		margin-bottom: 2.5rem;
 		color: var(--gray-300);
 		font-size: 1.125rem;
-		line-height: 1.625;
-	}
-	.hero__sub {
-		margin-bottom: 2.5rem;
-		color: var(--gray-400);
-		font-size: 0.875rem;
 		line-height: 1.625;
 	}
 	.hero__actions {
 		display: flex;
 		flex-direction: column;
+		flex-wrap: wrap;
 		gap: 1rem;
+	}
+	/* Keep each label on one line; the secondary button wraps below when space runs out */
+	.hero__actions :global(.btn) {
+		padding-inline: 1.5rem;
+		white-space: nowrap;
 	}
 	.hero__media {
 		display: none;
@@ -120,12 +116,11 @@
 		.hero__grid {
 			grid-template-columns: 1fr 1fr;
 		}
+		/* Same top padding as .hero__copy, so the photo lines up with the headline */
 		.hero__media {
 			display: flex;
-			align-items: flex-end;
 			justify-content: center;
-			height: 100%;
-			padding-top: 3rem;
+			padding-block: 3rem;
 		}
 	}
 	@media (min-width: 1280px) {

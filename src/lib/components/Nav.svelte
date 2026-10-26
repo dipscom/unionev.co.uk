@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { navLinks } from '../content/nav';
+	import { site } from '../content/site';
 	import Button from './Button.svelte';
 	import Logo from './Logo.svelte';
 
@@ -23,7 +24,7 @@
 			{/each}
 		</div>
 
-		<Button href="{base}#contact" variant="brand" class="nav__cta">Start the Conversation</Button>
+		<Button href="{base}#contact" size="sm" class="nav__cta">{site.primaryCta}</Button>
 
 		<button
 			type="button"
@@ -44,7 +45,7 @@
 			{#each navLinks as link (link.href)}
 				<a href={base + link.href} class="nav__mobile-link" onclick={close}>{link.label}</a>
 			{/each}
-			<Button href="{base}#contact" variant="brand" onclick={close}>Start the Conversation</Button>
+			<Button href="{base}#contact" size="sm" onclick={close}>{site.primaryCta}</Button>
 		</div>
 	{/if}
 </nav>
@@ -82,7 +83,13 @@
 		display: none;
 	}
 	.nav__toggle {
-		padding: 0.5rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		/* 44px tap target */
+		min-width: 2.75rem;
+		min-height: 2.75rem;
+		padding: 0.75rem;
 	}
 	.nav__bar-line {
 		display: block;

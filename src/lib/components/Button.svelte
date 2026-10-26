@@ -4,10 +4,8 @@
 
 	type Props = Omit<HTMLAnchorAttributes, 'class' | 'children'> & {
 		href: string;
-		variant?: 'primary' | 'outline' | 'brand';
-		size?: 'md' | 'lg';
-		/** Small second line shown under the label */
-		sublabel?: string;
+		variant?: 'primary' | 'outline';
+		size?: 'sm' | 'md' | 'lg';
 		class?: string;
 		children: Snippet;
 	};
@@ -16,28 +14,12 @@
 		href,
 		variant = 'primary',
 		size = 'md',
-		sublabel,
 		class: className = '',
 		children,
 		...rest
 	}: Props = $props();
 </script>
 
-<a
-	{href}
-	class={[
-		'btn',
-		`btn--${variant}`,
-		size === 'lg' && 'btn--lg',
-		sublabel && 'btn--stacked',
-		className
-	]}
-	{...rest}
->
-	{#if sublabel}
-		<span class="btn__label">{@render children()}</span>
-		<span class="btn__sublabel">{sublabel}</span>
-	{:else}
-		{@render children()}
-	{/if}
+<a {href} class={['btn', `btn--${variant}`, size !== 'md' && `btn--${size}`, className]} {...rest}>
+	{@render children()}
 </a>

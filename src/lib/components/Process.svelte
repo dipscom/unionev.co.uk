@@ -8,7 +8,7 @@
 	<SectionHeader
 		eyebrow="The Process"
 		title="Survey to operation — we handle it all"
-		lead="A proven, end-to-end process that removes complexity from day one."
+		lead="Four steps from the first conversation to live chargers, and what we need from you at each one."
 		leadWidth="xl"
 	/>
 	<ol class="grid grid--4 steps">
@@ -21,6 +21,7 @@
 					<div class="step__number">{String(i + 1).padStart(2, '0')}</div>
 					<h3 class="step__title">{step.title}</h3>
 					<p class="step__body">{step.body}</p>
+					<p class="step__needs"><strong>From you:</strong> {step.needs}</p>
 				</div>
 			</li>
 		{/each}
@@ -72,6 +73,17 @@
 		color: var(--gray-500);
 		font-size: 0.875rem;
 		line-height: 1.625;
+	}
+	.step__needs {
+		margin-top: 1rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--gray-100);
+		color: var(--gray-600);
+		font-size: 0.8125rem;
+		line-height: 1.5;
+	}
+	.step__needs strong {
+		color: var(--green-900);
 	}
 	@media (min-width: 1024px) {
 		.step__line {

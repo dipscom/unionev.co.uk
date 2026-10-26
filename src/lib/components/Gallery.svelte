@@ -4,10 +4,31 @@
 	import Section from './Section.svelte';
 	import SectionHeader from './SectionHeader.svelte';
 
-	const photos = [
-		{ src: images.gallery1, alt: 'Union EV vehicle on site' },
-		{ src: images.gallery2, alt: 'EV being charged', offset: true },
-		{ src: images.install, alt: 'Union EV charge point installation' }
+	type Photo = {
+		src: string | null;
+		alt: string;
+		caption: string;
+		/** Case study for this project, when there is one */
+		href?: string;
+	};
+
+	// Captions still need the location of each project (see docs/open-points.md)
+	const photos: Photo[] = [
+		{
+			src: images.gallery1,
+			alt: 'Union EV vehicle on site',
+			caption: 'Union EV on site for a charger installation'
+		},
+		{
+			src: images.gallery2,
+			alt: 'EV being charged',
+			caption: 'A resident charging at a Union EV charge point'
+		},
+		{
+			src: images.install,
+			alt: 'Union EV charge point installation',
+			caption: 'A completed Union EV charge point installation'
+		}
 	];
 </script>
 
@@ -21,29 +42,37 @@
 	/>
 	<div class="grid grid--3 gallery" style="--gap: 1rem">
 		{#each photos as photo (photo.alt)}
-			<div class={['tile', photo.offset && 'tile--offset']}>
-				<Image src={photo.src} alt={photo.alt} class="img-fill" />
-			</div>
+			<figure class="tile">
+				<svelte:element this={photo.href ? 'a' : 'div'} href={photo.href} class="tile__image">
+					<Image src={photo.src} alt={photo.alt} class="img-fill" />
+				</svelte:element>
+				<figcaption class="tile__caption">{photo.caption}</figcaption>
+			</figure>
 		{/each}
 	</div>
 </Section>
 
 <style>
 	.tile {
-		height: 16rem;
+		margin: 0;
+	}
+	.tile__image {
+		display: block;
+		aspect-ratio: 4 / 3;
 		overflow: hidden;
 		border-radius: var(--radius-2xl);
 		box-shadow: var(--shadow-sm);
 	}
-	.tile :global(.img-fill) {
+	a.tile__image :global(.img-fill) {
 		transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 	}
-	.tile:hover :global(.img-fill) {
+	a.tile__image:hover :global(.img-fill) {
 		transform: scale(1.05);
 	}
-	@media (min-width: 768px) {
-		.tile--offset {
-			margin-top: 1.5rem;
-		}
+	.tile__caption {
+		margin-top: 0.75rem;
+		color: var(--gray-600);
+		font-size: 0.875rem;
+		line-height: 1.25rem;
 	}
 </style>

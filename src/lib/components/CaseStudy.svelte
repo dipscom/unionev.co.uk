@@ -27,6 +27,7 @@
 		<div class="study__lists">
 			<div>
 				<h3 class="study__heading">The Challenge</h3>
+				<p class="study__summary">{caseStudy.challengeSummary}</p>
 				<CheckList items={[...caseStudy.challenge]} variant="bad" />
 			</div>
 			<div>
@@ -41,10 +42,13 @@
 			<StatCard value={stat.value} label={stat.label} />
 		{/each}
 	</div>
+	{#if caseStudy.reportedAt}
+		<p class="study__asof">Figures as of {caseStudy.reportedAt}.</p>
+	{/if}
 
 	<div class="grid grid--2">
 		{#each caseStudy.quotes as q (q.author)}
-			<QuoteCard quote={q.quote} author={q.author} />
+			<QuoteCard quote={q.quote} author={q.author} role={q.role} />
 		{/each}
 	</div>
 </Section>
@@ -85,8 +89,20 @@
 		line-height: 1.75rem;
 		font-weight: 700;
 	}
+	.study__summary {
+		margin-bottom: 1rem;
+		color: var(--gray-600);
+		font-size: 0.9375rem;
+		line-height: 1.625;
+	}
 	.study__stats {
 		margin-bottom: 3rem;
+	}
+	.study__asof {
+		margin: -2rem 0 3rem;
+		color: var(--gray-500);
+		font-size: 0.8125rem;
+		text-align: center;
 	}
 	@media (min-width: 1024px) {
 		.study {

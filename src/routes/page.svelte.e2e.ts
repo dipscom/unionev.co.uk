@@ -3,10 +3,12 @@ import { expect, test } from '@playwright/test';
 test.describe('home page', () => {
 	test('has title, description and canonical', async ({ page }) => {
 		await page.goto('/');
-		await expect(page).toHaveTitle('Union EV | Smart EV Charging for Residential Communities');
+		await expect(page).toHaveTitle(
+			'Union EV | Managed EV Charging for Residential Sites, Workplaces & Depots'
+		);
 		await expect(page.locator('meta[name="description"]')).toHaveAttribute(
 			'content',
-			/zero-CAPEX electric vehicle charging/
+			/Managed EV charging for residential sites/
 		);
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
 			'href',
@@ -19,7 +21,7 @@ test.describe('home page', () => {
 	test('nav anchors scroll to their sections', async ({ page }) => {
 		await page.goto('/');
 		const links = [
-			['The Full Picture', '#what-we-do'],
+			['Services', '#what-we-do'],
 			['How It Works', '#how-it-works'],
 			['Case Study', '#case-study'],
 			['Get In Touch', '#contact']
@@ -46,13 +48,60 @@ test.describe('home page', () => {
 	test('FAQ item expands to show its answer', async ({ page }) => {
 		await page.goto('/');
 		const question = page.getByRole('button', { name: 'Who owns the chargers?' });
-		const answer = page.getByText('Union EV owns and operates the charging infrastructure.');
+		const answer = page.getByText('It depends on the funding model.');
 		await expect(answer).toBeHidden();
 		await question.click();
 		await expect(question).toHaveAttribute('aria-expanded', 'true');
 		await expect(answer).toBeVisible();
 		await question.click();
 		await expect(answer).toBeHidden();
+	});
+
+	test('audience panels open one at a time and link to the enquiry', async ({ page }) => {
+		await page.goto('/');
+		const fleet = page.getByRole('button', { name: 'Fleet Operators' });
+		const businesses = page.getByRole('button', { name: 'Businesses & Employers' });
+		const fleetPanel = page.locator(`#${await fleet.getAttribute('aria-controls')}`);
+		const businessesPanel = page.locator(`#${await businesses.getAttribute('aria-controls')}`);
+
+		await expect(fleetPanel).toBeHidden();
+		await fleet.click();
+		await expect(fleet).toHaveAttribute('aria-expanded', 'true');
+		await expect(fleetPanel).toBeVisible();
+		await expect(fleetPanel.getByRole('link')).toHaveAttribute(
+			'href',
+			'?type=fleet-operators#contact'
+		);
+
+		await businesses.click();
+		await expect(businessesPanel).toBeVisible();
+		await expect(fleetPanel).toBeHidden();
+		await expect(fleet).toHaveAttribute('aria-expanded', 'false');
+
+		await businesses.click();
+		await expect(businessesPanel).toBeHidden();
+	});
+
+	test('partners link out and explain their role', async ({ page }) => {
+		await page.goto('/');
+		const monta = page.getByRole('link', { name: 'Monta' });
+		await expect(monta).toHaveAttribute('href', 'https://monta.com/');
+		await expect(monta).toHaveAttribute('target', '_blank');
+		await expect(page.getByText('Operating platform & driver app')).toBeVisible();
+	});
+
+	test('case study preview links to the case study', async ({ page }) => {
+		await page.goto('/');
+		await page.getByRole('link', { name: /Read the case study/ }).click();
+		await expect(page).toHaveURL(/#case-study$/);
+		await expect(page.locator('#case-study')).toBeInViewport();
+	});
+
+	test('footer offers a separate driver support route', async ({ page }) => {
+		await page.goto('/');
+		await expect(
+			page.getByRole('contentinfo').getByRole('link', { name: 'Driver support' })
+		).toHaveAttribute('href', /^mailto:.+\?subject=Driver%20support$/);
 	});
 
 	test('contact links use mailto with subject', async ({ page }) => {

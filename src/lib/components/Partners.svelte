@@ -11,7 +11,19 @@
 					<li class="partners__divider" aria-hidden="true"></li>
 				{/if}
 				<li class="partners__item">
-					<span class="partners__name">{partner.name}</span>
+					<svelte:element
+						this={partner.url ? 'a' : 'span'}
+						href={partner.url}
+						target={partner.url && '_blank'}
+						rel={partner.url && 'noopener noreferrer'}
+						class="partners__name"
+					>
+						{#if partner.logo}
+							<img src={partner.logo} alt={partner.name} class="partners__logo" />
+						{:else}
+							{partner.name}
+						{/if}
+					</svelte:element>
 					<span class="partners__role">{partner.role}</span>
 				</li>
 			{/each}
@@ -57,6 +69,16 @@
 		line-height: 1.75rem;
 		font-weight: 800;
 		letter-spacing: -0.025em;
+		transition: color var(--transition);
+	}
+	a.partners__name:hover {
+		color: var(--green-900);
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	.partners__logo {
+		height: 2rem;
+		width: auto;
 	}
 	.partners__role {
 		color: var(--gray-400);

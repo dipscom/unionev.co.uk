@@ -8,14 +8,14 @@
 <Section id="what-we-do" tone="alt">
 	<SectionHeader
 		eyebrow="What We Do"
-		title="The Full Picture"
-		lead="From your initial survey through to intelligent, ongoing operation — you receive one partner, one relationship, and everything handled."
+		title="Services"
+		lead="One partner from the first site survey to day-to-day operation."
 	/>
 	<div class="grid grid--2">
 		{#each features as feature, i (feature.title)}
 			<div
 				class={[
-					'card card--hover feature',
+					'card feature',
 					i === features.length - 1 && features.length % 2 === 1 && 'feature--last'
 				]}
 			>
