@@ -16,7 +16,8 @@
 		<figure class="study__photo">
 			<div class="study__image">
 				<Image
-					src={images.install}
+					src={images.installStudy}
+					sizes="(min-width: 1024px) 528px, calc(100vw - 3rem)"
 					alt="Union EV charge point installed on site"
 					class="img-fill"
 				/>

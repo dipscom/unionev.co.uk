@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { images } from '../content/images';
 	import { site } from '../content/site';
 	import union_logo from '../images/union_logo.svg';
 
@@ -22,6 +21,7 @@
 	}: Props = $props();
 
 	const url = $derived(site.origin + path);
+	const ogImage = site.origin + '/og.jpg';
 
 	const jsonLd = $derived(
 		[
@@ -57,10 +57,14 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={url} />
-	{#if images.hero}
-		<meta property="og:image" content={images.hero} />
-		<meta name="twitter:image" content={images.hero} />
-	{/if}
+	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta
+		property="og:image:alt"
+		content="A driver plugging a charging cable into a red electric car"
+	/>
+	<meta name="twitter:image" content={ogImage} />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={title} />

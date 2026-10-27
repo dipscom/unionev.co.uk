@@ -120,6 +120,30 @@ test.describe('home page', () => {
 		);
 		expect(broken).toBe(0);
 	});
+
+	test('images are self-hosted, sized and served as AVIF', async ({ page, viewport }) => {
+		const external: string[] = [];
+		const avif: string[] = [];
+		page.on('request', (request) => {
+			const { hostname, pathname } = new URL(request.url());
+			if (hostname !== 'localhost' && hostname !== '127.0.0.1') external.push(request.url());
+			if (pathname.endsWith('.avif')) avif.push(pathname);
+		});
+		await page.goto('/');
+		await page.locator('.tile').first().scrollIntoViewIfNeeded();
+		await page.locator('#case-study').scrollIntoViewIfNeeded();
+		await page.waitForLoadState('networkidle');
+
+		expect(external).toEqual([]);
+		expect(avif.length).toBeGreaterThan(0);
+		const unsized = await page.evaluate(
+			() => [...document.images].filter((img) => !img.getAttribute('width')).length
+		);
+		expect(unsized).toBe(0);
+		// The hero photo is hidden below 1024px, so it must not be downloaded there
+		const heroLoaded = avif.some((path) => path.includes('hero-'));
+		expect(heroLoaded).toBe((viewport?.width ?? 1280) >= 1024);
+	});
 });
 
 test.describe('other routes', () => {

@@ -29,8 +29,15 @@
 			<div class="hero__frame">
 				<div class="hero__offset"></div>
 				<div class="hero__image">
-					<!-- lazy: the frame is display:none below lg, so mobile never downloads it -->
-					<Image src={images.hero} alt="EV charging in action" class="img-fill" />
+					<!-- lazy: the frame is display:none below lg, so mobile never downloads it.
+					     fetchpriority is for desktop, where this is the LCP element -->
+					<Image
+						src={images.hero}
+						alt="EV charging in action"
+						sizes="448px"
+						fetchpriority="high"
+						class="img-fill"
+					/>
 				</div>
 			</div>
 		</div>

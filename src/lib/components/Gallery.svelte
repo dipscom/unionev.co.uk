@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { images } from '../content/images';
+	import { images, type Picture } from '../content/images';
 	import Image from './Image.svelte';
 	import Section from './Section.svelte';
 	import SectionHeader from './SectionHeader.svelte';
 
 	type Photo = {
-		src: string | null;
+		src: Picture | null;
 		alt: string;
 		caption: string;
 		/** Case study for this project, when there is one */
@@ -26,7 +26,7 @@
 			caption: 'A resident charging at a Union EV charge point'
 		},
 		{
-			src: images.install,
+			src: images.installTile,
 			alt: 'Union EV charge post serving bays 2 and 4, beside a stone wall',
 			caption: 'A completed Union EV charge point installation'
 		}
@@ -45,7 +45,12 @@
 		{#each photos as photo (photo.alt)}
 			<figure class="tile">
 				<svelte:element this={photo.href ? 'a' : 'div'} href={photo.href} class="tile__image">
-					<Image src={photo.src} alt={photo.alt} class="img-fill" />
+					<Image
+						src={photo.src}
+						alt={photo.alt}
+						sizes="(min-width: 1152px) 357px, (min-width: 768px) calc((100vw - 5rem) / 3), calc(100vw - 3rem)"
+						class="img-fill"
+					/>
 				</svelte:element>
 				<figcaption class="tile__caption">{photo.caption}</figcaption>
 			</figure>

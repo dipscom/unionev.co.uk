@@ -44,9 +44,8 @@
 
 			<h2>Third parties</h2>
 			<p>
-				Some images on this website are loaded from a content delivery network, which can see your
-				IP address when your browser requests them. Our LinkedIn link takes you to LinkedIn, which
-				has its own privacy policy. Our fonts are served from this website, not from a third party.
+				Our LinkedIn link takes you to LinkedIn, which has its own privacy policy. Our images and
+				fonts are served from this website, not from a third party.
 			</p>
 
 			<h2>Our legal basis and how long we keep information</h2>

@@ -14,7 +14,9 @@
 	src={union_logo}
 	alt="Union EV Charging"
 	fit="contain"
-	loading="eager"
+	width={1998}
+	height={495}
+	loading={size === 'nav' ? 'eager' : 'lazy'}
 	class="logo logo--{size}"
 />
 
