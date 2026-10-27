@@ -1,0 +1,8 @@
+{
+	"name": "unionev-preview",
+	"compatibility_date": "2026-10-27",
+	"assets": {
+		"directory": "./build",
+		"not_found_handling": "404-page"
+	}
+}
