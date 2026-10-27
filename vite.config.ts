@@ -41,6 +41,10 @@ export default defineConfig({
 			// Styles are small; inline them so they don't block first paint.
 			inlineStyleThreshold: 20000,
 
+			// Inlined styles live in the HTML, so their url()s must not be relative to a CSS file
+			// (they would resolve against the page and 404, e.g. the font at /inter-latin-….woff2)
+			paths: { relative: false },
+
 			// Plain static output so the site deploys unchanged to any static host.
 			// fallback gives hosts a 404.html that renders +error.svelte.
 			adapter: adapter({ fallback: '404.html' })
