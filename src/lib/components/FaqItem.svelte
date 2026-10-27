@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Icon from './Icon.svelte';
+
 	type Props = {
 		question: string;
 		answer: string;
@@ -20,7 +22,7 @@
 			aria-controls="{uid}-answer"
 		>
 			<span class="faq__text">{question}</span>
-			<span class="faq__icon" aria-hidden="true">+</span>
+			<span class="faq__icon"><Icon name="plus" size="0.875rem" /></span>
 		</button>
 	</h3>
 	<div id="{uid}-answer" class="faq__answer" data-disclosure-panel hidden>
@@ -67,8 +69,6 @@
 		border-radius: var(--radius-full);
 		background: var(--mint-tint);
 		color: var(--green-900);
-		font-size: 0.875rem;
-		font-weight: 700;
 		transition: transform var(--transition);
 	}
 	.faq__question:global([aria-expanded='true']) .faq__icon {
