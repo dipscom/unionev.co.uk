@@ -60,6 +60,7 @@
 
 <style>
 	.footer {
+		--focus-ring: var(--orange-pale);
 		padding: 3.5rem var(--gutter);
 		background: var(--gray-950);
 		color: var(--gray-400);

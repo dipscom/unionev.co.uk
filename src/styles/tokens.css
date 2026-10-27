@@ -13,14 +13,17 @@
 	--mint-tint: #eff7f5;
 
 	/*
-	 * One brand orange, darkened from the original #ed4f22 for WCAG AA
-	 * (docs/accessibility-audit.md): 5.1:1 with white text, 4.9:1 on --gray-50.
-	 * It drops to 2.5:1 on --green-900, so small text and focus rings on the dark
-	 * green sections use --orange-pale (5.3:1) instead.
+	 * Two brand oranges for WCAG AAA 1.4.6 (docs/accessibility-audit.md).
+	 * --orange is for light backgrounds: 8.1:1 with white text, 7.8:1 on --gray-50.
+	 * It is too dark for the dark backgrounds (hero, footer, --green-900 sections),
+	 * so text and focus rings there use --orange-pale: 7.3:1 on --green-900,
+	 * 10:1 or more on the hero and footer.
 	 */
-	--orange: #c44019;
-	--orange-hover: #a3350f;
-	--orange-pale: #f5896a;
+	--orange: #8f2f0d;
+	--orange-hover: #6f240a;
+	--orange-pale: #fab49e;
+	/* The original brand orange. Decorative only (borders), never text or text backgrounds */
+	--orange-bright: #ed4f22;
 	--orange-tint: #fdf1ee;
 	--focus-ring: var(--orange);
 

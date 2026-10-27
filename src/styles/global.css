@@ -224,6 +224,9 @@ button {
 .text-accent {
 	color: var(--orange);
 }
+.text-accent--light {
+	color: var(--orange-pale);
+}
 
 /* Buttons */
 .btn {
@@ -243,19 +246,23 @@ button {
 		border-color var(--transition);
 }
 .btn--primary {
+	border: 2px solid var(--orange-bright);
 	background: var(--orange);
 	color: var(--white);
 }
 .btn--primary:hover {
 	background: var(--orange-hover);
 }
+/* Same look as the skip link, plus a mint border */
 .btn--outline {
-	border: 1px solid rgb(255 255 255 / 0.2);
-	color: var(--white);
+	border: 2px solid var(--mint);
+	background: var(--white);
+	box-shadow: var(--shadow-md);
+	color: var(--green-900);
 	font-weight: 600;
 }
 .btn--outline:hover {
-	background: rgb(255 255 255 / 0.05);
+	background: var(--mint-tint);
 }
 .btn--sm {
 	border-radius: var(--radius-lg);
