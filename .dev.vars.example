@@ -1,0 +1,6 @@
+# Copy to .dev.vars for `npm run preview:cf`. Production secrets: `npx wrangler secret put <NAME>`.
+BREVO_API_KEY=xkeysib-xxxxxxxx
+# Cloudflare's always-passes test secret (pairs with the test site key in site.ts)
+TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# Local overrides of the vars in wrangler.jsonc, e.g. a mailbox you can read
+# ENQUIRY_TO=you@example.com

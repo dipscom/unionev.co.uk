@@ -11,7 +11,7 @@ async function expectNoViolations(page: Page) {
 }
 
 test.describe('accessibility (axe)', () => {
-	for (const path of ['/', '/privacy', '/does-not-exist']) {
+	for (const path of ['/', '/privacy', '/thank-you', '/does-not-exist']) {
 		test(`${path} has no violations`, async ({ page }) => {
 			await page.goto(path);
 			await expectNoViolations(page);

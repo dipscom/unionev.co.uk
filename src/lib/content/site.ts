@@ -14,6 +14,12 @@ export const site = {
 	primaryCta: 'Request a free site assessment',
 	email: 'grant@uevcl.com',
 	enquirySubject: 'EV Charging Enquiry',
+	/** Placeholder until Union EV confirms what it can promise (docs/open-points.md) */
+	responseCommitment: 'We aim to reply within one working day.',
+	/** Not yet supplied; the contact section only shows it once set */
+	phone: null as string | null,
+	/** Public Cloudflare Turnstile site key. This is Cloudflare's always-passes test key; replace for production */
+	turnstileSiteKey: '1x00000000000000000000AA',
 	linkedin: 'https://www.linkedin.com/company/union-ev',
 	registered: 'Registered in England & Wales',
 	// Not yet supplied (see docs/open-points.md); the footer only shows them once set

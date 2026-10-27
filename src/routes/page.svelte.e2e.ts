@@ -104,12 +104,9 @@ test.describe('home page', () => {
 		).toHaveAttribute('href', /^mailto:.+\?subject=Driver%20support$/);
 	});
 
-	test('contact links use mailto with subject', async ({ page }) => {
+	test('contact section offers the enquiry form', async ({ page }) => {
 		await page.goto('/');
-		await expect(page.getByRole('link', { name: /Email Us/ })).toHaveAttribute(
-			'href',
-			'mailto:grant@uevcl.com?subject=EV%20Charging%20Enquiry'
-		);
+		await expect(page.locator('#contact form')).toBeVisible();
 	});
 
 	test('images load or fall back to a placeholder', async ({ page }) => {

@@ -16,7 +16,7 @@
 		<div class="container container--text">
 			<p class="eyebrow">Legal</p>
 			<h1 class="section-title">Privacy &amp; Cookie Notice</h1>
-			<p class="privacy__updated">Last updated: 21 October 2026</p>
+			<p class="privacy__updated">Last updated: 27 October 2026</p>
 
 			<h2>Who we are</h2>
 			<p>
@@ -26,10 +26,14 @@
 
 			<h2>What we collect</h2>
 			<p>
-				This website has no forms or accounts. If you email us at
-				<a href="mailto:{site.email}">{site.email}</a>, we receive your email address, your name if
-				you include it, and anything else you choose to tell us. We use this only to reply to your
-				enquiry, to arrange a site assessment and, if you become a customer, to provide our service.
+				If you use the enquiry form, we receive your name, email address, organisation, the site
+				postcode and type of site, and any project details you choose to add. The form also records
+				the page you came from and any campaign tags in the link you followed (such as
+				<code>utm_source</code>), so we can see which of our marketing is working. If you email us
+				at <a href="mailto:{site.email}">{site.email}</a>, we receive your email address, your name
+				if you include it, and anything else you choose to tell us. We use this only to reply to
+				your enquiry, to arrange a site assessment and, if you become a customer, to provide our
+				service.
 			</p>
 			<p>
 				Our hosting provider may keep standard server logs (such as IP address, date and time, and
@@ -44,15 +48,21 @@
 
 			<h2>Third parties</h2>
 			<p>
-				Our LinkedIn link takes you to LinkedIn, which has its own privacy policy. Our images and
-				fonts are served from this website, not from a third party.
+				We use Cloudflare Turnstile to check that enquiries come from people, not robots. It runs
+				when you start filling in the form and may use your browser and device details to decide; it
+				is subject to Cloudflare's own privacy policy. We use Brevo (a French company with EU data
+				centres) to deliver the enquiry to us and your confirmation email to you, so it processes
+				your enquiry and email address on our behalf. Our LinkedIn link takes you to LinkedIn, which
+				has its own privacy policy. Our images and fonts are served from this website, not from a
+				third party.
 			</p>
 
 			<h2>Our legal basis and how long we keep information</h2>
 			<p>
 				We process enquiry emails because it is in our legitimate interests to respond to people who
-				contact us, and to take steps you ask for before entering into a contract. We keep enquiry
-				emails only as long as needed for that purpose, or longer where we are required to by law.
+				contact us, and to take steps you ask for before entering into a contract. We keep enquiries
+				(forms and emails) only as long as needed for that purpose, or longer where we are required
+				to by law.
 			</p>
 
 			<h2>Your rights</h2>
