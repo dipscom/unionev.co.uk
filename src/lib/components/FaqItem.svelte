@@ -7,7 +7,6 @@
 	let { question, answer }: Props = $props();
 
 	const uid = $props.id();
-	let open = $state(false);
 </script>
 
 <div class="faq">
@@ -16,15 +15,15 @@
 		<button
 			type="button"
 			class="faq__question"
-			aria-expanded={open}
+			data-disclosure
+			aria-expanded="false"
 			aria-controls="{uid}-answer"
-			onclick={() => (open = !open)}
 		>
 			<span class="faq__text">{question}</span>
-			<span class={['faq__icon', open && 'faq__icon--open']} aria-hidden="true">+</span>
+			<span class="faq__icon" aria-hidden="true">+</span>
 		</button>
 	</h3>
-	<div id="{uid}-answer" class="faq__answer" hidden={!open}>
+	<div id="{uid}-answer" class="faq__answer" data-disclosure-panel hidden>
 		<p>{answer}</p>
 	</div>
 </div>
@@ -72,7 +71,7 @@
 		font-weight: 700;
 		transition: transform var(--transition);
 	}
-	.faq__icon--open {
+	.faq__question:global([aria-expanded='true']) .faq__icon {
 		transform: rotate(45deg);
 	}
 	.faq__answer {

@@ -10,19 +10,7 @@
 	};
 
 	let { base = '' }: Props = $props();
-	let open = $state(false);
-	let toggle: HTMLButtonElement;
-	const close = () => (open = false);
-
-	function onkeydown(event: KeyboardEvent) {
-		if (open && event.key === 'Escape') {
-			close();
-			toggle.focus();
-		}
-	}
 </script>
-
-<svelte:window {onkeydown} />
 
 <nav class="nav" aria-label="Main">
 	<div class="container nav__bar">
@@ -39,11 +27,11 @@
 		<button
 			type="button"
 			class="nav__toggle"
-			bind:this={toggle}
+			data-disclosure
+			data-menu-toggle
 			aria-label="Toggle menu"
-			aria-expanded={open}
+			aria-expanded="false"
 			aria-controls="mobile-menu"
-			onclick={() => (open = !open)}
 		>
 			<span class="nav__bar-line"></span>
 			<span class="nav__bar-line"></span>
@@ -51,14 +39,12 @@
 		</button>
 	</div>
 
-	{#if open}
-		<div id="mobile-menu" class="nav__mobile">
-			{#each navLinks as link (link.href)}
-				<a href={base + link.href} class="nav__mobile-link" onclick={close}>{link.label}</a>
-			{/each}
-			<Button href="{base}#contact" size="sm" onclick={close}>{site.primaryCta}</Button>
-		</div>
-	{/if}
+	<div id="mobile-menu" class="nav__mobile" data-disclosure-panel data-menu hidden>
+		{#each navLinks as link (link.href)}
+			<a href={base + link.href} class="nav__mobile-link">{link.label}</a>
+		{/each}
+		<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
+	</div>
 </nav>
 
 <style>
@@ -120,6 +106,9 @@
 		padding: 0.5rem var(--gutter) 1rem;
 		background: var(--white);
 		border-top: 1px solid var(--gray-100);
+	}
+	.nav__mobile[hidden] {
+		display: none;
 	}
 	.nav__mobile-link {
 		padding-block: 0.75rem;

@@ -37,11 +37,12 @@ test.describe('home page', () => {
 		await page.setViewportSize({ width: 390, height: 800 });
 		await page.goto('/');
 		const toggle = page.getByRole('button', { name: 'Toggle menu' });
-		await expect(page.locator('#mobile-menu')).toHaveCount(0);
+		await expect(page.locator('#mobile-menu')).toBeHidden();
 		await toggle.click();
 		await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+		await expect(page.locator('#mobile-menu')).toBeVisible();
 		await page.locator('#mobile-menu').getByRole('link', { name: 'How It Works' }).click();
-		await expect(page.locator('#mobile-menu')).toHaveCount(0);
+		await expect(page.locator('#mobile-menu')).toBeHidden();
 		await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 	});
 
@@ -165,5 +166,19 @@ test.describe('other routes', () => {
 		const xml = await sitemap.text();
 		expect(xml).toContain('<loc>https://www.unionev.co.uk/</loc>');
 		expect(xml).toContain('<loc>https://www.unionev.co.uk/privacy</loc>');
+	});
+});
+
+test.describe('without JavaScript', () => {
+	test.use({ javaScriptEnabled: false });
+
+	test('the page ships only two small inline scripts and keeps its content readable', async ({
+		page
+	}) => {
+		await page.goto('/');
+		await expect(page.locator('script[src]')).toHaveCount(0);
+		await expect(page.locator('script[type="module"]')).toHaveCount(2);
+		await expect(page.getByText('It depends on the funding model.')).toBeVisible();
+		await expect(page.getByRole('button', { name: 'Toggle menu' })).toBeHidden();
 	});
 });

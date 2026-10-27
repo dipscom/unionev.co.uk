@@ -2,7 +2,7 @@
 	import type { Picture } from '../content/images';
 
 	type Props = {
-		/** `null` (or a failed load) renders the placeholder */
+		/** `null` renders the placeholder; a failed load is given one by site.js */
 		src: Picture | string | null;
 		alt: string;
 		width?: number;
@@ -30,8 +30,7 @@
 		class: className = ''
 	}: Props = $props();
 
-	let failed = $state(false);
-	const showImage = $derived(src !== null && !failed);
+	const showImage = $derived(src !== null);
 	const picture = $derived(typeof src === 'object' && src !== null ? src : null);
 	const imgSrc = $derived(picture ? picture.src : (src as string | null));
 	const imgWidth = $derived(width ?? picture?.width);
@@ -50,7 +49,6 @@
 		decoding="async"
 		{style}
 		class={['image', `image--${fit}`, className]}
-		onerror={() => (failed = true)}
 	/>
 {/snippet}
 
@@ -93,8 +91,13 @@
 	.image--contain {
 		object-fit: contain;
 	}
+	/* Added by site.js when the file fails to load: hides the broken-image icon and alt text */
+	.image--failed,
 	.image--placeholder {
 		width: 100%;
 		background: linear-gradient(135deg, var(--mint-tint), var(--mint));
+	}
+	.image--failed {
+		color: transparent;
 	}
 </style>

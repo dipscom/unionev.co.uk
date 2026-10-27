@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
+import { validateEnquiry } from '../lib/enquiry/schema';
 
 // Turnstile is a third-party iframe; replace it with a stub that hands out a token at once
 async function stubTurnstile(page: Page) {
@@ -9,6 +10,18 @@ async function stubTurnstile(page: Page) {
 			body: `window.turnstile = { render: (el, o) => { o.callback('test-token'); return 'w1'; }, reset() {} };`
 		})
 	);
+}
+
+// The Worker is the only validator; answer like it does, using the same schema
+async function stubWorker(page: Page) {
+	await page.route('**/api/enquiry', (route) => {
+		const result = validateEnquiry(
+			Object.fromEntries(new URLSearchParams(route.request().postData() ?? ''))
+		);
+		return result.ok
+			? route.fulfill({ json: { ok: true } })
+			: route.fulfill({ status: 400, json: { ok: false, errors: result.errors } });
+	});
 }
 
 async function fillValid(page: Page) {
@@ -29,6 +42,7 @@ async function expectNoViolations(page: Page) {
 test.describe('enquiry form', () => {
 	test.beforeEach(async ({ page }) => {
 		await stubTurnstile(page);
+		await stubWorker(page);
 	});
 
 	test('pre-selects the site type from ?type=', async ({ page }) => {
@@ -131,7 +145,6 @@ test.describe('enquiry form', () => {
 	});
 
 	test('has no axe violations after a successful send', async ({ page }) => {
-		await page.route('**/api/enquiry', (route) => route.fulfill({ json: { ok: true } }));
 		await page.goto('/');
 		await fillValid(page);
 		await page.getByRole('button', { name: 'Send enquiry' }).click();

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { audiences, type AudienceSlug } from '../content/audiences';
+	import { audiences } from '../content/audiences';
 	import { site } from '../content/site';
 	import Button from './Button.svelte';
 	import CheckList from './CheckList.svelte';
@@ -8,10 +8,6 @@
 	import SectionHeader from './SectionHeader.svelte';
 
 	const uid = $props.id();
-	/** Only one panel is open at a time */
-	let openSlug = $state<AudienceSlug | null>(null);
-
-	const toggle = (slug: AudienceSlug) => (openSlug = openSlug === slug ? null : slug);
 </script>
 
 <Section>
@@ -23,14 +19,14 @@
 	/>
 	<ul class="grid grid--4 grid--2-mobile audiences" style="--gap: 1rem">
 		{#each audiences as audience (audience.slug)}
-			{@const open = openSlug === audience.slug}
 			<li class="audiences__item">
 				<button
 					type="button"
-					class={['card', 'audience', open && 'audience--open']}
-					aria-expanded={open}
+					class="card audience"
+					data-disclosure
+					data-disclosure-group="audiences"
+					aria-expanded="false"
 					aria-controls="{uid}-{audience.slug}"
-					onclick={() => toggle(audience.slug)}
 				>
 					<span class="audience__icon"><Icon name={audience.icon} size="1.75rem" /></span>
 					<span class="audience__label">{audience.label}</span>
@@ -38,7 +34,7 @@
 				</button>
 			</li>
 			<!-- Spans the full row; `dense` packing slots it in under the row of the card that opened it -->
-			<li id="{uid}-{audience.slug}" class="audiences__panel" hidden={!open}>
+			<li id="{uid}-{audience.slug}" class="audiences__panel" data-disclosure-panel hidden>
 				<div class="panel">
 					<div>
 						<h3 class="panel__title">{audience.label}</h3>
@@ -72,7 +68,7 @@
 		padding: 1.5rem 1rem 1rem;
 		text-align: center;
 	}
-	.audience--open {
+	.audience:global([aria-expanded='true']) {
 		border-color: var(--green-900);
 	}
 	.audience__icon {
@@ -97,10 +93,10 @@
 			color var(--transition);
 	}
 	.audience:hover .audience__chevron,
-	.audience--open .audience__chevron {
+	.audience:global([aria-expanded='true']) .audience__chevron {
 		color: var(--green-900);
 	}
-	.audience--open .audience__chevron {
+	.audience:global([aria-expanded='true']) .audience__chevron {
 		transform: rotate(180deg);
 	}
 	.panel {
