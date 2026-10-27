@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { partners } from '../content/partners';
+	import NewTabHint from './NewTabHint.svelte';
+
+	const uid = $props.id();
+	const headingId = `${uid}-heading`;
 </script>
 
-<section class="partners">
+<section class="partners" aria-labelledby={headingId}>
 	<div class="container container--narrow">
-		<p class="partners__label">Powered by trusted partners</p>
+		<h2 id={headingId} class="partners__label">Powered by trusted partners</h2>
 		<ul class="partners__list">
 			{#each partners as partner, i (partner.name)}
 				{#if i > 0}
@@ -23,7 +27,7 @@
 						{:else}
 							{partner.name}
 						{/if}
-						{#if partner.url}<span class="visually-hidden"> (opens in a new tab)</span>{/if}
+						{#if partner.url}<NewTabHint />{/if}
 					</svelte:element>
 					<span class="partners__role">{partner.role}</span>
 				</li>
@@ -46,7 +50,7 @@
 		margin-bottom: 1.5rem;
 		color: var(--gray-500);
 		font-size: 0.75rem;
-		line-height: 1rem;
+		line-height: 1.125rem;
 		font-weight: 600;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
@@ -72,6 +76,11 @@
 		letter-spacing: -0.025em;
 		transition: color var(--transition);
 	}
+	/* 44px target (WCAG 2.5.5); the negative margin keeps the layout as it was */
+	a.partners__name {
+		margin-block: -0.5rem;
+		padding-block: 0.5rem;
+	}
 	a.partners__name:hover {
 		color: var(--green-900);
 		text-decoration: underline;
@@ -84,7 +93,7 @@
 	.partners__role {
 		color: var(--gray-500);
 		font-size: 0.75rem;
-		line-height: 1rem;
+		line-height: 1.125rem;
 	}
 	.partners__divider {
 		display: none;

@@ -3,7 +3,7 @@ export const caseStudy = {
 	lead: 'A 600-household residential community — 25 years old, no existing EV infrastructure. A full turnkey delivery from survey to live operation.',
 	/** One-line proof point for the preview card near the top of the page */
 	summary:
-		'A 600-household community with no EV infrastructure. We upgraded the power supply, secured grant funding and installed six 22 kW chargers, with room for six more.',
+		'A 600-household community with no EV infrastructure. We upgraded the power supply, secured grant funding and installed six 22 kilowatt (kW) chargers, with room for six more.',
 	caption: 'Union EV charge point — installed, managed, and maintained end-to-end.',
 	challengeSummary:
 		"Any scheme needed the agreement of the freeholder, the residents' association and the block manager. None of them wanted to fund or manage an installation, and the site's power supply could not support chargers.",
@@ -25,7 +25,7 @@ export const caseStudy = {
 	reportedAt: null as string | null,
 	stats: [
 		{ value: '264', label: 'Charging sessions since launch' },
-		{ value: '22 kWh', label: 'Average energy per session' },
+		{ value: '22 kWh', label: 'Average energy per session, in kilowatt hours (kWh)' },
 		{ value: '6+6', label: 'Installed now, future-proofed for 6 more' }
 	],
 	quotes: [

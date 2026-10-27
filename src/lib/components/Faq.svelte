@@ -28,7 +28,7 @@
 		margin-top: 2.5rem;
 		color: var(--gray-500);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 		text-align: center;
 	}
 	.faq-more a {

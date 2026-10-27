@@ -19,6 +19,6 @@ export const features = [
 	{
 		icon: 'chart',
 		title: 'Reporting & ESG',
-		body: 'Charging and carbon data for your ESG reporting, with business and private use kept separate for reimbursement and HMRC. Fleets also see cost per mile, location and time of day.'
+		body: 'Charging and carbon data for your environmental, social and governance (ESG) reporting, with business and private use kept separate for reimbursement and HM Revenue & Customs. Fleets also see cost per mile, location and time of day.'
 	}
 ] as const satisfies readonly { icon: IconName; title: string; body: string }[];

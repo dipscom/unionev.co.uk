@@ -3,18 +3,21 @@
 	import { site } from '../content/site';
 	import Button from './Button.svelte';
 	import Image from './Image.svelte';
+
+	const uid = $props.id();
+	const headingId = `${uid}-heading`;
 </script>
 
-<section class="hero">
+<section class="hero" aria-labelledby={headingId}>
 	<div class="container hero__grid">
 		<div class="hero__copy">
-			<h1 class="hero__title">
-				EV Charging for Your Site.
+			<h1 id={headingId} class="hero__title">
+				<abbr title="electric vehicle">EV</abbr> Charging for Your Site.
 				<span class="text-accent text-accent--light">Fully Managed.</span>
 			</h1>
 			<p class="hero__lead">
-				We design, install, operate and maintain EV charging for residential sites, workplaces,
-				destinations and depots, and share the revenue with you. {site.funding}
+				We design, install, operate and maintain electric vehicle (EV) charging for residential
+				sites, workplaces, destinations and depots, and share the revenue with you. {site.funding}
 			</p>
 			<div class="hero__actions">
 				<Button href="#contact">{site.primaryCta}</Button>
@@ -61,6 +64,10 @@
 		font-size: 2.25rem;
 		line-height: 1.25;
 		font-weight: 800;
+	}
+	/* The lead below spells EV out, so the title doesn't need the dotted underline */
+	.hero__title abbr {
+		text-decoration: none;
 	}
 	.hero__lead {
 		margin-bottom: 2.5rem;

@@ -37,7 +37,7 @@
 		color: var(--gray-500);
 		font-size: 0.875rem;
 		font-weight: 600;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 	}
 	.quote__role {
 		font-weight: 400;

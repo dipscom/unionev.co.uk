@@ -76,7 +76,7 @@
 		color: var(--white);
 		font-size: 0.875rem;
 		font-weight: 500;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 	}
 	.study__lists {
 		display: grid;

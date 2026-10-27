@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { navLinks } from '../content/nav';
 	import { driverSupport, mailto, site } from '../content/site';
 	import Logo from './Logo.svelte';
+	import NewTabHint from './NewTabHint.svelte';
 
 	type Props = {
 		/** Prefix for in-page anchors; use "/" on pages other than the home page */
@@ -29,25 +31,25 @@
 			</div>
 
 			<div class="footer__col">
-				<p class="footer__heading">Contact</p>
+				<h2 class="footer__heading">Contact</h2>
 				<a href={mailto}>{site.email}</a>
-				<a href={site.linkedin} target="_blank" rel="noopener noreferrer"
-					>LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a
-				>
+				<a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<NewTabHint /></a>
 			</div>
 
 			<div class="footer__col">
-				<p class="footer__heading">Drivers</p>
+				<h2 class="footer__heading">Drivers</h2>
 				<p class="footer__note">Already charging with us?</p>
 				<a href={driverSupport}>Driver support</a>
 			</div>
 
 			<div class="footer__col">
-				<p class="footer__heading">Quick Links</p>
+				<h2 class="footer__heading">Quick Links</h2>
 				{#each navLinks as link (link.href)}
 					<a href={base + link.href}>{link.label}</a>
 				{/each}
-				<a href="/privacy">Privacy</a>
+				<a href="/privacy" aria-current={page.url.pathname === '/privacy' ? 'page' : undefined}
+					>Privacy</a
+				>
 			</div>
 		</div>
 
@@ -94,24 +96,34 @@
 	.footer__col {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 	}
+	/* 44px targets (WCAG 2.5.5), stacked with no gap so they don't overlap */
 	.footer__col a {
+		display: flex;
+		align-items: center;
+		min-height: 2.75rem;
 		transition: color var(--transition);
 	}
-	.footer__col a:hover {
+	.footer__col a:hover,
+	.footer__col a[aria-current='page'] {
 		color: var(--white);
 	}
+	.footer__col a[aria-current='page'] {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	/* Same padding as the links, so it lines up with the first link in the other columns */
 	.footer__note {
+		padding-block: 0.75rem;
 		color: var(--gray-400);
 	}
 	.footer__heading {
 		margin-bottom: 0.25rem;
 		color: var(--gray-400);
 		font-size: 0.75rem;
-		line-height: 1rem;
+		line-height: 1.125rem;
 		font-weight: 600;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
@@ -126,7 +138,7 @@
 		border-top: 1px solid var(--gray-800);
 		color: var(--gray-400);
 		font-size: 0.75rem;
-		line-height: 1rem;
+		line-height: 1.125rem;
 	}
 	@media (min-width: 640px) {
 		.footer__bottom {

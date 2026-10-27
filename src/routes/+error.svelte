@@ -16,9 +16,9 @@
 <Seo title="{heading} | Union EV" path={page.url.pathname} noindex />
 
 <PageShell base="/">
-	<section class="error">
+	<section class="error" aria-labelledby="error-heading">
 		<p class="eyebrow">{page.status}</p>
-		<h1 class="section-title">{heading}</h1>
+		<h1 id="error-heading" class="section-title">{heading}</h1>
 		<p class="section-lead">{message}</p>
 		<div class="error__action">
 			<Button href="/">Back to the home page</Button>

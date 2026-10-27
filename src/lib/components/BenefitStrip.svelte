@@ -3,7 +3,8 @@
 	import Icon from './Icon.svelte';
 </script>
 
-<section class="strip">
+<!-- No visible heading, so the region is named here -->
+<section class="strip" aria-label="Key benefits">
 	<ul class="container strip__list">
 		{#each benefits as benefit, i (benefit)}
 			{#if i > 0}
@@ -20,7 +21,7 @@
 		background: var(--green-900);
 		color: var(--white);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 		font-weight: 500;
 	}
 	.strip__list {

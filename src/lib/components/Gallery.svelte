@@ -74,6 +74,6 @@
 		margin-top: 0.75rem;
 		color: var(--gray-600);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 	}
 </style>

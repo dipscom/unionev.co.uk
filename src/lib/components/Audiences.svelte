@@ -46,7 +46,7 @@
 					</div>
 					<CheckList items={[...audience.points]} variant="good" />
 					<Button href="?type={audience.slug}#contact" class="panel__cta">
-						{site.primaryCta}
+						{site.primaryCta}<span class="visually-hidden"> for {audience.label}</span>
 					</Button>
 				</div>
 			</li>
@@ -85,7 +85,7 @@
 		flex-grow: 1;
 		color: var(--gray-900);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 		font-weight: 600;
 	}
 	.audience__chevron {

@@ -156,7 +156,7 @@ button {
 	display: inline-block;
 	color: var(--orange);
 	font-size: 0.875rem;
-	line-height: 1.25rem;
+	line-height: 1.3125rem;
 	font-weight: 600;
 	letter-spacing: 0.05em;
 	text-transform: uppercase;
@@ -265,10 +265,12 @@ button {
 	background: var(--mint-tint);
 }
 .btn--sm {
+	/* 44px target (WCAG 2.5.5) */
+	min-height: 2.75rem;
 	border-radius: var(--radius-lg);
 	padding: 0.625rem 1.25rem;
 	font-size: 0.875rem;
-	line-height: 1.25rem;
+	line-height: 1.3125rem;
 }
 .btn--lg {
 	border-radius: var(--radius-2xl);
@@ -314,13 +316,13 @@ button.card:hover {
 }
 .check-list__text {
 	font-size: 0.875rem;
-	line-height: 1.25rem;
+	line-height: 1.3125rem;
 }
 .check-list__mark {
 	display: flex;
 	flex-shrink: 0;
-	/* Centres the 16px icon on the first 20px line of text */
-	margin-top: 0.125rem;
+	/* Centres the 16px icon on the first 21px line of text */
+	margin-top: 0.15625rem;
 }
 .check-list--good .check-list__mark {
 	color: var(--green-tick);

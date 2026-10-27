@@ -1,4 +1,5 @@
 <script lang="ts">
+	import NewTabHint from '#lib/components/NewTabHint.svelte';
 	import PageShell from '#lib/components/PageShell.svelte';
 	import Seo from '#lib/components/Seo.svelte';
 	import { site } from '../../lib/content/site';
@@ -57,11 +58,13 @@
 
 			<h2>Your rights</h2>
 			<p>
-				Under UK data protection law you can ask us for access to, correction of, or deletion of
-				your personal information, and you can object to or ask us to restrict how we use it. Email
-				us to make a request. If you are unhappy with how we have handled your information, you can
-				complain to the Information Commissioner's Office at
-				<a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.
+				Under United Kingdom (UK) data protection law you can ask us for access to, correction of,
+				or deletion of your personal information, and you can object to or ask us to restrict how we
+				use it. Email us to make a request. If you are unhappy with how we have handled your
+				information, you can complain to the Information Commissioner's Office at
+				<a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer"
+					>ico.org.uk<NewTabHint /></a
+				>.
 			</p>
 
 			<h2>Contact</h2>
@@ -92,10 +95,12 @@
 		line-height: 1.75rem;
 		font-weight: 700;
 	}
+	/* WCAG 1.4.8: paragraph gap of 1.5em, and lines kept under 80 characters */
 	p + p {
-		margin-top: 0.75rem;
+		margin-top: 1.5em;
 	}
 	.privacy :global(p) {
+		max-width: 56ch;
 		color: var(--gray-600);
 		line-height: 1.625;
 	}

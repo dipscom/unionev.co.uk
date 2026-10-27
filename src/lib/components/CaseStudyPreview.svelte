@@ -2,7 +2,8 @@
 	import { caseStudy } from '../content/caseStudy';
 </script>
 
-<section class="section section--md preview">
+<!-- Not named by its heading: the full case study section further down already is -->
+<section class="section section--md preview" aria-label="Case study summary: {caseStudy.title}">
 	<div class="container container--narrow">
 		<div class="preview__card">
 			<div class="preview__copy">
@@ -97,7 +98,7 @@
 	.preview__label {
 		color: var(--gray-600);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 	}
 	.preview__asof {
 		margin-top: 1rem;

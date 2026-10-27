@@ -55,7 +55,7 @@
 		padding-right: 1rem;
 		color: var(--gray-900);
 		font-size: 0.875rem;
-		line-height: 1.25rem;
+		line-height: 1.3125rem;
 		font-weight: 600;
 	}
 	.faq__icon {

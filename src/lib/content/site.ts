@@ -6,7 +6,7 @@ export const site = {
 	description:
 		'Managed EV charging for residential sites, workplaces, destinations and fleet depots across the UK, with flexible funding. We survey, install, operate and maintain.',
 	tagline:
-		'Managed EV charging for residential sites, workplaces, destinations and depots across the UK, with flexible funding options.',
+		'Managed EV charging for residential sites, workplaces, destinations and depots across the United Kingdom, with flexible funding options.',
 	/** The one funding sentence; reuse it so the offer reads the same everywhere */
 	funding:
 		'Fully funded, part-funded and owner-funded options are available, depending on the site and its suitability.',

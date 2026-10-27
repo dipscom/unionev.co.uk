@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getSectionHeadingId } from './Section.svelte';
+
 	type Props = {
 		eyebrow?: string;
 		title: string;
@@ -26,6 +28,7 @@
 		relaxed = false
 	}: Props = $props();
 	const dark = $derived(tone === 'dark');
+	const headingId = getSectionHeadingId();
 </script>
 
 <div class={['section-head', spacing !== 'lg' && `section-head--${spacing}`]}>
@@ -33,6 +36,7 @@
 		<span class={['eyebrow', dark && 'eyebrow--light']}>{eyebrow}</span>
 	{/if}
 	<h2
+		id={headingId}
 		class={[
 			'section-title',
 			titleSize !== 'lg' && `section-title--${titleSize}`,

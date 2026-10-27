@@ -81,7 +81,9 @@
 		align-items: center;
 		gap: 2rem;
 	}
+	/* 44px targets (WCAG 2.5.5) */
 	.nav__link {
+		padding-block: 0.75rem;
 		color: var(--gray-600);
 		font-size: 0.875rem;
 		font-weight: 500;
@@ -114,12 +116,13 @@
 	.nav__mobile {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
-		padding: 1rem var(--gutter);
+		gap: 0.25rem;
+		padding: 0.5rem var(--gutter) 1rem;
 		background: var(--white);
 		border-top: 1px solid var(--gray-100);
 	}
 	.nav__mobile-link {
+		padding-block: 0.75rem;
 		color: var(--gray-700);
 		font-size: 0.875rem;
 		font-weight: 500;
