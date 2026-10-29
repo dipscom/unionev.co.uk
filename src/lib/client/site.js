@@ -1,6 +1,6 @@
-// Progressive enhancement for the static pages: disclosures (mobile menu, FAQ, audience
-// panels) and a placeholder for images that fail to load. Without it the pages still read
-// in full; see the <noscript> styles in app.html.
+// Progressive enhancement for the static pages: the mobile menu disclosure and a placeholder
+// for images that fail to load. Without it the pages still read in full; see the <noscript>
+// styles in app.html.
 // Every function is named, so stack traces and the minified output stay readable.
 
 function panelFor(button) {
@@ -17,13 +17,6 @@ function onClick(event) {
 	const button = event.target.closest('[data-disclosure]');
 	if (button) {
 		const expanded = button.getAttribute('aria-expanded') !== 'true';
-		const group = button.dataset.disclosureGroup;
-		if (group && expanded) {
-			// Only one panel in a group is open at a time
-			for (const other of document.querySelectorAll('[data-disclosure-group="' + group + '"]')) {
-				if (other !== button) setExpanded(other, false);
-			}
-		}
 		setExpanded(button, expanded);
 		return;
 	}

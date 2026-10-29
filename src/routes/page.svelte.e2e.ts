@@ -61,26 +61,26 @@ test.describe('home page', () => {
 
 	test('audience panels open one at a time and link to the enquiry', async ({ page }) => {
 		await page.goto('/');
-		const fleet = page.getByRole('button', { name: 'Fleet Operators' });
-		const businesses = page.getByRole('button', { name: 'Businesses & Employers' });
-		const fleetPanel = page.locator(`#${await fleet.getAttribute('aria-controls')}`);
-		const businessesPanel = page.locator(`#${await businesses.getAttribute('aria-controls')}`);
+		const fleet = page.locator('details', { hasText: 'Fleet Operators' });
+		const businesses = page.locator('details', { hasText: 'Businesses & Employers' });
+		const fleetPanel = fleet.locator('.panel');
+		const businessesPanel = businesses.locator('.panel');
 
 		await expect(fleetPanel).toBeHidden();
-		await fleet.click();
-		await expect(fleet).toHaveAttribute('aria-expanded', 'true');
+		await fleet.locator('summary').click();
+		await expect(fleet).toHaveAttribute('open', '');
 		await expect(fleetPanel).toBeVisible();
 		await expect(fleetPanel.getByRole('link')).toHaveAttribute(
 			'href',
 			'?type=fleet-operators#contact'
 		);
 
-		await businesses.click();
+		await businesses.locator('summary').click();
 		await expect(businessesPanel).toBeVisible();
 		await expect(fleetPanel).toBeHidden();
-		await expect(fleet).toHaveAttribute('aria-expanded', 'false');
+		await expect(fleet).not.toHaveAttribute('open');
 
-		await businesses.click();
+		await businesses.locator('summary').click();
 		await expect(businessesPanel).toBeHidden();
 	});
 
@@ -191,6 +191,17 @@ test.describe('without JavaScript', () => {
 		await expect(answer).toBeVisible();
 		await question.click();
 		await expect(answer).toBeHidden();
+	});
+
+	test('audience cards still open natively, one at a time', async ({ page }) => {
+		await page.goto('/');
+		const fleet = page.locator('details', { hasText: 'Fleet Operators' });
+		const authorities = page.locator('details', { hasText: 'Local Authorities' });
+		await fleet.locator('summary').click();
+		await expect(fleet.locator('.panel')).toBeVisible();
+		await authorities.locator('summary').click();
+		await expect(authorities.locator('.panel')).toBeVisible();
+		await expect(fleet.locator('.panel')).toBeHidden();
 	});
 
 	test('keeps the enquiry form, ready to post, with no email address or mention of JavaScript', async ({

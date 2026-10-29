@@ -6,13 +6,15 @@
 }
 /* Only cards that go somewhere get a hover state */
 a.card,
-button.card {
+button.card,
+summary.card {
 	transition:
 		border-color var(--transition),
 		box-shadow var(--transition);
 }
 a.card:hover,
-button.card:hover {
+button.card:hover,
+summary.card:hover {
 	border-color: var(--color-border-hover);
 	box-shadow: var(--shadow-md);
 }
