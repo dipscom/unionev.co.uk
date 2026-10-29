@@ -12,11 +12,13 @@
 />
 
 <PageShell base="/">
-	<article class="privacy">
-		<div class="container container--text">
-			<p class="eyebrow">Legal</p>
-			<h1 class="section-title">Privacy &amp; Cookie Notice</h1>
-			<p class="privacy__updated">Last updated: 27 October 2026</p>
+	<article class="privacy region">
+		<div class="wrapper flow">
+			<div class="section-head flow">
+				<p class="eyebrow">Legal</p>
+				<h1 class="section-title">Privacy &amp; Cookie Notice</h1>
+			</div>
+			<p class="privacy__updated text-sm color-subtle">Last updated: 27 October 2026</p>
 
 			<h2>Who we are</h2>
 			<p>
@@ -87,34 +89,37 @@
 
 <style>
 	.privacy {
-		padding: calc(var(--nav-height) + 4rem) var(--gutter) 6rem;
+		padding-top: calc(var(--nav-height) + var(--space-16));
 	}
-	.privacy :global(.container) {
-		padding-inline: 0;
+	.privacy .wrapper {
+		--wrapper-max: var(--w-3xl);
+		--flow-space: 1.5em;
+	}
+	.privacy .section-head {
+		text-align: left;
 	}
 	.privacy__updated {
-		margin-bottom: 2rem;
-		color: var(--gray-500);
-		font-size: 0.875rem;
+		margin-top: var(--space-4);
+		margin-bottom: var(--space-8);
 	}
 	h2 {
-		margin: 2rem 0 0.75rem;
-		color: var(--gray-900);
-		font-size: 1.25rem;
-		line-height: 1.75rem;
+		margin: var(--space-8) 0 var(--space-3);
+		color: var(--color-heading);
+		font-size: var(--text-xl);
+		line-height: var(--leading-lg);
 		font-weight: 700;
 	}
-	/* WCAG 1.4.8: paragraph gap of 1.5em, and lines kept under 80 characters */
-	p + p {
-		margin-top: 1.5em;
+	h2 + p {
+		margin-top: 0;
 	}
-	.privacy :global(p) {
+	/* WCAG 1.4.8: paragraph gap of 1.5em (the flow), and lines kept under 80 characters */
+	.privacy p {
 		max-width: 56ch;
-		color: var(--gray-600);
-		line-height: 1.625;
+		color: var(--color-text-muted);
+		line-height: var(--leading-relaxed);
 	}
 	a {
-		color: var(--green-900);
+		color: var(--color-brand);
 		font-weight: 600;
 		text-decoration: underline;
 	}

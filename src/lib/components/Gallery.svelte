@@ -33,15 +33,14 @@
 	];
 </script>
 
-<Section size="sm">
+<Section size="sm" style="--flow-space: var(--space-10)">
 	<SectionHeader
 		title="EV charging, delivered"
 		lead="Real installations, real communities, real results."
 		titleSize="sm"
 		leadWidth="full"
-		spacing="sm"
 	/>
-	<div class="grid grid--3 gallery" style="--gap: 1rem">
+	<div class="grid" data-layout="thirds" style="--gap: var(--space-4)">
 		{#each photos as photo (photo.alt)}
 			<figure class="tile">
 				<svelte:element this={photo.href ? 'a' : 'div'} href={photo.href} class="tile__image">
@@ -52,7 +51,7 @@
 						class="img-fill"
 					/>
 				</svelte:element>
-				<figcaption class="tile__caption">{photo.caption}</figcaption>
+				<figcaption class="tile__caption text-sm color-muted">{photo.caption}</figcaption>
 			</figure>
 		{/each}
 	</div>
@@ -76,9 +75,6 @@
 		transform: scale(1.05);
 	}
 	.tile__caption {
-		margin-top: 0.75rem;
-		color: var(--gray-600);
-		font-size: 0.875rem;
-		line-height: 1.3125rem;
+		margin-top: var(--space-3);
 	}
 </style>

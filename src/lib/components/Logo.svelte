@@ -17,20 +17,21 @@
 	width={1998}
 	height={495}
 	loading={size === 'nav' ? 'eager' : 'lazy'}
-	class="logo logo--{size}"
+	class="logo"
+	data-size={size}
 />
 
 <style>
 	:global(.logo) {
 		width: auto;
 	}
-	:global(.logo.image--placeholder) {
+	:global(.logo[data-state]) {
 		width: 8rem;
 	}
-	:global(.logo--nav) {
+	:global(.logo[data-size='nav']) {
 		height: 2.5rem;
 	}
-	:global(.logo--footer) {
+	:global(.logo[data-size='footer']) {
 		height: 2rem;
 	}
 </style>

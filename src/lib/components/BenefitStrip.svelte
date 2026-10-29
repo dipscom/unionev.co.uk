@@ -4,8 +4,8 @@
 </script>
 
 <!-- No visible heading, so the region is named here -->
-<section class="strip" aria-label="Key benefits">
-	<ul class="container strip__list">
+<section class="strip text-sm bg-brand" aria-label="Key benefits">
+	<ul class="strip__list wrapper cluster">
 		{#each benefits as benefit, i (benefit)}
 			{#if i > 0}
 				<li class="strip__divider" aria-hidden="true">|</li>
@@ -17,29 +17,21 @@
 
 <style>
 	.strip {
-		padding: 1rem var(--gutter);
-		background: var(--green-900);
-		color: var(--white);
-		font-size: 0.875rem;
-		line-height: 1.3125rem;
+		padding-block: var(--space-4);
+		color: var(--color-text-on-dark);
 		font-weight: 500;
 	}
 	.strip__list {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: center;
-		gap: 2rem;
-		padding-inline: 0;
+		--cluster-gap: var(--space-8);
 	}
 	.strip__item {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 	.strip__divider {
 		display: none;
-		color: rgb(255 255 255 / 0.4);
+		color: var(--color-divider-on-brand);
 	}
 	@media (min-width: 640px) {
 		.strip__divider {

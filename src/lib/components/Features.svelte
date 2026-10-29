@@ -11,18 +11,13 @@
 		title="Services"
 		lead="One partner from the first site survey to day-to-day operation."
 	/>
-	<div class="grid grid--2">
-		{#each features as feature, i (feature.title)}
-			<div
-				class={[
-					'card feature',
-					i === features.length - 1 && features.length % 2 === 1 && 'feature--last'
-				]}
-			>
+	<div class="grid" data-layout="halves">
+		{#each features as feature (feature.title)}
+			<div class="card feature with-icon">
 				<IconTile icon={feature.icon} />
 				<div>
 					<h3 class="feature__title">{feature.title}</h3>
-					<p class="feature__body">{feature.body}</p>
+					<p class="feature__body text-sm leading-relaxed color-subtle">{feature.body}</p>
 				</div>
 			</div>
 		{/each}
@@ -31,25 +26,17 @@
 
 <style>
 	.feature {
-		display: flex;
-		align-items: flex-start;
-		gap: 1.25rem;
-		padding: 1.75rem;
+		--with-icon-gap: var(--space-5);
+		padding: var(--space-7);
 	}
 	.feature__title {
-		margin-bottom: 0.5rem;
-		color: var(--gray-900);
-		font-size: 1rem;
-		line-height: 1.5rem;
-		font-weight: 700;
-	}
-	.feature__body {
-		color: var(--gray-500);
-		font-size: 0.875rem;
-		line-height: 1.625;
+		margin-bottom: var(--space-2);
+		font-size: var(--text-base);
+		line-height: var(--leading-base);
 	}
 	@media (min-width: 768px) {
-		.feature--last {
+		/* An odd one out in the last row sits centred under the others */
+		.feature:last-child:nth-child(odd) {
 			grid-column: span 2;
 			width: 100%;
 			max-width: 36rem;

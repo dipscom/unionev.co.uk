@@ -2,50 +2,119 @@
  * Design tokens. Values mirror the Tailwind classes used on the original site.
  * Breakpoints cannot be CSS variables inside @media, so they are documented here
  * and used literally: md = 768px, lg = 1024px, xl = 1280px.
+ *
+ * Colours are named after their role (--color-<role>[-<variant>]), never after the swatch.
+ * Each hex appears once; a role that shares a value points at the primary role.
  */
 :root {
-	/* Brand */
-	--green-900: #023a31;
-	--green-950: #011d19;
-	--green-hover: #033d34;
-	--green-tick: #024d41;
-	--mint: #d4ebe6;
-	--mint-tint: #eff7f5;
+	/*
+	 * Brand. --color-brand must stay in sync with `theme-color` in src/routes/+layout.svelte
+	 * and `theme_color` in static/site.webmanifest, which cannot read CSS variables.
+	 */
+	--color-brand: #023a31;
+	--color-surface-brand: var(--color-brand);
+	--color-success: #024d41;
+	--color-brand-soft: #d4ebe6;
+	--color-surface-brand-soft: #eff7f5;
 
 	/*
 	 * Two brand oranges for WCAG AAA 1.4.6 (docs/accessibility-audit.md).
-	 * --orange is for light backgrounds: 8.1:1 with white text, 7.8:1 on --gray-50.
-	 * It is too dark for the dark backgrounds (hero, footer, --green-900 sections),
-	 * so text and focus rings there use --orange-pale: 7.3:1 on --green-900,
-	 * 10:1 or more on the hero and footer.
+	 * --color-action (buttons, focus ring) and --color-accent (text) are for light backgrounds:
+	 * 8.1:1 with white text, 7.8:1 on --color-surface-alt. They are too dark for the dark
+	 * backgrounds (hero, footer, --color-surface-brand sections), so .theme-dark points accent
+	 * text and the focus ring at --color-accent-on-dark: 7.3:1 on --color-surface-brand,
+	 * 10:1 or more on the hero and footer. Buttons keep --color-action on both.
 	 */
-	--orange: #8f2f0d;
-	--orange-hover: #6f240a;
-	--orange-pale: #fab49e;
+	--color-action: #8f2f0d;
+	--color-action-hover: #6f240a;
+	--color-accent: var(--color-action);
+	--color-accent-on-dark: #fab49e;
 	/* The original brand orange. Decorative only (borders), never text or text backgrounds */
-	--orange-bright: #ed4f22;
-	--orange-tint: #fdf1ee;
-	--focus-ring: var(--orange);
+	--color-accent-decorative: #ed4f22;
+	--color-surface-accent: #fdf1ee;
+	--color-accent-wash: rgb(196 64 25 / 0.1);
+	--color-focus: var(--color-action);
 
-	/* Neutrals (Tailwind gray scale) */
-	--white: #fff;
-	--gray-50: #f9fafb;
-	--gray-100: #f3f4f6;
-	--gray-200: #e5e7eb;
-	--gray-300: #d1d5db;
-	--gray-400: #9ca3af;
-	--gray-500: #6b7280;
-	--gray-600: #4b5563;
-	--gray-700: #374151;
-	--gray-800: #1f2937;
-	--gray-900: #111827;
-	--gray-950: #030712;
-	--red-400: #f87171;
+	/* Surfaces */
+	--color-surface: #fff;
+	--color-surface-alt: #f9fafb;
+	--color-surface-inverse: #030712;
+	--color-surface-translucent: rgb(255 255 255 / 0.95);
+	--gradient-hero: linear-gradient(to bottom right, var(--color-surface-inverse), #011d19, #111827);
+
+	/* Borders */
+	--color-border: #f3f4f6;
+	--color-border-strong: #e5e7eb;
+	--color-border-input: #6b7280;
+	--color-border-inverse: #1f2937;
+	--color-border-hover: rgb(2 58 49 / 0.2);
+	--color-border-brand-subtle: rgb(2 58 49 / 0.1);
+	--color-divider-on-brand: rgb(255 255 255 / 0.4);
+
+	/* Text and icons (Tailwind gray scale) */
+	--color-text: #111827;
+	--color-heading: var(--color-text);
+	--color-text-strong: #1f2937;
+	--color-text-soft: #374151;
+	--color-text-muted: #4b5563;
+	--color-text-subtle: #6b7280;
+	--color-text-on-dark: #fff;
+	--color-text-on-dark-muted: #d1d5db;
+	--color-text-on-inverse: #9ca3af;
+	--color-icon-muted: #9ca3af;
+
+	/* Status */
+	--color-danger-decorative: #f87171;
 	/* Form errors on white: 8.3:1 */
-	--error: #991b1b;
+	--color-danger: #991b1b;
 
 	/* Typography */
 	--font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+	/* Type scale: size and leading pairs */
+	--text-xs: 0.75rem;
+	--leading-xs: 1.125rem;
+	--text-13: 0.8125rem;
+	--text-sm: 0.875rem;
+	--leading-sm: 1.3125rem;
+	--text-15: 0.9375rem;
+	--text-base: 1rem;
+	--leading-base: 1.5rem;
+	--text-lg: 1.125rem;
+	--leading-lg: 1.75rem;
+	--text-xl: 1.25rem;
+	--leading-xl: 1.75rem;
+	--text-2xl: 1.5rem;
+	--leading-2xl: 2rem;
+	--text-3xl: 1.875rem;
+	--leading-3xl: 2.25rem;
+	--text-4xl: 2.25rem;
+	--leading-4xl: 2.5rem;
+	--text-5xl: 3rem;
+	--text-6xl: 3.75rem;
+	--leading-none: 1;
+	--leading-tight: 1.25;
+	--leading-snug: 1.5;
+	--leading-relaxed: 1.625;
+
+	/* Space scale: 0.25rem steps, named by quarter-rems */
+	--space-1: 0.25rem;
+	--space-1-5: 0.375rem;
+	--space-2: 0.5rem;
+	--space-2-5: 0.625rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-7: 1.75rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-14: 3.5rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+	--space-24: 6rem;
+	--space-28: 7rem;
 
 	/* Radii */
 	--radius-lg: 0.5rem;

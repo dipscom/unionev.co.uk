@@ -1,0 +1,87 @@
+/* One job each. Add a utility only once it is used three times. */
+
+/*
+ * Dark context: reassigns the colour roles so blocks inside need no dark variants.
+ * Tracking, title weight and header gap are the few type details that also differ on dark.
+ */
+.theme-dark {
+	--color-focus: var(--color-accent-on-dark);
+	--color-accent: var(--color-accent-on-dark);
+	--color-heading: var(--color-text-on-dark);
+	--color-text-subtle: var(--color-text-on-dark-muted);
+	--eyebrow-tracking: 0.1em;
+	--title-weight: 800;
+	--head-gap: var(--space-3);
+	color: var(--color-text-on-dark);
+}
+
+.text-xs {
+	font-size: var(--text-xs);
+	line-height: var(--leading-xs);
+}
+.text-sm {
+	font-size: var(--text-sm);
+	line-height: var(--leading-sm);
+}
+.text-lg {
+	font-size: var(--text-lg);
+	line-height: var(--leading-lg);
+}
+/* After the text sizes, so it wins when combined with one */
+.leading-relaxed {
+	line-height: var(--leading-relaxed);
+}
+
+.weight-semibold {
+	font-weight: 600;
+}
+.weight-extrabold {
+	font-weight: 800;
+}
+
+.color-brand {
+	color: var(--color-brand);
+}
+.color-muted {
+	color: var(--color-text-muted);
+}
+.color-subtle {
+	color: var(--color-text-subtle);
+}
+.color-accent {
+	color: var(--color-accent);
+}
+
+.text-center {
+	text-align: center;
+}
+
+.shadow-sm {
+	box-shadow: var(--shadow-sm);
+}
+
+.bg-surface-alt {
+	background: var(--color-surface-alt);
+}
+.bg-brand {
+	background: var(--color-surface-brand);
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Fill a sized wrapper with an <Image> */
+.img-fill {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}

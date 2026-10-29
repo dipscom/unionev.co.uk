@@ -8,24 +8,27 @@
 <Seo title="Enquiry received | Union EV" path="/thank-you" noindex />
 
 <PageShell base="/">
-	<section class="thanks" aria-labelledby="thanks-heading">
-		<p class="eyebrow">Enquiry received</p>
-		<h1 id="thanks-heading" class="section-title">Thank you for getting in touch</h1>
-		<p class="section-lead">
-			We have your enquiry and have emailed you a confirmation. {site.responseCommitment}
-		</p>
-		<div class="thanks__action">
-			<Button href="/">Back to the home page</Button>
+	<section class="thanks region text-center" aria-labelledby="thanks-heading">
+		<div class="wrapper">
+			<div class="section-head flow">
+				<p class="eyebrow">Enquiry received</p>
+				<h1 id="thanks-heading" class="section-title">Thank you for getting in touch</h1>
+				<p class="section-lead">
+					We have your enquiry and have emailed you a confirmation. {site.responseCommitment}
+				</p>
+			</div>
+			<div class="thanks__action">
+				<Button href="/">Back to the home page</Button>
+			</div>
 		</div>
 	</section>
 </PageShell>
 
 <style>
 	.thanks {
-		padding: calc(var(--nav-height) + 6rem) var(--gutter) 6rem;
-		text-align: center;
+		padding-top: calc(var(--nav-height) + var(--space-24));
 	}
 	.thanks__action {
-		margin-top: 2rem;
+		margin-top: var(--space-8);
 	}
 </style>

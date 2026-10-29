@@ -20,6 +20,6 @@
 	}: Props = $props();
 </script>
 
-<a {href} class={['btn', `btn--${variant}`, size !== 'md' && `btn--${size}`, className]} {...rest}>
+<a {href} class={['btn', className]} data-variant={variant} data-size={size} {...rest}>
 	{@render children()}
 </a>

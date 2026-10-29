@@ -21,11 +21,16 @@
 			aria-expanded="false"
 			aria-controls="{uid}-answer"
 		>
-			<span class="faq__text">{question}</span>
-			<span class="faq__icon"><Icon name="plus" size="0.875rem" /></span>
+			<span class="faq__text text-sm weight-semibold">{question}</span>
+			<span class="faq__icon color-brand"><Icon name="plus" size="0.875rem" /></span>
 		</button>
 	</h3>
-	<div id="{uid}-answer" class="faq__answer" data-disclosure-panel hidden>
+	<div
+		id="{uid}-answer"
+		class="faq__answer text-sm leading-relaxed color-subtle"
+		data-disclosure-panel
+		hidden
+	>
 		<p>{answer}</p>
 	</div>
 </div>
@@ -33,7 +38,7 @@
 <style>
 	.faq {
 		overflow: hidden;
-		border: 1px solid var(--gray-100);
+		border: 1px solid var(--color-border);
 		border-radius: var(--radius-2xl);
 	}
 	.faq__heading {
@@ -45,19 +50,16 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
-		padding: 1.25rem 1.5rem;
+		padding: var(--space-5) var(--space-6);
 		text-align: left;
 		transition: background-color var(--transition);
 	}
 	.faq__question:hover {
-		background: var(--gray-50);
+		background: var(--color-surface-alt);
 	}
 	.faq__text {
-		padding-right: 1rem;
-		color: var(--gray-900);
-		font-size: 0.875rem;
-		line-height: 1.3125rem;
-		font-weight: 600;
+		padding-right: var(--space-4);
+		color: var(--color-text);
 	}
 	.faq__icon {
 		display: flex;
@@ -67,17 +69,13 @@
 		width: 1.5rem;
 		height: 1.5rem;
 		border-radius: var(--radius-full);
-		background: var(--mint-tint);
-		color: var(--green-900);
+		background: var(--color-surface-brand-soft);
 		transition: transform var(--transition);
 	}
 	.faq__question:global([aria-expanded='true']) .faq__icon {
 		transform: rotate(45deg);
 	}
 	.faq__answer {
-		padding: 0 1.5rem 1.25rem;
-		color: var(--gray-500);
-		font-size: 0.875rem;
-		line-height: 1.625;
+		padding: 0 var(--space-6) var(--space-5);
 	}
 </style>

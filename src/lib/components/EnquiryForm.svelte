@@ -14,7 +14,7 @@
 
 <div aria-live="polite" class="enquiry">
 	<!-- Filled in and revealed by enquiry.js once the enquiry is sent -->
-	<div class="enquiry__success" tabindex="-1" hidden>
+	<div class="enquiry__success flow" tabindex="-1" hidden>
 		<h3>Thank you, <span data-sent="name"></span>. We have your enquiry.</h3>
 		<p>
 			{site.responseCommitment} A confirmation is on its way to <span data-sent="email"></span>.
@@ -33,11 +33,16 @@
 </div>
 
 {#snippet error(field: string)}
-	<p class="field__error" id={id(`${field}-error`)} data-error={field} hidden></p>
+	<p
+		class="field__error text-sm weight-semibold"
+		id={id(`${field}-error`)}
+		data-error={field}
+		hidden
+	></p>
 {/snippet}
 
 <form
-	class="enquiry__form"
+	class="enquiry__form flow"
 	method="post"
 	action="/api/enquiry"
 	novalidate
@@ -51,7 +56,7 @@
 		<ul></ul>
 	</div>
 
-	<p class="enquiry__required">Fields marked "(required)" must be filled in.</p>
+	<p class="enquiry__required text-sm color-muted">Fields marked "(required)" must be filled in.</p>
 
 	<div class="field">
 		<label for={id('name')}>Your name (required)</label>
@@ -95,7 +100,7 @@
 
 	<div class="field">
 		<label for={id('postcode')}>Site postcode (required)</label>
-		<p class="field__hint" id={id('postcode-hint')}>
+		<p class="field__hint text-sm color-muted" id={id('postcode-hint')}>
 			We use it to check grid and funding options for the site.
 		</p>
 		<input
@@ -111,7 +116,7 @@
 
 	<div class="field">
 		<label for={id('siteType')}>Type of site (required)</label>
-		<p class="field__hint" id={id('siteType-hint')}>
+		<p class="field__hint text-sm color-muted" id={id('siteType-hint')}>
 			Pick the closest match; "Something else" is fine.
 		</p>
 		<select
@@ -130,7 +135,7 @@
 
 	<div class="field">
 		<label for={id('details')}>Project details (optional)</label>
-		<p class="field__hint" id={id('details-hint')}>
+		<p class="field__hint text-sm color-muted" id={id('details-hint')}>
 			For example the number of parking spaces, or your timescale.
 		</p>
 		<textarea
@@ -153,10 +158,10 @@
 
 	<div data-turnstile></div>
 
-	<button class="btn btn--primary enquiry__submit" type="submit">Send enquiry</button>
+	<button class="btn enquiry__submit" data-variant="primary" type="submit">Send enquiry</button>
 
 	<noscript>
-		<p class="field__error">
+		<p class="field__error text-sm weight-semibold">
 			This form needs JavaScript to check that you are not a robot. Please
 			<a href={mailto}>email {site.email}</a> instead.
 		</p>
@@ -164,75 +169,56 @@
 </form>
 
 <style>
+	/* Empty until the enquiry is sent; its parent's flow must not add a gap before the form */
+	.enquiry {
+		margin-top: 0;
+	}
 	.enquiry__form,
 	.enquiry__success {
-		margin-top: 2rem;
+		margin-top: var(--space-8);
 		border-radius: var(--radius-2xl);
-		padding: 2rem;
-		background: var(--white);
-		color: var(--gray-900);
+		padding: var(--space-8);
+		background: var(--color-surface);
+		color: var(--color-text);
 		text-align: left;
-		--focus-ring: var(--orange);
+		--color-focus: var(--color-action);
 	}
 	.enquiry__form:global([hidden]),
 	.enquiry__success[hidden] {
 		display: none;
 	}
-	.enquiry__form > * + * {
-		margin-top: 1.25rem;
-	}
-	.enquiry__required {
-		color: var(--gray-600);
-		font-size: 0.875rem;
+	.enquiry__form {
+		--flow-space: var(--space-5);
 	}
 	.field label {
 		display: block;
-		margin-bottom: 0.375rem;
+		margin-bottom: var(--space-1-5);
 		font-weight: 600;
 	}
 	.field__hint {
-		margin-bottom: 0.375rem;
-		color: var(--gray-600);
-		font-size: 0.875rem;
-	}
-	input:not([type='hidden']),
-	select,
-	textarea {
-		display: block;
-		width: 100%;
-		min-height: 2.75rem;
-		border: 1px solid var(--gray-500);
-		border-radius: var(--radius-lg);
-		padding: 0.625rem 0.75rem;
-		background: var(--white);
-		color: var(--gray-900);
-		font: inherit;
-	}
-	:global([aria-invalid='true']) {
-		border: 2px solid var(--error);
+		margin-bottom: var(--space-1-5);
 	}
 	.field__error {
-		margin-top: 0.375rem;
-		color: var(--error);
-		font-size: 0.875rem;
-		font-weight: 600;
+		margin-top: var(--space-1-5);
+		color: var(--color-danger);
 	}
 	.enquiry__summary[hidden] {
 		display: none;
 	}
 	.enquiry__summary {
-		border: 2px solid var(--error);
+		border: 2px solid var(--color-danger);
 		border-radius: var(--radius-lg);
-		padding: 1rem 1.25rem;
-		color: var(--error);
+		padding: var(--space-4) var(--space-5);
+		color: var(--color-danger);
 	}
 	.enquiry__summary h3 {
-		font-size: 1rem;
-		font-weight: 700;
+		color: inherit;
+		font-size: var(--text-base);
+		line-height: var(--leading-snug);
 	}
 	.enquiry__summary ul {
-		margin-top: 0.5rem;
-		padding-left: 1.25rem;
+		margin-top: var(--space-2);
+		padding-left: var(--space-5);
 		list-style: disc;
 	}
 	.enquiry__summary :global(a),
@@ -256,20 +242,20 @@
 		cursor: progress;
 		opacity: 0.8;
 	}
-	.enquiry__success h3 {
-		font-size: 1.25rem;
-		font-weight: 700;
-		color: var(--green-900);
+	.enquiry__success {
+		--flow-space: var(--space-4);
 	}
-	.enquiry__success > * + * {
-		margin-top: 1rem;
+	.enquiry__success h3 {
+		font-size: var(--text-xl);
+		line-height: var(--leading-snug);
+		color: var(--color-brand);
 	}
 	.enquiry__success dt {
-		color: var(--gray-600);
-		font-size: 0.875rem;
+		color: var(--color-text-muted);
+		font-size: var(--text-sm);
 	}
 	.enquiry__success dd {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 		font-weight: 600;
 	}
 </style>

@@ -12,7 +12,7 @@
 <Section id="case-study" tone="alt">
 	<SectionHeader eyebrow="Case Study" title={caseStudy.title} lead={caseStudy.lead} />
 
-	<div class="study">
+	<div class="grid" data-layout="split" style="--gap: var(--space-12); --grid-align: start">
 		<figure class="study__photo">
 			<div class="study__image">
 				<Image
@@ -22,13 +22,13 @@
 					class="img-fill"
 				/>
 			</div>
-			<figcaption class="study__caption">{caseStudy.caption}</figcaption>
+			<figcaption class="study__caption text-sm bg-brand">{caseStudy.caption}</figcaption>
 		</figure>
 
-		<div class="study__lists">
+		<div class="flow" style="--flow-space: var(--space-10)">
 			<div>
 				<h3 class="study__heading">The Challenge</h3>
-				<p class="study__summary">{caseStudy.challengeSummary}</p>
+				<p class="study__summary color-muted">{caseStudy.challengeSummary}</p>
 				<CheckList items={[...caseStudy.challenge]} variant="bad" />
 			</div>
 			<div>
@@ -38,16 +38,18 @@
 		</div>
 	</div>
 
-	<div class="grid grid--3 study__stats">
+	<div class="grid" data-layout="thirds">
 		{#each caseStudy.stats as stat (stat.label)}
 			<StatCard value={stat.value} label={stat.label} />
 		{/each}
 	</div>
 	{#if caseStudy.reportedAt}
-		<p class="study__asof">Figures as of {caseStudy.reportedAt}.</p>
+		<p class="study__asof color-subtle text-center" style="--flow-space: var(--space-4)">
+			Figures as of {caseStudy.reportedAt}.
+		</p>
 	{/if}
 
-	<div class="grid grid--2">
+	<div class="grid" data-layout="halves" style="--flow-space: var(--space-12)">
 		{#each caseStudy.quotes as q (q.author)}
 			<QuoteCard quote={q.quote} author={q.author} role={q.role} />
 		{/each}
@@ -55,13 +57,6 @@
 </Section>
 
 <style>
-	.study {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 3rem;
-		align-items: start;
-		margin-bottom: 4rem;
-	}
 	.study__photo {
 		margin: 0;
 		overflow: hidden;
@@ -72,42 +67,21 @@
 		height: 20rem;
 	}
 	.study__caption {
-		padding: 1rem 1.5rem;
-		background: var(--green-900);
-		color: var(--white);
-		font-size: 0.875rem;
+		padding: var(--space-4) var(--space-6);
+		color: var(--color-text-on-dark);
 		font-weight: 500;
-		line-height: 1.3125rem;
-	}
-	.study__lists {
-		display: grid;
-		gap: 2.5rem;
 	}
 	.study__heading {
-		margin-bottom: 1rem;
-		color: var(--gray-900);
-		font-size: 1.25rem;
-		line-height: 1.75rem;
-		font-weight: 700;
+		margin-bottom: var(--space-4);
+		font-size: var(--text-xl);
+		line-height: var(--leading-lg);
 	}
 	.study__summary {
-		margin-bottom: 1rem;
-		color: var(--gray-600);
-		font-size: 0.9375rem;
-		line-height: 1.625;
-	}
-	.study__stats {
-		margin-bottom: 3rem;
+		margin-bottom: var(--space-4);
+		font-size: var(--text-15);
+		line-height: var(--leading-relaxed);
 	}
 	.study__asof {
-		margin: -2rem 0 3rem;
-		color: var(--gray-500);
-		font-size: 0.8125rem;
-		text-align: center;
-	}
-	@media (min-width: 1024px) {
-		.study {
-			grid-template-columns: 1fr 1fr;
-		}
+		font-size: var(--text-13);
 	}
 </style>

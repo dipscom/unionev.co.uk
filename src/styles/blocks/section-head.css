@@ -1,0 +1,55 @@
+/* Eyebrow, title and lead. The parent flow sets the space after the header. */
+.section-head {
+	--flow-space: var(--head-gap, var(--space-2));
+	text-align: center;
+}
+
+.eyebrow {
+	display: inline-block;
+	color: var(--color-accent);
+	font-size: var(--text-sm);
+	line-height: var(--leading-sm);
+	font-weight: 600;
+	letter-spacing: var(--eyebrow-tracking, 0.05em);
+	text-transform: uppercase;
+}
+
+.section-title {
+	margin-bottom: var(--space-4);
+	font-size: var(--text-4xl);
+	line-height: var(--title-leading, var(--leading-4xl));
+	font-weight: var(--title-weight, 700);
+}
+.section-head[data-title-size='sm'] .section-title {
+	margin-bottom: var(--space-3);
+	font-size: var(--text-3xl);
+	line-height: var(--leading-3xl);
+}
+.section-head[data-title-size='md'] .section-title {
+	font-size: var(--text-3xl);
+	line-height: var(--title-leading, var(--leading-tight));
+}
+@media (min-width: 768px) {
+	.section-head[data-title-size='md'] .section-title {
+		font-size: var(--text-4xl);
+		line-height: var(--title-leading, var(--leading-4xl));
+	}
+}
+
+.section-lead {
+	max-width: 42rem;
+	margin-inline: auto;
+	color: var(--color-text-subtle);
+	font-size: var(--text-lg);
+	line-height: var(--lead-leading, var(--leading-lg));
+}
+.section-head[data-lead-width='xl'] .section-lead {
+	max-width: 36rem;
+}
+.section-head[data-lead-width='full'] .section-lead {
+	max-width: none;
+}
+.section-head[data-title-size='sm'] .section-lead {
+	font-size: var(--text-base);
+	line-height: var(--lead-leading, var(--leading-base));
+}

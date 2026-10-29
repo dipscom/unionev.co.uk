@@ -10,6 +10,6 @@
 	let { shadow = false, class: className = '', children }: Props = $props();
 </script>
 
-<div class={['card', shadow && 'card--shadow', className]}>
+<div class={['card', shadow && 'shadow-sm', className]}>
 	{@render children()}
 </div>

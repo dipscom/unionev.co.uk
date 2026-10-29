@@ -1,0 +1,104 @@
+/* Centred column that owns the page gutter. --wrapper-max is the content width. */
+.wrapper {
+	width: 100%;
+	max-width: calc(var(--wrapper-max, var(--w-6xl)) + var(--gutter) * 2);
+	margin-inline: auto;
+	padding-inline: var(--gutter);
+}
+
+/* A page band: vertical padding, and room for the fixed nav when jumped to */
+.region {
+	padding-block: var(--region-space, var(--space-24));
+	scroll-margin-top: var(--nav-height);
+}
+
+/* Vertical rhythm between siblings */
+.flow > * + * {
+	margin-block-start: var(--flow-space, 1em);
+}
+
+/* Wrapping row, centred by default */
+.cluster {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: var(--cluster-align, center);
+	justify-content: var(--cluster-justify, center);
+	gap: var(--cluster-gap, var(--space-4));
+}
+
+/* Pushes two or more items to opposite ends */
+.repel {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: var(--repel-align, center);
+	justify-content: space-between;
+	gap: var(--repel-gap, 0);
+}
+/* Stacks until md; does not wrap, so the columns shrink as they always did */
+.repel[data-stack-below='md'] {
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+@media (min-width: 768px) {
+	.repel[data-stack-below='md'] {
+		flex-direction: row;
+	}
+}
+
+/* Column, then a row from 640px */
+.switcher {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: var(--switcher-wrap, wrap);
+	justify-content: var(--switcher-justify, flex-start);
+	gap: var(--switcher-gap, var(--space-4));
+}
+@media (min-width: 640px) {
+	.switcher {
+		flex-direction: row;
+	}
+}
+
+/* Single column on mobile; --gap, --grid-align and --grid-cols tune the shapes below */
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: var(--grid-align, normal);
+	gap: var(--gap, var(--space-6));
+}
+.grid[data-layout='quarters-2up'] {
+	grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 768px) {
+	.grid[data-layout='halves'],
+	.grid[data-layout='thirds'] {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.grid[data-layout='thirds'] {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	.grid[data-layout='quarters'] {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.grid[data-layout='quarters-2up'] {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.grid[data-layout='split-md'] {
+		grid-template-columns: var(--grid-cols, 1fr 1fr);
+	}
+}
+@media (min-width: 1024px) {
+	.grid[data-layout='quarters'] {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.grid[data-layout='split'] {
+		grid-template-columns: var(--grid-cols, 1fr 1fr);
+	}
+}
+
+/* An icon beside its text */
+.with-icon {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--with-icon-gap, var(--space-3));
+}

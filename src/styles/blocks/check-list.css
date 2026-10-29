@@ -1,0 +1,21 @@
+.check-list {
+	display: grid;
+	gap: var(--space-3);
+	color: var(--color-text-muted);
+}
+.check-list__text {
+	font-size: var(--text-sm);
+	line-height: var(--leading-sm);
+}
+.check-list__mark {
+	display: flex;
+	flex-shrink: 0;
+	/* Centres the 16px icon on the first 21px line of text */
+	margin-top: 0.15625rem;
+}
+.check-list[data-variant='good'] .check-list__mark {
+	color: var(--color-success);
+}
+.check-list[data-variant='bad'] .check-list__mark {
+	color: var(--color-danger-decorative);
+}

@@ -45,7 +45,7 @@ function onKeydown(event) {
 }
 
 function markFailed(img) {
-	img.classList.add('image--failed');
+	img.dataset.state = 'failed';
 }
 
 function onError(event) {

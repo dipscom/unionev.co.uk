@@ -16,22 +16,25 @@
 <Seo title="{heading} | Union EV" path={page.url.pathname} noindex />
 
 <PageShell base="/">
-	<section class="error" aria-labelledby="error-heading">
-		<p class="eyebrow">{page.status}</p>
-		<h1 id="error-heading" class="section-title">{heading}</h1>
-		<p class="section-lead">{message}</p>
-		<div class="error__action">
-			<Button href="/">Back to the home page</Button>
+	<section class="error region text-center" aria-labelledby="error-heading">
+		<div class="wrapper">
+			<div class="section-head flow">
+				<p class="eyebrow">{page.status}</p>
+				<h1 id="error-heading" class="section-title">{heading}</h1>
+				<p class="section-lead">{message}</p>
+			</div>
+			<div class="error__action">
+				<Button href="/">Back to the home page</Button>
+			</div>
 		</div>
 	</section>
 </PageShell>
 
 <style>
 	.error {
-		padding: calc(var(--nav-height) + 6rem) var(--gutter) 6rem;
-		text-align: center;
+		padding-top: calc(var(--nav-height) + var(--space-24));
 	}
 	.error__action {
-		margin-top: 2rem;
+		margin-top: var(--space-8);
 	}
 </style>

@@ -14,6 +14,8 @@
 		size?: 'lg' | 'md' | 'sm';
 		width?: 'wide' | 'narrow' | 'text';
 		class?: string;
+		/** Custom properties for the wrapper's flow, e.g. `--flow-space` for the gap after the header */
+		style?: string;
 		children: Snippet;
 	};
 
@@ -23,8 +25,20 @@
 		size = 'lg',
 		width = 'wide',
 		class: className = '',
+		style = '',
 		children
 	}: Props = $props();
+
+	const regionSpace = {
+		lg: '',
+		md: '--region-space: var(--space-20);',
+		sm: '--region-space: var(--space-16);'
+	};
+	const wrapperMax = {
+		wide: '',
+		narrow: '--wrapper-max: var(--w-4xl);',
+		text: '--wrapper-max: var(--w-3xl);'
+	};
 
 	const uid = $props.id();
 	// Every Section has a SectionHeader, which picks this id up for its <h2>
@@ -36,13 +50,21 @@
 	{id}
 	aria-labelledby={headingId}
 	class={[
-		'section',
-		tone !== 'white' && `section--${tone}`,
-		size !== 'lg' && `section--${size}`,
+		'region',
+		tone === 'alt' && 'bg-surface-alt',
+		tone === 'dark' && 'theme-dark bg-brand',
 		className
 	]}
+	style={regionSpace[size] || undefined}
 >
-	<div class={['container', width !== 'wide' && `container--${width}`]}>
+	<div class="wrapper flow" style="{wrapperMax[width]}{style}">
 		{@render children()}
 	</div>
 </section>
+
+<style>
+	/* The gap after the header; a caller's `style` can set another */
+	.flow {
+		--flow-space: var(--space-16);
+	}
+</style>

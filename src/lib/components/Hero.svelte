@@ -8,18 +8,18 @@
 	const headingId = `${uid}-heading`;
 </script>
 
-<section class="hero" aria-labelledby={headingId}>
-	<div class="container hero__grid">
+<section class="hero theme-dark" aria-labelledby={headingId}>
+	<div class="wrapper hero__grid grid" data-layout="split">
 		<div class="hero__copy">
-			<h1 id={headingId} class="hero__title">
+			<h1 id={headingId} class="hero__title weight-extrabold">
 				<abbr title="electric vehicle">EV</abbr> Charging for Your Site.
-				<span class="text-accent text-accent--light">Fully Managed.</span>
+				<span class="hero__accent color-accent">Fully Managed.</span>
 			</h1>
-			<p class="hero__lead">
+			<p class="hero__lead text-lg leading-relaxed">
 				We design, install, operate and maintain electric vehicle (EV) charging for residential
 				sites, workplaces, destinations and depots, and share the revenue with you. {site.funding}
 			</p>
-			<div class="hero__actions">
+			<div class="hero__actions switcher">
 				<Button href="#contact">{site.primaryCta}</Button>
 				<Button href="#case-study" variant="outline">See the case study</Button>
 			</div>
@@ -46,52 +46,36 @@
 
 <style>
 	.hero {
-		--focus-ring: var(--orange-pale);
-		padding-top: 7rem;
-		background: linear-gradient(
-			to bottom right,
-			var(--gray-950),
-			var(--green-950),
-			var(--gray-900)
-		);
+		padding-top: var(--space-28);
+		background: var(--gradient-hero);
 		overflow: hidden;
 	}
 	.hero__grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 3rem;
-		align-items: start;
+		/* The wrapper's gutter is inside its max width here, not outside it */
+		--wrapper-max: calc(var(--w-6xl) - var(--gutter) * 2);
+		--gap: var(--space-12);
+		--grid-align: start;
 	}
 	.hero__copy {
-		padding-block: 3rem;
+		padding-block: var(--space-12);
 	}
 	.hero__title {
-		margin-bottom: 1.5rem;
-		color: var(--white);
-		font-size: 2.25rem;
-		line-height: 1.25;
-		font-weight: 800;
+		margin-bottom: var(--space-6);
+		font-size: var(--text-4xl);
+		line-height: var(--leading-tight);
 	}
 	/* The lead below spells EV out, so the title doesn't need the dotted underline */
 	.hero__title abbr {
 		text-decoration: none;
 	}
 	.hero__lead {
-		margin-bottom: 2.5rem;
-		color: var(--gray-300);
-		font-size: 1.125rem;
-		line-height: 1.625;
-	}
-	.hero__actions {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-		gap: 1rem;
+		margin-bottom: var(--space-10);
+		color: var(--color-text-on-dark-muted);
 	}
 	/* Keep each label on one line; the secondary button wraps below when space runs out */
-	.hero__actions :global(.btn) {
-		padding-inline: 1.5rem;
-		white-space: nowrap;
+	.hero__actions {
+		--btn-inline: var(--space-6);
+		--btn-wrap: nowrap;
 	}
 	.hero__media {
 		display: none;
@@ -105,7 +89,7 @@
 		position: absolute;
 		inset: 0;
 		transform: translate(1rem, 1rem);
-		background: rgb(196 64 25 / 0.1);
+		background: var(--color-accent-wash);
 		border-radius: var(--radius-3xl);
 	}
 	.hero__image {
@@ -116,31 +100,23 @@
 		box-shadow: var(--shadow-2xl);
 	}
 
-	@media (min-width: 640px) {
-		.hero__actions {
-			flex-direction: row;
-		}
-	}
 	@media (min-width: 768px) {
 		.hero__title {
-			font-size: 3rem;
-			line-height: 1;
+			font-size: var(--text-5xl);
+			line-height: var(--leading-none);
 		}
 	}
 	@media (min-width: 1024px) {
-		.hero__grid {
-			grid-template-columns: 1fr 1fr;
-		}
 		/* Same top padding as .hero__copy, so the photo lines up with the headline */
 		.hero__media {
 			display: flex;
 			justify-content: center;
-			padding-block: 3rem;
+			padding-block: var(--space-12);
 		}
 	}
 	@media (min-width: 1280px) {
 		.hero__title {
-			font-size: 3.75rem;
+			font-size: var(--text-6xl);
 		}
 	}
 </style>

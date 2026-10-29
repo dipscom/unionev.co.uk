@@ -15,6 +15,8 @@
 		/** Display width of the image, for choosing from the srcset, e.g. "(min-width: 768px) 357px, 100vw" */
 		sizes?: string;
 		class?: string;
+		/** Extra attributes for the image, e.g. a data-* hook */
+		[attribute: `data-${string}`]: string | undefined;
 	};
 
 	let {
@@ -27,7 +29,8 @@
 		loading = 'lazy',
 		fetchpriority,
 		sizes,
-		class: className = ''
+		class: className = '',
+		...rest
 	}: Props = $props();
 
 	const showImage = $derived(src !== null);
@@ -48,7 +51,9 @@
 		{fetchpriority}
 		decoding="async"
 		{style}
-		class={['image', `image--${fit}`, className]}
+		class={['image', className]}
+		data-fit={fit}
+		{...rest}
 	/>
 {/snippet}
 
@@ -65,7 +70,10 @@
 	{/if}
 {:else}
 	<div
-		class={['image', 'image--placeholder', className]}
+		class={['image', className]}
+		data-fit={fit}
+		data-state="placeholder"
+		{...rest}
 		role="img"
 		aria-label={alt}
 		style={[
@@ -85,19 +93,18 @@
 		display: block;
 		max-width: 100%;
 	}
-	.image--cover {
+	.image[data-fit='cover'] {
 		object-fit: cover;
 	}
-	.image--contain {
+	.image[data-fit='contain'] {
 		object-fit: contain;
 	}
-	/* Added by site.js when the file fails to load: hides the broken-image icon and alt text */
-	.image--failed,
-	.image--placeholder {
+	/* data-state="failed" is set by site.js when the file fails to load: it hides the broken-image icon and alt text */
+	.image[data-state] {
 		width: 100%;
-		background: linear-gradient(135deg, var(--mint-tint), var(--mint));
+		background: linear-gradient(135deg, var(--color-surface-brand-soft), var(--color-brand-soft));
 	}
-	.image--failed {
+	.image[data-state='failed'] {
 		color: transparent;
 	}
 </style>

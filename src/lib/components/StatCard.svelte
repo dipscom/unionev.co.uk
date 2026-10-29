@@ -7,26 +7,18 @@
 	let { value, label }: Props = $props();
 </script>
 
-<div class="card card--shadow stat">
-	<div class="stat__value">{value}</div>
-	<div class="stat__label">{label}</div>
+<div class="card stat shadow-sm text-center">
+	<div class="stat__value weight-extrabold color-brand">{value}</div>
+	<div class="stat__label text-sm color-muted">{label}</div>
 </div>
 
 <style>
 	.stat {
-		text-align: center;
-		border-color: rgb(2 58 49 / 0.1);
+		border-color: var(--color-border-brand-subtle);
 	}
 	.stat__value {
-		margin-bottom: 0.5rem;
-		color: var(--green-900);
-		font-size: 2.25rem;
-		line-height: 2.5rem;
-		font-weight: 800;
-	}
-	.stat__label {
-		color: var(--gray-600);
-		font-size: 0.875rem;
-		line-height: 1.3125rem;
+		margin-bottom: var(--space-2);
+		font-size: var(--text-4xl);
+		line-height: var(--leading-4xl);
 	}
 </style>

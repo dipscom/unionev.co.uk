@@ -1,0 +1,51 @@
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	border: 0;
+	border-radius: var(--radius-xl);
+	padding: var(--space-4) var(--btn-inline, var(--space-8));
+	font-size: var(--text-base);
+	font-weight: 700;
+	line-height: var(--leading-base);
+	text-align: center;
+	white-space: var(--btn-wrap, normal);
+	transition:
+		background-color var(--transition),
+		border-color var(--transition);
+}
+.btn[data-variant='primary'] {
+	border: 2px solid var(--color-accent-decorative);
+	background: var(--color-action);
+	color: var(--color-text-on-dark);
+}
+.btn[data-variant='primary']:hover {
+	background: var(--color-action-hover);
+}
+/* Same look as the skip link, plus a mint border */
+.btn[data-variant='outline'] {
+	border: 2px solid var(--color-brand-soft);
+	background: var(--color-surface);
+	box-shadow: var(--shadow-md);
+	color: var(--color-brand);
+	font-weight: 600;
+}
+.btn[data-variant='outline']:hover {
+	background: var(--color-surface-brand-soft);
+}
+.btn[data-size='sm'] {
+	/* 44px target (WCAG 2.5.5) */
+	min-height: 2.75rem;
+	border-radius: var(--radius-lg);
+	padding: var(--space-2-5) var(--space-5);
+	font-size: var(--text-sm);
+	line-height: var(--leading-sm);
+}
+.btn[data-size='lg'] {
+	border-radius: var(--radius-2xl);
+	padding: var(--space-5) var(--space-10);
+	font-size: var(--text-lg);
+	line-height: var(--leading-lg);
+	box-shadow: var(--shadow-lg);
+}

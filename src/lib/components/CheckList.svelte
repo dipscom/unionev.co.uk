@@ -9,9 +9,9 @@
 	let { items, variant = 'good' }: Props = $props();
 </script>
 
-<ul class={['check-list', `check-list--${variant}`]}>
+<ul class="check-list" data-variant={variant}>
 	{#each items as item (item)}
-		<li>
+		<li class="with-icon">
 			<span class="check-list__mark">
 				<Icon name={variant === 'good' ? 'check' : 'cross'} size="1rem" />
 			</span>

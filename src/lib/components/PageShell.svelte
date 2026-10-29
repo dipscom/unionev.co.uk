@@ -12,7 +12,7 @@
 	let { base = '', children }: Props = $props();
 </script>
 
-<a href="#main" class="skip-link">Skip to main content</a>
+<a href="#main" class="skip-link text-sm weight-semibold color-brand">Skip to main content</a>
 <Nav {base} />
 <!-- tabindex lets the skip link move focus here, not just scroll -->
 <main id="main" tabindex="-1">
@@ -26,13 +26,10 @@
 		top: 0.75rem;
 		left: 0.75rem;
 		z-index: 100;
-		padding: 0.75rem 1rem;
-		background: var(--white);
+		padding: var(--space-3) var(--space-4);
+		background: var(--color-surface);
 		border-radius: var(--radius-lg);
 		box-shadow: var(--shadow-md);
-		color: var(--green-900);
-		font-size: 0.875rem;
-		font-weight: 600;
 		transform: translateY(-200%);
 	}
 	.skip-link:focus {

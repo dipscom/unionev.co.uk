@@ -10,29 +10,29 @@
 		eyebrow="Common Questions"
 		title="Everything you need to know"
 		lead="No jargon. Just straight answers."
-		spacing="md"
 		leadWidth="full"
 	/>
-	<div class="stack" style="--stack-gap: 1rem">
+	<div class="faq-list flow">
 		{#each faqs as faq (faq.q)}
 			<FaqItem question={faq.q} answer={faq.a} />
 		{/each}
 	</div>
-	<p class="faq-more">
+	<p class="faq-more text-sm color-subtle text-center">
 		Still have a question? <a href="#contact">Get in touch</a> and we'll get back to you.
 	</p>
 </Section>
 
 <style>
+	.faq-list {
+		--flow-space: var(--space-4);
+		/* Below the header, which the wrapper's flow would space by 4rem */
+		margin-top: var(--space-14);
+	}
 	.faq-more {
-		margin-top: 2.5rem;
-		color: var(--gray-500);
-		font-size: 0.875rem;
-		line-height: 1.3125rem;
-		text-align: center;
+		margin-top: var(--space-10);
 	}
 	.faq-more a {
-		color: var(--green-900);
+		color: var(--color-brand);
 		font-weight: 600;
 	}
 	.faq-more a:hover {

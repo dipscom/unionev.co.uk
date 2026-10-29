@@ -9,10 +9,10 @@
 	let { quote, author, role }: Props = $props();
 </script>
 
-<figure class="card card--shadow quote">
-	<div class="quote__mark" aria-hidden="true">“</div>
+<figure class="card quote shadow-sm">
+	<div class="quote__mark color-accent" aria-hidden="true">“</div>
 	<blockquote class="quote__text">{quote}</blockquote>
-	<figcaption class="quote__author">
+	<figcaption class="quote__author text-sm weight-semibold color-subtle">
 		— {author}{#if role}<span class="quote__role">, {role}</span>{/if}
 	</figcaption>
 </figure>
@@ -22,22 +22,15 @@
 		margin: 0;
 	}
 	.quote__mark {
-		margin-bottom: 0.75rem;
-		color: var(--orange);
-		font-size: 1.5rem;
-		line-height: 2rem;
+		margin-bottom: var(--space-3);
+		font-size: var(--text-2xl);
+		line-height: var(--leading-2xl);
 	}
 	.quote__text {
-		margin: 0 0 1rem;
-		color: var(--gray-700);
-		font-size: 1rem;
-		line-height: 1.625;
-	}
-	.quote__author {
-		color: var(--gray-500);
-		font-size: 0.875rem;
-		font-weight: 600;
-		line-height: 1.3125rem;
+		margin: 0 0 var(--space-4);
+		color: var(--color-text-soft);
+		font-size: var(--text-base);
+		line-height: var(--leading-relaxed);
 	}
 	.quote__role {
 		font-weight: 400;

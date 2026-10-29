@@ -13,7 +13,7 @@
 </script>
 
 <nav class="nav" aria-label="Main">
-	<div class="container nav__bar">
+	<div class="nav__bar wrapper repel">
 		<Logo />
 
 		<div class="nav__links">
@@ -22,7 +22,9 @@
 			{/each}
 		</div>
 
-		<Button href="{base}#contact" size="sm" class="nav__cta">{site.primaryCta}</Button>
+		<div class="nav__cta">
+			<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
+		</div>
 
 		<button
 			type="button"
@@ -41,7 +43,7 @@
 
 	<div id="mobile-menu" class="nav__mobile" data-disclosure-panel data-menu hidden>
 		{#each navLinks as link (link.href)}
-			<a href={base + link.href} class="nav__mobile-link">{link.label}</a>
+			<a href={base + link.href} class="nav__mobile-link text-sm">{link.label}</a>
 		{/each}
 		<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
 	</div>
@@ -52,33 +54,32 @@
 		position: fixed;
 		inset: 0 0 auto;
 		z-index: 50;
-		background: rgb(255 255 255 / 0.95);
+		background: var(--color-surface-translucent);
 		backdrop-filter: blur(4px);
-		border-bottom: 1px solid var(--gray-100);
+		border-bottom: 1px solid var(--color-border);
 	}
 	.nav__bar {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding-block: 1rem;
+		--wrapper-max: calc(var(--w-6xl) - var(--gutter) * 2);
+		flex-wrap: nowrap;
+		padding-block: var(--space-4);
 	}
 	.nav__links {
 		display: none;
 		align-items: center;
-		gap: 2rem;
+		gap: var(--space-8);
 	}
 	/* 44px targets (WCAG 2.5.5) */
 	.nav__link {
-		padding-block: 0.75rem;
-		color: var(--gray-600);
-		font-size: 0.875rem;
+		padding-block: var(--space-3);
+		color: var(--color-text-muted);
+		font-size: var(--text-sm);
 		font-weight: 500;
 		transition: color var(--transition);
 	}
 	.nav__link:hover {
-		color: var(--green-900);
+		color: var(--color-brand);
 	}
-	.nav :global(.nav__cta) {
+	.nav__cta {
 		display: none;
 	}
 	.nav__toggle {
@@ -88,32 +89,31 @@
 		/* 44px tap target */
 		min-width: 2.75rem;
 		min-height: 2.75rem;
-		padding: 0.75rem;
+		padding: var(--space-3);
 	}
 	.nav__bar-line {
 		display: block;
 		width: 1.25rem;
 		height: 2px;
-		background: var(--gray-900);
+		background: var(--color-text);
 	}
 	.nav__bar-line + .nav__bar-line {
-		margin-top: 0.25rem;
+		margin-top: var(--space-1);
 	}
 	.nav__mobile {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
-		padding: 0.5rem var(--gutter) 1rem;
-		background: var(--white);
-		border-top: 1px solid var(--gray-100);
+		gap: var(--space-1);
+		padding: var(--space-2) var(--gutter) var(--space-4);
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-border);
 	}
 	.nav__mobile[hidden] {
 		display: none;
 	}
 	.nav__mobile-link {
-		padding-block: 0.75rem;
-		color: var(--gray-700);
-		font-size: 0.875rem;
+		padding-block: var(--space-3);
+		color: var(--color-text-soft);
 		font-weight: 500;
 	}
 
@@ -121,8 +121,9 @@
 		.nav__links {
 			display: flex;
 		}
-		.nav :global(.nav__cta) {
-			display: inline-flex;
+		/* The button itself stays the flex item of the bar */
+		.nav__cta {
+			display: contents;
 		}
 		.nav__toggle,
 		.nav__mobile {

@@ -8,7 +8,7 @@
 	let { icon }: Props = $props();
 </script>
 
-<div class="icon-tile">
+<div class="icon-tile color-accent">
 	<Icon name={icon} size="1.25rem" />
 </div>
 
@@ -20,8 +20,7 @@
 		justify-content: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		background: var(--orange-tint);
+		background: var(--color-surface-accent);
 		border-radius: var(--radius-xl);
-		color: var(--orange);
 	}
 </style>
