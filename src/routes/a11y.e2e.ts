@@ -21,7 +21,7 @@ test.describe('accessibility (axe)', () => {
 	test('home has no violations with an audience panel and FAQ open', async ({ page }) => {
 		await page.goto('/');
 		await page.getByRole('button', { name: 'Fleet Operators' }).click();
-		await page.getByRole('button', { name: 'Who owns the chargers?' }).click();
+		await page.locator('summary', { hasText: 'Who owns the chargers?' }).click();
 		await expectNoViolations(page);
 	});
 

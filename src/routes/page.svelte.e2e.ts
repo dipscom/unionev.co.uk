@@ -48,11 +48,12 @@ test.describe('home page', () => {
 
 	test('FAQ item expands to show its answer', async ({ page }) => {
 		await page.goto('/');
-		const question = page.getByRole('button', { name: 'Who owns the chargers?' });
+		const item = page.locator('details', { hasText: 'Who owns the chargers?' });
+		const question = item.locator('summary');
 		const answer = page.getByText('It depends on the funding model.');
 		await expect(answer).toBeHidden();
 		await question.click();
-		await expect(question).toHaveAttribute('aria-expanded', 'true');
+		await expect(item).toHaveAttribute('open', '');
 		await expect(answer).toBeVisible();
 		await question.click();
 		await expect(answer).toBeHidden();
@@ -178,8 +179,18 @@ test.describe('without JavaScript', () => {
 		await page.goto('/');
 		await expect(page.locator('script[src]')).toHaveCount(0);
 		await expect(page.locator('script[type="module"]')).toHaveCount(2);
-		await expect(page.getByText('It depends on the funding model.')).toBeVisible();
 		await expect(page.getByRole('button', { name: 'Toggle menu' })).toBeHidden();
+	});
+
+	test('FAQ items still open and close natively', async ({ page }) => {
+		await page.goto('/');
+		const question = page.locator('summary', { hasText: 'Who owns the chargers?' });
+		const answer = page.getByText('It depends on the funding model.');
+		await expect(answer).toBeHidden();
+		await question.click();
+		await expect(answer).toBeVisible();
+		await question.click();
+		await expect(answer).toBeHidden();
 	});
 
 	test('keeps the enquiry form, ready to post, with no email address or mention of JavaScript', async ({
