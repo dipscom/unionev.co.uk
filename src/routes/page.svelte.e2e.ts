@@ -181,4 +181,19 @@ test.describe('without JavaScript', () => {
 		await expect(page.getByText('It depends on the funding model.')).toBeVisible();
 		await expect(page.getByRole('button', { name: 'Toggle menu' })).toBeHidden();
 	});
+
+	test('keeps the enquiry form, ready to post, with no email address or mention of JavaScript', async ({
+		page
+	}) => {
+		await page.goto('/');
+		const form = page.locator('#contact form');
+		await expect(form).toBeVisible();
+		await expect(form.getByRole('button', { name: 'Send enquiry' })).toBeVisible();
+		await expect(form).toHaveAttribute('method', 'post');
+		await expect(form.locator('input[name="ft"]')).toHaveAttribute('value', '');
+		// Without JavaScript the browser checks the required fields itself
+		await expect(form).not.toHaveAttribute('novalidate');
+		await expect(page.locator('#contact a[href^="mailto:"]')).toHaveCount(0);
+		await expect(page.locator('#contact')).not.toContainText(/javascript/i);
+	});
 });

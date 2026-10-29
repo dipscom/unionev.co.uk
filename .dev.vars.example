@@ -2,5 +2,7 @@
 BREVO_API_KEY=xkeysib-xxxxxxxx
 # Cloudflare's always-passes test secret (pairs with the test site key in site.ts)
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
+# Signs the plain form's timestamp. Production: a long random string, e.g. `openssl rand -hex 32`
+FORM_SECRET=dev-only-not-a-secret
 # Local overrides of the vars in wrangler.jsonc, e.g. a mailbox you can read
 # ENQUIRY_TO=you@example.com

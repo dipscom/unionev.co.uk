@@ -47,7 +47,15 @@ export default defineConfig({
 
 			// Plain static output so the site deploys unchanged to any static host.
 			// fallback gives hosts a 404.html that renders +error.svelte.
-			adapter: adapter({ fallback: '404.html' })
+			adapter: adapter({ fallback: '404.html' }),
+
+			prerender: {
+				// /api/* belongs to the Worker (worker/index.ts), so the crawler can't fetch the
+				// links to it; any other broken link still fails the build
+				handleHttpError: ({ path, message }) => {
+					if (!path.startsWith('/api/')) throw new Error(message);
+				}
+			}
 		})
 	]
 });

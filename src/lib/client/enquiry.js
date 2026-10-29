@@ -1,7 +1,7 @@
 // Enhances the enquiry form: posts it with fetch, shows the Worker's validation errors in an
 // accessible summary, and loads Cloudflare Turnstile on first use. The Worker validates
-// (worker/index.ts); nothing is duplicated here. Without JavaScript the form still posts and the
-// Worker redirects to /thank-you, but Turnstile cannot run, so the <noscript> note says to email.
+// (worker/index.ts); nothing is duplicated here. Without JavaScript the form still posts, and the
+// Worker checks the signed timestamp in the form (`ft`) instead of Turnstile.
 // Every function is named, so stack traces and the minified output stay readable.
 
 const form = document.querySelector('form.enquiry__form');
@@ -93,7 +93,7 @@ function createLink(href, text) {
 function createErrorItem(field, message) {
 	const item = document.createElement('li');
 	if (field === 'form') {
-		item.append(message + ' ', createLink(form.dataset.mailto, 'Email ' + form.dataset.email));
+		item.append(message);
 		return item;
 	}
 	const input = form.elements[field];
@@ -121,7 +121,9 @@ function showErrors(errors) {
 	summary.focus();
 }
 
-function showSuccess() {
+function showSuccess(confirmed) {
+	// Enquiries sent without Turnstile do not get a confirmation email
+	success.querySelector('[data-confirmation]').hidden = !confirmed;
 	for (const element of success.querySelectorAll('[data-sent]')) {
 		const control = form.elements[element.dataset.sent];
 		element.textContent =
@@ -156,12 +158,12 @@ async function onSubmit(event) {
 		});
 		const payload = await response.json().catch(returnEmpty);
 		if (response.ok && payload.ok) {
-			showSuccess();
+			showSuccess(payload.confirmation !== false);
 			return;
 		}
-		errors = payload.errors ?? { form: 'Something went wrong. Please email us instead.' };
+		errors = payload.errors ?? { form: 'Something went wrong. Please try again.' };
 	} catch {
-		errors = { form: 'We could not reach the server. Please email us instead.' };
+		errors = { form: 'We could not reach the server. Please try again.' };
 	} finally {
 		setSending(false);
 	}
@@ -178,6 +180,8 @@ function returnEmpty() {
 }
 
 if (form) {
+	// Not in the markup, so that without JavaScript the browser checks required fields itself
+	form.noValidate = true;
 	preselectSiteType();
 	trackLead();
 	form.addEventListener('focusin', loadTurnstile);

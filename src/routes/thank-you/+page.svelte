@@ -14,7 +14,7 @@
 				<p class="eyebrow">Enquiry received</p>
 				<h1 id="thanks-heading" class="section-title">Thank you for getting in touch</h1>
 				<p class="section-lead">
-					We have your enquiry and have emailed you a confirmation. {site.responseCommitment}
+					We have your enquiry. {site.responseCommitment}
 				</p>
 			</div>
 			<div class="thanks__action">

@@ -22,7 +22,13 @@ const oneLine = (value: string) => value.replace(/[\r\n]+/g, ' ').trim();
 
 const siteTypeLabel = (slug: string) => siteTypes.find((type) => type.slug === slug)?.label ?? slug;
 
-export function enquiryNotification(data: Enquiry, tracking: Tracking, receivedAt: Date): Content {
+/** `botChecked` is false for the plain form, which has no Turnstile: read those with more care */
+export function enquiryNotification(
+	data: Enquiry,
+	tracking: Tracking,
+	receivedAt: Date,
+	botChecked = true
+): Content {
 	const rows: [string, string][] = [
 		[fieldLabels.name, data.name],
 		[fieldLabels.email, data.email],
@@ -32,7 +38,8 @@ export function enquiryNotification(data: Enquiry, tracking: Tracking, receivedA
 		[fieldLabels.details, data.details || '(none given)'],
 		['Referrer', tracking.referrer || '(direct)'],
 		...utmKeys.flatMap((key): [string, string][] => (tracking[key] ? [[key, tracking[key]]] : [])),
-		['Received', receivedAt.toISOString()]
+		['Received', receivedAt.toISOString()],
+		...(botChecked ? [] : [['Bot check', 'Not run: sent with the plain form'] as [string, string]])
 	];
 	return {
 		subject: oneLine(`${site.enquirySubject}: ${data.organisation} (${data.postcode})`),

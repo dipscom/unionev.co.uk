@@ -5,12 +5,23 @@
 	"assets": {
 		"directory": "./build",
 		"not_found_handling": "404-page",
-		// Only the API runs the Worker; every other path is served as a static asset
-		"run_worker_first": ["/api/*"]
+		"binding": "ASSETS",
+		// The API, and the home page (it is stamped with the time it was sent, worker/index.ts);
+		// every other path is served as a static asset
+		"run_worker_first": ["/api/*", "/"]
 	},
 	"vars": {
 		"EMAIL_PROVIDER": "brevo",
 		"ENQUIRY_TO": "grant@uevcl.com",
 		"ENQUIRY_FROM": "Union EV <hello@unionev.co.uk>"
-	}
+	},
+	// Rate limits, per client IP unless noted (worker/env.ts). A window can only be 10 or 60 seconds
+	"ratelimits": [
+		// Enquiries that passed Turnstile
+		{ "name": "ENQUIRY_LIMITER", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } },
+		// Enquiries without Turnstile (no JavaScript, or it was blocked), so stricter
+		{ "name": "PLAIN_LIMITER", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } },
+		// Per recipient address, for the confirmation email
+		{ "name": "RECIPIENT_LIMITER", "namespace_id": "1003", "simple": { "limit": 2, "period": 60 } }
+	]
 }

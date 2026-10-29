@@ -111,13 +111,13 @@ test.describe('enquiry form', () => {
 		});
 	});
 
-	test('shows a server failure with an email fallback and keeps the input', async ({ page }) => {
+	test('shows a server failure and keeps the input', async ({ page }) => {
 		await page.route('**/api/enquiry', (route) =>
 			route.fulfill({
 				status: 502,
 				json: {
 					ok: false,
-					errors: { form: 'We could not send your enquiry. Please email us instead.' }
+					errors: { form: 'We could not send your enquiry. Please try again in a few minutes.' }
 				}
 			})
 		);
@@ -127,7 +127,6 @@ test.describe('enquiry form', () => {
 		const summary = page.getByRole('alert');
 		await expect(summary).toBeFocused();
 		await expect(summary).toContainText('We could not send your enquiry');
-		await expect(summary.getByRole('link', { name: /grant@uevcl.com/ })).toBeVisible();
 		await expect(page.getByLabel('Your name')).toHaveValue('Ada Lovelace');
 	});
 
