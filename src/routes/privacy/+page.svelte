@@ -18,7 +18,7 @@
 				<p class="eyebrow">Legal</p>
 				<h1 class="section-title">Privacy &amp; Cookie Notice</h1>
 			</div>
-			<p class="privacy__updated text-sm color-subtle">Last updated: 27 October 2026</p>
+			<p class="privacy__updated text-sm color-subtle">Last updated: 30 October 2026</p>
 
 			<h2>Who we are</h2>
 			<p>
@@ -38,8 +38,10 @@
 				service.
 			</p>
 			<p>
-				Our hosting provider may keep standard server logs (such as IP address, date and time, and
-				the page requested) for security and reliability.
+				This website is hosted on Cloudflare, which may keep standard server logs (such as IP
+				address, date and time, and the page requested) for security and reliability. When you send
+				the enquiry form, we also use your IP address briefly to limit how many enquiries one
+				connection can send in a minute. We do not store it with your enquiry.
 			</p>
 
 			<h2>Cookies and analytics</h2>
@@ -50,12 +52,18 @@
 
 			<h2>Third parties</h2>
 			<p>
-				We use Cloudflare Turnstile to check that enquiries come from people, not robots. It runs
-				when you start filling in the form and may use your browser and device details to decide; it
-				is subject to Cloudflare's own privacy policy. We use Brevo (a French company with EU data
-				centres) to deliver the enquiry to us and your confirmation email to you, so it processes
-				your enquiry and email address on our behalf. Our images and fonts are served from this
-				website, not from a third party.
+				We use Cloudflare Turnstile to check that enquiries come from people, not robots. It loads
+				only when you start filling in the form, and may use your browser and device details to
+				decide; when you send the form, your IP address is passed to Cloudflare to verify the check.
+				It is subject to Cloudflare's own privacy policy. If your browser has JavaScript turned off
+				or blocked, Turnstile does not run. The form then relies on a signed timestamp in the page
+				and stricter limits instead, and we do not send you a confirmation email.
+			</p>
+			<p>
+				We use Brevo (a French company with EU data centres) to deliver the enquiry to us and, where
+				the check above ran, your confirmation email to you, so it processes your enquiry and email
+				address on our behalf. Our images and fonts are served from this website, not from a third
+				party.
 			</p>
 
 			<h2>Our legal basis and how long we keep information</h2>
