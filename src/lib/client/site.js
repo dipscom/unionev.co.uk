@@ -1,40 +1,12 @@
-// Progressive enhancement for the static pages: the mobile menu disclosure and a placeholder
-// for images that fail to load. Without it the pages still read in full; see the <noscript>
-// styles in app.html.
+// Progressive enhancement for the static pages: closing the mobile menu when a link in it is
+// followed, and a placeholder for images that fail to load. Everything else (the menu, FAQ,
+// audience cards) is native HTML, so the pages work in full without it.
 // Every function is named, so stack traces and the minified output stay readable.
 
-function panelFor(button) {
-	return document.getElementById(button.getAttribute('aria-controls'));
-}
-
-function setExpanded(button, expanded) {
-	button.setAttribute('aria-expanded', String(expanded));
-	const panel = panelFor(button);
-	if (panel) panel.hidden = !expanded;
-}
-
 function onClick(event) {
-	const button = event.target.closest('[data-disclosure]');
-	if (button) {
-		const expanded = button.getAttribute('aria-expanded') !== 'true';
-		setExpanded(button, expanded);
-		return;
-	}
-
 	// Following a link in the mobile menu closes it
-	if (event.target.closest('[data-menu] a')) {
-		const toggle = document.querySelector('[data-menu-toggle]');
-		if (toggle) setExpanded(toggle, false);
-	}
-}
-
-function onKeydown(event) {
-	if (event.key !== 'Escape') return;
-	const toggle = document.querySelector('[data-menu-toggle]');
-	if (toggle && toggle.getAttribute('aria-expanded') === 'true') {
-		setExpanded(toggle, false);
-		toggle.focus();
-	}
+	const menu = event.target.closest('[popover]');
+	if (menu && event.target.closest('a')) menu.hidePopover();
 }
 
 function markFailed(img) {
@@ -48,7 +20,6 @@ function onError(event) {
 }
 
 document.addEventListener('click', onClick);
-document.addEventListener('keydown', onKeydown);
 // `error` does not bubble, so listen in the capture phase. Images that failed before this
 // script ran are caught by the sweep below.
 document.addEventListener('error', onError, true);

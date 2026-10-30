@@ -16,36 +16,23 @@
 	<div class="nav__bar wrapper repel">
 		<Logo />
 
-		<div class="nav__links">
-			{#each navLinks as link (link.href)}
-				<a href={base + link.href} class="nav__link">{link.label}</a>
-			{/each}
-		</div>
-
-		<div class="nav__cta">
-			<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
-		</div>
-
-		<button
-			type="button"
-			class="nav__toggle"
-			data-disclosure
-			data-menu-toggle
-			aria-label="Toggle menu"
-			aria-expanded="false"
-			aria-controls="mobile-menu"
-		>
+		<button type="button" class="nav__toggle" popovertarget="nav-menu" aria-label="Toggle menu">
 			<span class="nav__bar-line"></span>
 			<span class="nav__bar-line"></span>
 			<span class="nav__bar-line"></span>
 		</button>
-	</div>
 
-	<div id="mobile-menu" class="nav__mobile" data-disclosure-panel data-menu hidden>
-		{#each navLinks as link (link.href)}
-			<a href={base + link.href} class="nav__mobile-link text-sm">{link.label}</a>
-		{/each}
-		<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
+		<!-- One menu for every width. Below 768px it is a popover, so the browser handles
+		     open/close, Escape, outside clicks and focus, with or without JavaScript; from
+		     768px it is just the links and button inline in the bar -->
+		<div id="nav-menu" class="nav__menu" popover>
+			<ul class="nav__links">
+				{#each navLinks as link (link.href)}
+					<li><a href={base + link.href} class="nav__link">{link.label}</a></li>
+				{/each}
+			</ul>
+			<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
+		</div>
 	</div>
 </nav>
 
@@ -54,6 +41,8 @@
 		position: fixed;
 		inset: 0 0 auto;
 		z-index: 50;
+		/* Where the mobile menu popover starts: the bar's padding, 44px toggle and border */
+		--nav-height: calc(var(--space-4) * 2 + 2.75rem + 1px);
 		background: var(--color-surface-translucent);
 		backdrop-filter: blur(4px);
 		border-bottom: 1px solid var(--color-border);
@@ -63,13 +52,34 @@
 		flex-wrap: nowrap;
 		padding-block: var(--space-4);
 	}
+	/* Popovers render in the top layer, so position under the bar rather than inside the nav */
+	.nav__menu {
+		inset: var(--nav-height) 0 auto;
+		width: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		border: 0;
+		border-top: 1px solid var(--color-border);
+		background: var(--color-surface);
+		color: inherit;
+		padding: var(--space-2) var(--gutter) var(--space-4);
+	}
+	.nav__menu:popover-open {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+	.nav__menu::backdrop {
+		background: transparent;
+	}
 	.nav__links {
-		display: none;
-		align-items: center;
-		gap: var(--space-8);
+		display: flex;
+		flex-direction: column;
 	}
 	/* 44px targets (WCAG 2.5.5) */
 	.nav__link {
+		display: block;
 		padding-block: var(--space-3);
 		color: var(--color-text-muted);
 		font-size: var(--text-sm);
@@ -78,9 +88,6 @@
 	}
 	.nav__link:hover {
 		color: var(--color-brand);
-	}
-	.nav__cta {
-		display: none;
 	}
 	.nav__toggle {
 		display: flex;
@@ -100,33 +107,19 @@
 	.nav__bar-line + .nav__bar-line {
 		margin-top: var(--space-1);
 	}
-	.nav__mobile {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-1);
-		padding: var(--space-2) var(--gutter) var(--space-4);
-		background: var(--color-surface);
-		border-top: 1px solid var(--color-border);
-	}
-	.nav__mobile[hidden] {
-		display: none;
-	}
-	.nav__mobile-link {
-		padding-block: var(--space-3);
-		color: var(--color-text-soft);
-		font-weight: 500;
-	}
 
 	@media (min-width: 768px) {
-		.nav__links {
-			display: flex;
-		}
-		/* The button itself stays the flex item of the bar */
-		.nav__cta {
+		/* The links and the button become flex items of the bar itself */
+		.nav__menu,
+		.nav__menu:popover-open {
 			display: contents;
 		}
-		.nav__toggle,
-		.nav__mobile {
+		.nav__links {
+			flex-direction: row;
+			align-items: center;
+			gap: var(--space-8);
+		}
+		.nav__toggle {
 			display: none;
 		}
 	}

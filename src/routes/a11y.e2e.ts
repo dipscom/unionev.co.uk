@@ -49,9 +49,9 @@ test.describe('keyboard', () => {
 		await page.goto('/');
 		const toggle = page.getByRole('button', { name: 'Toggle menu' });
 		await toggle.click();
-		await expect(page.locator('#mobile-menu')).toBeVisible();
+		await expect(page.locator('#nav-menu')).toBeVisible();
 		await page.keyboard.press('Escape');
-		await expect(page.locator('#mobile-menu')).toBeHidden();
+		await expect(page.locator('#nav-menu')).toBeHidden();
 		await expect(toggle).toBeFocused();
 	});
 });

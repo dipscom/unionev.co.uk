@@ -37,13 +37,11 @@ test.describe('home page', () => {
 		await page.setViewportSize({ width: 390, height: 800 });
 		await page.goto('/');
 		const toggle = page.getByRole('button', { name: 'Toggle menu' });
-		await expect(page.locator('#mobile-menu')).toBeHidden();
+		await expect(page.locator('#nav-menu')).toBeHidden();
 		await toggle.click();
-		await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-		await expect(page.locator('#mobile-menu')).toBeVisible();
-		await page.locator('#mobile-menu').getByRole('link', { name: 'How It Works' }).click();
-		await expect(page.locator('#mobile-menu')).toBeHidden();
-		await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+		await expect(page.locator('#nav-menu')).toBeVisible();
+		await page.locator('#nav-menu').getByRole('link', { name: 'How It Works' }).click();
+		await expect(page.locator('#nav-menu')).toBeHidden();
 	});
 
 	test('FAQ item expands to show its answer', async ({ page }) => {
@@ -179,7 +177,6 @@ test.describe('without JavaScript', () => {
 		await page.goto('/');
 		await expect(page.locator('script[src]')).toHaveCount(0);
 		await expect(page.locator('script[type="module"]')).toHaveCount(2);
-		await expect(page.getByRole('button', { name: 'Toggle menu' })).toBeHidden();
 	});
 
 	test('FAQ items still open and close natively', async ({ page }) => {
@@ -191,6 +188,19 @@ test.describe('without JavaScript', () => {
 		await expect(answer).toBeVisible();
 		await question.click();
 		await expect(answer).toBeHidden();
+	});
+
+	test('the mobile menu opens and closes natively', async ({ page }) => {
+		await page.setViewportSize({ width: 390, height: 800 });
+		await page.goto('/');
+		const toggle = page.getByRole('button', { name: 'Toggle menu' });
+		const menu = page.locator('#nav-menu');
+		await expect(menu).toBeHidden();
+		await toggle.click();
+		await expect(menu).toBeVisible();
+		await expect(menu.getByRole('link', { name: 'How It Works' })).toBeVisible();
+		await page.keyboard.press('Escape');
+		await expect(menu).toBeHidden();
 	});
 
 	test('audience cards still open natively, one at a time', async ({ page }) => {
