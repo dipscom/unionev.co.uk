@@ -1,0 +1,19 @@
+/*
+ * Docs pages render in the same iframe as the stories, so the site's reset (src/styles/base.css)
+ * applies to them too. These undo the parts that break prose in the docs pages only.
+ */
+.sbdocs-content ul:not(.sb-unstyled ul) {
+	list-style: disc;
+	padding-left: 1.5em;
+}
+.sbdocs-content ol:not(.sb-unstyled ol) {
+	list-style: decimal;
+	padding-left: 1.5em;
+}
+.sbdocs-content p:not(.sb-unstyled p) + p {
+	margin-top: 1em;
+}
+.sbdocs-content a:not(.sb-unstyled a) {
+	color: var(--color-brand);
+	text-decoration: underline;
+}

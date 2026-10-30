@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { tokensWith } from '../tokens';
+
+<Meta title="Foundations/Radius, shadow and motion" />
+
+# Radius, shadow and motion
+
+## Radius
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', margin: '1.5rem 0' }}>
+	{tokensWith('--radius-').map((t) => (
+		<figure key={t.name} style={{ margin: 0, textAlign: 'center' }}>
+			<div
+				style={{
+					width: '6rem',
+					height: '6rem',
+					background: 'var(--color-surface-brand-soft)',
+					border: '2px solid var(--color-brand)',
+					borderRadius: `var(${t.name})`
+				}}
+			/>
+			<figcaption className="text-xs" style={{ marginTop: '0.5rem' }}>
+				<code>{t.name}</code>
+				<br />
+				<span className="color-muted">{t.value}</span>
+			</figcaption>
+		</figure>
+	))}
+</div>
+
+| Token           | Used for                                                    |
+| --------------- | ----------------------------------------------------------- |
+| `--radius-lg`   | Inputs, small buttons, the skip link, the footer logo plate |
+| `--radius-xl`   | Buttons, icon tiles                                         |
+| `--radius-2xl`  | Cards, FAQ items, audience panels, large buttons, photos    |
+| `--radius-3xl`  | The hero photo and its offset frame                         |
+| `--radius-full` | The round FAQ toggle                                        |
+
+## Shadow
+
+<div
+	style={{
+		display: 'flex',
+		flexWrap: 'wrap',
+		gap: '2rem',
+		margin: '1.5rem 0',
+		padding: '2rem',
+		background: 'var(--color-surface-alt)',
+		borderRadius: 'var(--radius-2xl)'
+	}}
+>
+	{tokensWith('--shadow-')
+		.filter((t) => !t.name.startsWith('--shadow-tint'))
+		.map((t) => (
+			<figure key={t.name} style={{ margin: 0, textAlign: 'center' }}>
+				<div
+					style={{
+						width: '8rem',
+						height: '6rem',
+						background: 'var(--color-surface)',
+						borderRadius: 'var(--radius-2xl)',
+						boxShadow: `var(${t.name})`
+					}}
+				/>
+				<figcaption className="text-xs" style={{ marginTop: '0.75rem' }}>
+					<code>{t.name}</code>
+				</figcaption>
+			</figure>
+		))}
+</div>
+
+| Token                                      | Used for                                                  |
+| ------------------------------------------ | --------------------------------------------------------- |
+| `--shadow-sm`                              | Resting cards (`.shadow-sm`)                              |
+| `--shadow-md`                              | Card hover, the skip link                                 |
+| `--shadow-lg`                              | Case-study photo                                          |
+| `--shadow-2xl`                             | The hero photo                                            |
+| `--shadow-md-action`, `--shadow-lg-action` | Primary buttons (md and lg), tinted with `--color-action` |
+| `--shadow-md-brand`, `--shadow-lg-brand`   | Outline buttons (md and lg), tinted with `--color-brand`  |
+
+Neutral shadows are black at low opacity. Coloured elements cast a shadow tinted with their own colour (`--shadow-tint-*`, a `color-mix()` of the colour with transparent), so a button's shadow reads as part of the button rather than as grey dirt. The outline button is white, and a white shadow would not show, so it takes the green of its text and border.
+
+## Motion
+
+<table>
+	<tbody>
+		{tokensWith('--transition').map((t) => (
+			<tr key={t.name}>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>
+					<code>{t.value}</code>
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+One transition for everything: 150ms on the standard ease-in-out curve, used for colour, border, shadow and the FAQ and chevron rotations. Nothing moves on its own. `prefers-reduced-motion: reduce` cuts all transitions and animations to near zero and turns off smooth scrolling (`src/styles/base.css`).

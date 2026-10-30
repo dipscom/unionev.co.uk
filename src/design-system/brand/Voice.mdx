@@ -1,0 +1,50 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { site } from '../../lib/content/site';
+import { navLinks } from '../../lib/content/nav';
+import { benefits } from '../../lib/content/partners';
+
+<Meta title="Brand/Voice and copy" />
+
+# Voice and copy
+
+All site copy lives in `src/lib/content/` as TypeScript, so a phrase is written once and reads the same everywhere. The values below are imported from there.
+
+## Fixed phrases
+
+| Use                        | Copy                      | Source                    |
+| -------------------------- | ------------------------- | ------------------------- |
+| Name                       | {site.name}               | `site.name`               |
+| Legal name                 | {site.legalName}          | `site.legalName`          |
+| Tagline                    | {site.tagline}            | `site.tagline`            |
+| Funding (the one sentence) | {site.funding}            | `site.funding`            |
+| Primary call to action     | **{site.primaryCta}**     | `site.primaryCta`         |
+| Response promise           | {site.responseCommitment} | `site.responseCommitment` |
+| Insurance                  | {site.insurance}          | `site.insurance`          |
+
+## Key benefits
+
+<ul>
+	{benefits.map((b) => (
+		<li key={b}>{b}</li>
+	))}
+</ul>
+
+## Navigation labels
+
+<ul>
+	{navLinks.map((l) => (
+		<li key={l.href}>
+			{l.label} → <code>{l.href}</code>
+		</li>
+	))}
+</ul>
+
+## Rules
+
+- **One primary call to action.** Every primary button reads "{site.primaryCta}" and links to `#contact`. The secondary action is "See the case study".
+- **Plain, confident, specific.** Say what Union EV does ("We design, install, operate and maintain…") rather than adjectives. Use real figures from the case study, and date them (`caseStudy.reportedAt`).
+- **Spell out abbreviations on first use:** electric vehicle (EV), kilowatt (kW), kilowatt hours (kWh). The hero wraps "EV" in `<abbr>`.
+- **Only claims the business can support.** Revenue share, install time and insurance are listed for confirmation in `docs/open-points.md`; "100% renewable" and "24/7 monitoring" were removed for this reason.
+- **Title Case** for eyebrows, nav labels and the hero headline ("Who We Work With", "EV Charging for Your Site."); sentence case for section titles and body ("Survey to operation — we handle it all").
+- **British English:** colour, organisation, licence.
+- **Testimonials** carry a name and role only with permission; otherwise an anonymous attribution such as "Apsley Marina Resident".

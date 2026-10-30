@@ -12,7 +12,7 @@
 
 <Image
 	src={union_logo}
-	alt="Union EV Charging"
+	alt="Union Electric Vehicle Charging"
 	fit="contain"
 	width={1998}
 	height={495}

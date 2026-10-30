@@ -1,0 +1,166 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+import { colourTokens, darkRoles, tokens, value, contrast, level, isHex } from '../tokens';
+
+<Meta title="Foundations/Colour" />
+
+# Colour
+
+Colours are named after their **role** (`--color-<role>[-<variant>]`), never after the swatch. Use `--color-text-muted`, not "grey 600". Each hex value appears once in `src/styles/tokens.css`; a role that shares a value points at the primary role with `var()`. This page reads that file, so it is always current.
+
+The palette is a deep **brand green** with a **burnt orange** for actions, on white and cool greys (the Tailwind gray scale).
+
+{colourTokens().map(([group, list]) => (
+
+<section key={group}>
+<h2>{group}</h2>
+<ColorPalette>
+{list.map((token) => (
+<ColorItem
+key={token.name}
+title={token.name}
+subtitle={token.alias ? `→ ${token.alias}` : ''}
+colors={{ [token.resolved.startsWith('linear') ? 'gradient' : token.resolved]: token.resolved }}
+/>
+))}
+</ColorPalette>
+</section>
+))}
+
+## Notes from the source
+
+<table>
+	<thead>
+		<tr>
+			<th>Token</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		{tokens
+			.filter((t) => t.note && t.note.length > 30 && /^--(color|gradient)/.test(t.name))
+			.map((t) => (
+				<tr key={t.name}>
+					<td>
+						<code>{t.name}</code>
+					</td>
+					<td>{t.note}</td>
+				</tr>
+			))}
+	</tbody>
+</table>
+
+## Contrast
+
+Computed from the token values (WCAG 2 contrast ratio). The site targets **AAA (7:1)** for body text, which is why there are two oranges: `--color-action`/`--color-accent` for light backgrounds and `--color-accent-on-dark` for dark ones. `--color-accent-decorative`, the original brand orange, is for borders only.
+
+<table>
+	<thead>
+		<tr>
+			<th>Foreground</th>
+			<th>Background</th>
+			<th>Sample</th>
+			<th>Ratio</th>
+			<th>Level</th>
+		</tr>
+	</thead>
+	<tbody>
+		{[
+			['--color-text', '--color-surface'],
+			['--color-text-soft', '--color-surface'],
+			['--color-text-muted', '--color-surface'],
+			['--color-text-muted', '--color-surface-alt'],
+			['--color-text-subtle', '--color-surface'],
+			['--color-brand', '--color-surface'],
+			['--color-brand', '--color-surface-brand-soft'],
+			['--color-accent', '--color-surface'],
+			['--color-accent', '--color-surface-alt'],
+			['--color-text-on-dark', '--color-action'],
+			['--color-text-on-dark', '--color-action-hover'],
+			['--color-danger', '--color-surface'],
+			['--color-text-on-dark', '--color-surface-brand'],
+			['--color-text-on-dark-muted', '--color-surface-brand'],
+			['--color-accent-on-dark', '--color-surface-brand'],
+			['--color-text-on-inverse', '--color-surface-inverse'],
+			['--color-accent-decorative', '--color-surface']
+		].map(([fg, bg]) => {
+			const ratio = isHex(value(fg)) && isHex(value(bg)) ? contrast(value(fg), value(bg)) : null;
+			return (
+				<tr key={fg + bg}>
+					<td>
+						<code>{fg}</code>
+					</td>
+					<td>
+						<code>{bg}</code>
+					</td>
+					<td>
+						<span
+							style={{
+								display: 'inline-block',
+								padding: '0.25rem 0.75rem',
+								borderRadius: '0.5rem',
+								background: value(bg),
+								color: value(fg),
+								fontWeight: 600,
+								border: '1px solid var(--color-border-strong)'
+							}}
+						>
+							Aa Union EV
+						</span>
+					</td>
+					<td>{ratio ? `${ratio}:1` : '–'}</td>
+					<td>{ratio ? level(ratio) : '–'}</td>
+				</tr>
+			);
+		})}
+	</tbody>
+</table>
+
+## Dark context
+
+`.theme-dark` (in `src/styles/utilities.css`) is applied by `Section tone="dark"`, the hero and the footer. It reassigns these roles, so blocks inside need no dark variants. Try any story with the **Tone** toolbar set to Dark.
+
+<table>
+	<thead>
+		<tr>
+			<th>Property</th>
+			<th>On dark</th>
+			<th>Resolves to</th>
+		</tr>
+	</thead>
+	<tbody>
+		{darkRoles.map((t) => (
+			<tr key={t.name}>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>
+					<code>{t.value}</code>
+				</td>
+				<td>
+					{isHex(t.resolved) && (
+						<span
+							style={{
+								display: 'inline-block',
+								width: '1rem',
+								height: '1rem',
+								marginRight: '0.5rem',
+								verticalAlign: 'middle',
+								borderRadius: '0.25rem',
+								background: t.resolved,
+								border: '1px solid var(--color-border-strong)'
+							}}
+						/>
+					)}
+					<code>{t.resolved}</code>
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+## Rules
+
+- Use roles in blocks, never hex values. A new colour gets a role name and one entry in `tokens.css`.
+- Keep `--color-brand` in sync with `theme-color` (`src/routes/+layout.svelte`), `theme_color` (`static/site.webmanifest`) and `.storybook/theme.ts`.
+- Never put text on `--color-accent-decorative` or use it as text; it fails AA on white.
+- Check any new text/background pair here, or with the AAA steps in `docs/accessibility-audit.md`.

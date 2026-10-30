@@ -15,12 +15,18 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:e2e": "playwright install && playwright test",
-		"test": "npm run test:e2e"
+		"test": "npm run test:e2e",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.10.2",
 		"@eslint/js": "^10.0.1",
 		"@playwright/test": "^1.60.0",
+		"@storybook/addon-a11y": "^10.6.5",
+		"@storybook/addon-docs": "^10.6.5",
+		"@storybook/addon-svelte-csf": "^5.1.6",
+		"@storybook/sveltekit": "^10.6.5",
 		"@sveltejs/adapter-static": "^4.0.0",
 		"@sveltejs/kit": "^3.0.0",
 		"@sveltejs/vite-plugin-svelte": "^7.2.0",
@@ -31,6 +37,8 @@
 		"globals": "^17.6.0",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^4.1.0",
+		"remark-gfm": "^4.0.1",
+		"storybook": "^10.6.5",
 		"svelte": "^5.57.1",
 		"svelte-check": "^4.6.0",
 		"typescript": "^6.0.3",

@@ -1,0 +1,125 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as LogoStories from '../../lib/components/Logo.stories.svelte';
+import logo from '../../lib/images/union_logo.svg';
+import { value } from '../tokens';
+
+<Meta title="Brand/Logo" />
+
+# Logo
+
+The wordmark is a single-colour SVG in brand green, <strong><code>{value('--color-brand')}</code></strong> (`--color-brand`), at `src/lib/images/union_logo.svg` (1998 × 495, about 4:1). The `Logo` component renders it through `Image`, so it keeps its aspect ratio and has a placeholder if it fails to load.
+
+<div
+	style={{
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
+		gap: '1rem',
+		margin: '2rem 0'
+	}}
+>
+	<figure
+		className="card"
+		style={{ margin: 0, display: 'grid', placeItems: 'center', minHeight: '10rem' }}
+	>
+		<img
+			src={logo}
+			alt="Union Electric Vehicle Charging logo on white"
+			style={{ height: '2.5rem', width: 'auto' }}
+		/>
+	</figure>
+	<figure
+		className="card bg-surface-alt"
+		style={{ margin: 0, display: 'grid', placeItems: 'center', minHeight: '10rem' }}
+	>
+		<img
+			src={logo}
+			alt="Union Electric Vehicle Charging logo on the alt surface"
+			style={{ height: '2.5rem', width: 'auto' }}
+		/>
+	</figure>
+	<figure
+		className="card"
+		style={{
+			margin: 0,
+			display: 'grid',
+			placeItems: 'center',
+			minHeight: '10rem',
+			background: 'var(--color-surface-inverse)',
+			borderColor: 'var(--color-border-inverse)'
+		}}
+	>
+		<div
+			style={{
+				padding: 'var(--space-1-5) var(--space-3)',
+				background: 'var(--color-surface)',
+				borderRadius: 'var(--radius-lg)'
+			}}
+		>
+			<img
+				src={logo}
+				alt="Union Electric Vehicle Charging logo on its white plate, on dark"
+				style={{ height: '2rem', width: 'auto' }}
+			/>
+		</div>
+	</figure>
+</div>
+
+## Usage
+
+- **Sizes:** 2.5rem tall in the nav (`size="nav"`, loaded eagerly), 2rem in the footer (`size="footer"`, lazy). Don't go below 2rem: the "CHARGING" line stops being legible.
+- **On light backgrounds** (white, `--color-surface-alt`) use it as is.
+- **On dark backgrounds** the green mark has too little contrast, so it sits on a white plate with `--space-1-5` × `--space-3` padding and `--radius-lg`, as in the footer. Don't recolour the SVG.
+- **Clear space:** keep at least the plate padding clear around it; never crowd it with text.
+- **Alt text** is "Union Electric Vehicle Charging". The SVG also carries its own `<title>`.
+
+<Canvas of={LogoStories.Nav} />
+
+## Icons for browsers and devices
+
+<div
+	style={{ display: 'flex', gap: '2rem', alignItems: 'end', flexWrap: 'wrap', margin: '1.5rem 0' }}
+>
+	<figure style={{ margin: 0, textAlign: 'center' }}>
+		<div
+			style={{
+				display: 'grid',
+				placeItems: 'center',
+				width: '5rem',
+				height: '5rem',
+				background: 'var(--color-brand)',
+				borderRadius: 'var(--radius-xl)'
+			}}
+		>
+			<img src="/favicon.svg" alt="Favicon" style={{ width: '3rem' }} />
+		</div>
+		<figcaption className="text-xs color-muted" style={{ marginTop: '0.5rem' }}>
+			<code>favicon.svg</code>
+		</figcaption>
+	</figure>
+	<figure style={{ margin: 0, textAlign: 'center' }}>
+		<img
+			src="/apple-touch-icon.png"
+			alt="Apple touch icon"
+			style={{ width: '5rem', borderRadius: 'var(--radius-xl)' }}
+		/>
+		<figcaption className="text-xs color-muted" style={{ marginTop: '0.5rem' }}>
+			<code>apple-touch-icon.png</code> 180²
+		</figcaption>
+	</figure>
+	<figure style={{ margin: 0, textAlign: 'center' }}>
+		<img
+			src="/og.jpg"
+			alt="Open Graph sharing image"
+			style={{
+				width: '15rem',
+				borderRadius: 'var(--radius-lg)',
+				border: '1px solid var(--color-border-strong)'
+			}}
+		/>
+		<figcaption className="text-xs color-muted" style={{ marginTop: '0.5rem' }}>
+			<code>og.jpg</code> 1200 × 630, for link previews
+		</figcaption>
+	</figure>
+</div>
+
+The browser theme colour is <code>{value('--color-brand')}</code>. It is set in three places that cannot read CSS variables, so keep them in sync with `--color-brand`: `theme-color` in `src/routes/+layout.svelte`, `theme_color` in `static/site.webmanifest`, and `.storybook/theme.ts`.

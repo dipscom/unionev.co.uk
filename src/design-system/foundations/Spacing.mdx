@@ -1,0 +1,83 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { tokensWith, toPx } from '../tokens';
+
+<Meta title="Foundations/Spacing" />
+
+# Spacing and layout
+
+## Space scale
+
+`--space-N` is N quarter-rems (`--space-4` = 1rem = 16px). Use it for every margin, padding and gap; compositions take it through custom properties such as `--flow-space` and `--gap`.
+
+<table>
+	<thead>
+		<tr>
+			<th>Token</th>
+			<th>Value</th>
+			<th>px</th>
+			<th style={{ width: '50%' }}></th>
+		</tr>
+	</thead>
+	<tbody>
+		{tokensWith('--space-').map((t) => (
+			<tr key={t.name}>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>{t.value}</td>
+				<td>{toPx(t.value)}</td>
+				<td>
+					<div
+						style={{
+							width: `var(${t.name})`,
+							height: '1rem',
+							background: 'var(--color-brand)',
+							borderRadius: '2px'
+						}}
+					/>
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+## Layout
+
+<table>
+	<thead>
+		<tr>
+			<th>Token</th>
+			<th>Value</th>
+			<th>Use</th>
+		</tr>
+	</thead>
+	<tbody>
+		{tokensWith('--w-', '--gutter', '--section-y', '--nav-height').map((t) => (
+			<tr key={t.name}>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>
+					{t.value} ({toPx(t.value)}px)
+				</td>
+				<td>
+					{
+						{
+							'--w-6xl': 'Default content width (.wrapper, Section width="wide")',
+							'--w-4xl': 'Section width="narrow", partners, case-study preview',
+							'--w-3xl': 'Section width="text", contact, privacy page',
+							'--gutter': 'Inline padding of .wrapper and the mobile menu',
+							'--section-y':
+								'Vertical rhythm reference for page bands (.region defaults to --space-24)',
+							'--nav-height': 'Height of the fixed nav; scroll margin for in-page anchors'
+						}[t.name]
+					}
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+## Section padding
+
+`Section size` picks the `.region` padding: `lg` = `--space-24` (default), `md` = `--space-20`, `sm` = `--space-16`. The gap after a section header is `--space-16` unless the section sets `--flow-space`.

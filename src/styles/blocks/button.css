@@ -15,19 +15,21 @@
 		background-color var(--transition),
 		border-color var(--transition);
 }
+/* Shadows take the tint of the button: orange for primary, brand green for outline */
 .btn[data-variant='primary'] {
 	border: 2px solid var(--color-accent-decorative);
 	background: var(--color-action);
+	box-shadow: var(--shadow-md-action);
 	color: var(--color-text-on-dark);
 }
 .btn[data-variant='primary']:hover {
 	background: var(--color-action-hover);
 }
-/* Same look as the skip link, plus a mint border */
+/* Like the skip link, plus a mint border and a green-tinted shadow */
 .btn[data-variant='outline'] {
 	border: 2px solid var(--color-brand-soft);
 	background: var(--color-surface);
-	box-shadow: var(--shadow-md);
+	box-shadow: var(--shadow-md-brand);
 	color: var(--color-brand);
 	font-weight: 600;
 }
@@ -47,5 +49,10 @@
 	padding: var(--space-5) var(--space-10);
 	font-size: var(--text-lg);
 	line-height: var(--leading-lg);
-	box-shadow: var(--shadow-lg);
+}
+.btn[data-variant='primary'][data-size='lg'] {
+	box-shadow: var(--shadow-lg-action);
+}
+.btn[data-variant='outline'][data-size='lg'] {
+	box-shadow: var(--shadow-lg-brand);
 }

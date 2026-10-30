@@ -1,0 +1,70 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Layout/Utilities" />
+
+# Utilities
+
+Single-purpose classes from `src/styles/utilities.css`. **Add a utility only once it is used three times**; until then the declaration stays in the block. A block must not set a property that a utility on the same element controls, because the block would win.
+
+<table>
+	<thead>
+		<tr>
+			<th>Class</th>
+			<th>Does</th>
+			<th>Example</th>
+		</tr>
+	</thead>
+	<tbody>
+		{[
+			['text-xs', 'size + leading: xs', 'Footer legal line'],
+			['text-sm', 'size + leading: sm', 'Card text and labels'],
+			['text-lg', 'size + leading: lg', 'Hero lead'],
+			['leading-relaxed', 'line-height 1.625', 'Longer paragraphs read more easily.'],
+			['weight-semibold', 'font-weight 600', 'Semibold'],
+			['weight-extrabold', 'font-weight 800', 'Extrabold'],
+			['color-brand', 'color: --color-brand', 'Brand green'],
+			['color-muted', 'color: --color-text-muted', 'Muted text'],
+			['color-subtle', 'color: --color-text-subtle', 'Subtle text'],
+			['color-accent', 'color: --color-accent', 'Accent orange'],
+			['text-center', 'text-align: center', 'Centred'],
+			['shadow-sm', 'box-shadow: --shadow-sm', 'Resting card'],
+			['bg-surface-alt', 'background: --color-surface-alt', 'Alt band'],
+			['bg-brand', 'background: --color-surface-brand', 'Brand band (with theme-dark)']
+		].map(([cls, does, sample]) => (
+			<tr key={cls}>
+				<td>
+					<code>.{cls}</code>
+				</td>
+				<td>{does}</td>
+				<td>
+					<span
+						className={cls + (cls === 'bg-brand' ? ' theme-dark' : '')}
+						style={
+							cls.startsWith('bg') || cls === 'shadow-sm'
+								? { display: 'inline-block', padding: '0.5rem 0.75rem', borderRadius: '0.5rem' }
+								: undefined
+						}
+					>
+						{sample}
+					</span>
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+## Context and helpers
+
+| Class              | Does                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `.theme-dark`      | Reassigns the colour roles for a dark background (see Foundations / Colour). Pair with `.bg-brand`, or the hero/footer backgrounds. |
+| `.visually-hidden` | Hidden on screen, read by screen readers                                                                                            |
+| `.img-fill`        | Makes an `Image` fill a sized wrapper (`object-fit: cover`)                                                                         |
+
+## Exceptions are data attributes
+
+Variants and states are attributes, not modifier classes: `data-variant="outline"`, `data-size="sm"`, `data-state="failed"`, `data-layout="thirds"`, `data-title-size="md"`. State from JavaScript is an attribute too (`aria-expanded`, `hidden`, `aria-invalid`).
+
+```html
+<a class="btn" data-variant="outline" data-size="sm" href="#case-study">See the case study</a>
+```

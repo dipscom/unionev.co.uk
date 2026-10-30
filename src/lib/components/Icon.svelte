@@ -66,6 +66,9 @@
 	} satisfies Record<string, string[]>;
 
 	export type IconName = keyof typeof paths;
+
+	/** Every icon, for the Storybook gallery */
+	export const iconNames = Object.keys(paths) as IconName[];
 </script>
 
 <script lang="ts">

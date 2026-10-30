@@ -1,0 +1,56 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { images } from '../../lib/content/images';
+import * as ImageStories from '../../lib/components/Image.stories.svelte';
+
+<Meta title="Brand/Photography" />
+
+# Photography
+
+Real Union EV installs, cars and drivers: no stock photography. Photos are self-hosted and listed in `src/lib/content/images.ts`.
+
+<div
+	style={{
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fill, minmax(14rem, 1fr))',
+		gap: '1rem',
+		margin: '2rem 0'
+	}}
+>
+	{Object.entries(images).map(([name, picture]) => (
+		<figure key={name} style={{ margin: 0 }}>
+			<img
+				src={picture.src}
+				alt=""
+				width={picture.width}
+				height={picture.height}
+				style={{
+					width: '100%',
+					height: 'auto',
+					borderRadius: 'var(--radius-2xl)',
+					boxShadow: 'var(--shadow-md)'
+				}}
+			/>
+			<figcaption className="text-sm color-muted" style={{ marginTop: '0.5rem' }}>
+				<code>images.{name}</code> · {picture.width} × {picture.height}
+			</figcaption>
+		</figure>
+	))}
+</div>
+
+## Crops and formats
+
+| Crop    | Aspect          | Widths              | Used in                 |
+| ------- | --------------- | ------------------- | ----------------------- |
+| `hero`  | 448 : 384 (7:6) | 448, 672, 896       | Hero frame, from 1024px |
+| `tile`  | 4:3             | 360, 540, 720, 1080 | Gallery                 |
+| `study` | 33:20           | 528, 792, 1056      | Case study              |
+
+Each crop ships as AVIF, then WebP, with a JPEG fallback in the `<img>`, which also carries the intrinsic size so the layout never shifts.
+
+## Treatment
+
+- **Rounded corners:** `--radius-2xl` for tiles, `--radius-3xl` for the hero, which also gets `--shadow-2xl` and an offset frame in `--color-accent-wash`.
+- **Placeholder:** a photo set to `null`, or one that fails to load, becomes a soft brand-green gradient (`--color-surface-brand-soft` → `--color-brand-soft`), never a broken image.
+- **Alt text** describes the photo ("Driver plugging a charging cable into a red car"); the caption describes the project.
+
+<Canvas of={ImageStories.Placeholder} />

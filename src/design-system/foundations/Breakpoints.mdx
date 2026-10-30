@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Breakpoints" />
+
+# Breakpoints
+
+Mobile first: styles are written for small screens and add `min-width` queries. CSS variables cannot be used inside `@media`, so the values are written literally; these are the only ones in use.
+
+| Name | Min width | What changes                                                                                                                       |
+| ---- | --------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| —    | 640px     | `.switcher` becomes a row (hero and CTA buttons)                                                                                   |
+| `md` | 768px     | Nav links inline, no menu button; `grid` halves/thirds/split-md; hero title to 5xl; `repel[data-stack-below=md]` goes side by side |
+| `lg` | 1024px    | Hero photo appears; `grid` quarters and split; audience panel goes three-column                                                    |
+| `xl` | 1280px    | Hero title to 6xl                                                                                                                  |
+
+Use the **Viewport** toolbar to preview any story at 375, 640, 768, 1024 or 1280px.

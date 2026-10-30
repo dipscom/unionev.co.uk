@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
+import * as IconStories from '../../lib/components/Icon.stories.svelte';
+import * as IconTileStories from '../../lib/components/IconTile.stories.svelte';
+
+<Meta title="Brand/Iconography" />
+
+# Iconography
+
+Icons are [Lucide](https://lucide.dev) stroke paths (ISC licence) drawn inline by `Icon.svelte`: no icon font and no sprite request. Every icon in use is below. To add one, paste its Lucide path data into `paths` in `Icon.svelte`; the gallery picks it up.
+
+- **Grid and stroke:** 24 × 24 viewBox, 2px stroke, round caps and joins, no fill.
+- **Colour:** `currentColor`, so an icon takes the text colour of its context: `color-brand` for audience cards and the FAQ toggle, `color-accent` in icon tiles, `--color-success` for ticks.
+- **Always decorative:** icons are `aria-hidden`. Pair each one with visible text, or add visually hidden text.
+- **Sizes:** 0.875rem (FAQ, new-tab hint), 1rem (check lists, chevrons), 1.25rem (icon tiles), 1.5rem (default), 1.75rem (audience cards).
+
+<Canvas of={IconStories.Gallery} />
+
+## Sizes
+
+<Canvas of={IconStories.Sizes} />
+
+## Icon tile
+
+The accent-wash tile that leads each feature card.
+
+<Canvas of={IconTileStories.FeatureIcons} />

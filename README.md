@@ -23,6 +23,8 @@ The marketing site for Union Electric Vehicle Charging: managed EV charging for 
 | `src/styles/`         | Tokens and the global CSS layers                                                                                                                                |
 | `worker/`             | The Cloudflare Worker: enquiry API, page stamping, rate limits, email, Turnstile check                                                                          |
 | `static/`             | Copied as-is: favicon, OG image, `robots.txt`, web manifest, `_headers`                                                                                         |
+| `src/design-system/`  | Storybook brand and foundations pages (MDX) and the token reader; see [Design system](#design-system)                                                           |
+| `.storybook/`         | Storybook config, tone decorator and brand theme                                                                                                                |
 | `docs/`               | Open work: [open points](docs/open-points.md) lists what is left before launch; [accessibility audit](docs/accessibility-audit.md) lists the outstanding checks |
 
 ## Getting started
@@ -58,6 +60,20 @@ npm run test       # installs Playwright's browsers, builds, previews and runs e
 ```
 
 The Playwright tests in `src/routes/` and `worker/` cover axe accessibility checks (WCAG 2.2 AA), keyboard use, the enquiry form (with Turnstile and the Worker stubbed), the pages with JavaScript off, and the Worker itself, which is called directly with email, Turnstile and rate limits stubbed. The tests run against `vite preview`, not the Worker.
+
+## Design system
+
+[Storybook](https://storybook.js.org) catalogues the brand, design tokens and components. It is a local tool: it is not part of the site build or the deploy.
+
+```sh
+npm run storybook        # http://localhost:6006
+npm run build-storybook  # static build in storybook-static/ (ignored by git)
+```
+
+- **Brand, Foundations, Accessibility and Layout** are MDX pages in `src/design-system/`. The token pages read `src/styles/tokens.css` through `src/design-system/tokens.ts`, so they update with the CSS; only the brand hex values in `.storybook/theme.ts` are copied by hand.
+- **Component stories** sit beside their component (`Button.svelte` → `Button.stories.svelte`), written in [Svelte CSF](https://github.com/storybookjs/addon-svelte-csf). Add one with every new component. `Pages/Home` renders `src/routes/+page.svelte`.
+- **Toolbar:** _Tone_ previews a story on white, the alt surface or `.theme-dark`; _Viewport_ has the site's breakpoints. The Accessibility panel runs axe with the same WCAG 2.2 AA tags as the e2e tests.
+- Stories load the same CSS as `+layout.svelte` but not the inline scripts, so they show the no-JavaScript behaviour.
 
 ## Deploying
 

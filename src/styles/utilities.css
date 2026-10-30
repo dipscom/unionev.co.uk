@@ -2,16 +2,13 @@
 
 /*
  * Dark context: reassigns the colour roles so blocks inside need no dark variants.
- * Tracking, title weight and header gap are the few type details that also differ on dark.
+ * Only colour changes: type and spacing are the same on every background.
  */
 .theme-dark {
 	--color-focus: var(--color-accent-on-dark);
 	--color-accent: var(--color-accent-on-dark);
 	--color-heading: var(--color-text-on-dark);
 	--color-text-subtle: var(--color-text-on-dark-muted);
-	--eyebrow-tracking: 0.1em;
-	--title-weight: 800;
-	--head-gap: var(--space-3);
 	color: var(--color-text-on-dark);
 }
 

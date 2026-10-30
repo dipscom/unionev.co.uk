@@ -1,0 +1,207 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Layout/Compositions" />
+
+export const Box = ({ children, w }) => (
+	<div
+		className="text-sm weight-semibold"
+		style={{
+			padding: 'var(--space-3) var(--space-4)',
+			background: 'var(--color-surface-brand-soft)',
+			border: '1px solid var(--color-border-brand-subtle)',
+			borderRadius: 'var(--radius-lg)',
+			color: 'var(--color-brand)',
+			width: w
+		}}
+	>
+		{children}
+	</div>
+);
+
+export const Demo = ({ children }) => (
+	<div
+		className="sb-unstyled"
+		style={{
+			margin: '1rem 0 2rem',
+			padding: 'var(--space-4)',
+			border: '1px dashed var(--color-border-input)',
+			borderRadius: 'var(--radius-xl)'
+		}}
+	>
+		{children}
+	</div>
+);
+
+# Compositions
+
+Layout primitives from `src/styles/compositions.css` ([CUBE CSS](https://cube.fyi)). They arrange their children and know nothing about what is inside. Tune them with custom properties on the same element, and order classes block, composition, utility: `class="card flow text-center"`.
+
+## `.wrapper`
+
+A centred column that owns the page gutter. `--wrapper-max` sets the content width (default `--w-6xl`).
+
+<Demo>
+	<div
+		className="wrapper"
+		style={{ '--wrapper-max': '20rem', background: 'var(--color-surface-alt)' }}
+	>
+		<Box>--wrapper-max: 20rem</Box>
+	</div>
+</Demo>
+
+## `.region`
+
+A page band: vertical padding from `--region-space` (default `--space-24`) and `scroll-margin-top` for the fixed nav. `Section` is a `.region`.
+
+## `.flow`
+
+Vertical rhythm: a margin above every child but the first, from `--flow-space` (default `1em`). Give every `.flow` its own `--flow-space`, because custom properties inherit.
+
+<Demo>
+	<div className="flow" style={{ '--flow-space': 'var(--space-6)' }}>
+		<Box>One</Box>
+		<Box>Two</Box>
+		<Box>Three (--flow-space: var(--space-6))</Box>
+	</div>
+</Demo>
+
+## `.cluster`
+
+A wrapping row, centred by default. `--cluster-gap`, `--cluster-justify`, `--cluster-align`.
+
+<Demo>
+	<div className="cluster" style={{ '--cluster-justify': 'flex-start' }}>
+		{[
+			'Everything handled',
+			'Fully funded options',
+			'Revenue share',
+			'One point of contact',
+			'UK-wide'
+		].map((t) => (
+			<Box key={t}>{t}</Box>
+		))}
+	</div>
+</Demo>
+
+## `.repel`
+
+Pushes items to opposite ends (`--repel-gap`, `--repel-align`). `data-stack-below="md"` stacks them until 768px, as the footer does.
+
+<Demo>
+	<div className="repel">
+		<Box>Logo</Box>
+		<Box>Menu</Box>
+	</div>
+</Demo>
+
+## `.switcher`
+
+A column that becomes a row from 640px (`--switcher-gap`, `--switcher-justify`, `--switcher-wrap`). Used for button pairs.
+
+<Demo>
+	<div className="switcher">
+		<Box>Primary action</Box>
+		<Box>Secondary action</Box>
+	</div>
+</Demo>
+
+## `.grid`
+
+One column on mobile; `data-layout` picks the wider shape. `--gap` (default `--space-6`), `--grid-align`, `--grid-cols` (for `split` and `split-md`).
+
+<table>
+	<thead>
+		<tr>
+			<th>
+				<code>data-layout</code>
+			</th>
+			<th>Columns</th>
+			<th>Used in</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<code>halves</code>
+			</td>
+			<td>1 → 2 at md</td>
+			<td>Features</td>
+		</tr>
+		<tr>
+			<td>
+				<code>thirds</code>
+			</td>
+			<td>1 → 3 at md</td>
+			<td>Gallery, case-study stats</td>
+		</tr>
+		<tr>
+			<td>
+				<code>quarters</code>
+			</td>
+			<td>1 → 2 at md → 4 at lg</td>
+			<td>Process</td>
+		</tr>
+		<tr>
+			<td>
+				<code>quarters-2up</code>
+			</td>
+			<td>2 → 4 at md</td>
+			<td>Audiences</td>
+		</tr>
+		<tr>
+			<td>
+				<code>split</code>
+			</td>
+			<td>
+				1 → <code>--grid-cols</code> at lg
+			</td>
+			<td>Hero</td>
+		</tr>
+		<tr>
+			<td>
+				<code>split-md</code>
+			</td>
+			<td>
+				1 → <code>--grid-cols</code> at md
+			</td>
+			<td>Case-study preview</td>
+		</tr>
+	</tbody>
+</table>
+
+{['halves', 'thirds', 'quarters', 'quarters-2up'].map((layout) => (
+
+<Demo key={layout}>
+<div className="grid" data-layout={layout} style={{ '--gap': 'var(--space-3)' }}>
+{[1, 2, 3, 4].map((n) => <Box key={n}>{layout} {n}</Box>)}
+</div>
+</Demo>
+))}
+
+## `.with-icon`
+
+An icon beside its text, top-aligned (`--with-icon-gap`, default `--space-3`). Check lists and feature cards use it.
+
+<Demo>
+	<div className="with-icon">
+		<span className="color-accent" style={{ display: 'flex' }}>
+			<svg
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				aria-hidden="true"
+			>
+				<path d="M20 6 9 17l-5-5" />
+			</svg>
+		</span>
+		<span>
+			Text that wraps onto several lines stays aligned to the right of the icon, which sits on the
+			first line.
+		</span>
+	</div>
+</Demo>

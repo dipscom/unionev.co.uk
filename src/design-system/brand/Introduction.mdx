@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { site } from '../../lib/content/site';
+import logo from '../../lib/images/union_logo.svg';
+
+<Meta title="Brand/Introduction" />
+
+<img
+	src={logo}
+	alt="Union Electric Vehicle Charging"
+	style={{ height: '3.5rem', width: 'auto', marginBottom: '2rem' }}
+/>
+
+# Union EV design system
+
+The brand, design tokens and components of [unionev.co.uk](https://www.unionev.co.uk), catalogued from the site's own source. Every page here renders the real CSS and Svelte components, and the token pages read `src/styles/tokens.css` directly, so what you see is what ships.
+
+**{site.legalName}** ({site.name}): {site.tagline}
+
+## How it is organised
+
+| Section           | What is there                                                     | Source                                           |
+| ----------------- | ----------------------------------------------------------------- | ------------------------------------------------ |
+| **Brand**         | Logo, voice and copy, iconography, photography                    | `src/lib/images/`, `src/lib/content/`, `static/` |
+| **Foundations**   | Colour, type, space, radius, shadow, motion and breakpoint tokens | `src/styles/tokens.css`                          |
+| **Accessibility** | The rules the components follow                                   | `docs/accessibility-audit.md`                    |
+| **Layout**        | CUBE CSS compositions and utilities, `Section`, `PageShell`       | `src/styles/compositions.css`, `utilities.css`   |
+| **Components**    | Primitives (button, card, icon, image, logo) and content blocks   | `src/lib/components/`                            |
+| **Chrome**        | Nav and footer                                                    | `src/lib/components/`                            |
+| **Sections**      | Each band of the home page, with its real copy                    | `src/lib/components/`                            |
+| **Pages**         | The home page, composed                                           | `src/routes/+page.svelte`                        |
+
+## Principles
+
+- **Colours are roles, never swatches.** Blocks use `--color-text-muted`, not a grey. A dark context (`.theme-dark`) reassigns the roles, so no block needs a dark variant. Use the **Tone** toolbar to preview any story on white, the alt surface or dark.
+- **Type and space come from the scales.** No literal sizes, line heights or spacing in blocks.
+- **Exceptions are data attributes**, not modifier classes: `data-variant`, `data-size`, `data-state`, `data-layout`.
+- **Works without JavaScript.** Menus, FAQs and audience panels are native HTML (`popover`, `<details>`). Svelte ships no runtime to the browser.
+- **WCAG 2.2 AA at least, AAA for contrast.** The Accessibility panel runs the same axe tags as the site's e2e tests on every story.
+
+## Working in Storybook
+
+```sh
+npm run storybook        # http://localhost:6006
+npm run build-storybook  # static build in storybook-static/
+```
+
+Stories sit beside their component (`Button.svelte` → `Button.stories.svelte`) and use Svelte CSF. The brand and foundations pages are MDX in `src/design-system/`. Add a story with every new component.
+
+`Seo.svelte` has no story: it only writes `<head>` tags (title, canonical, Open Graph, JSON-LD).

@@ -1,0 +1,155 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+import { typeScale, tokensWith, value } from '../tokens';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+<p
+	style={{
+		fontFamily: 'var(--font-sans)',
+		fontSize: 'var(--text-5xl)',
+		lineHeight: 1,
+		fontWeight: 800,
+		color: 'var(--color-brand)',
+		margin: '2rem 0 0.5rem'
+	}}
+>
+	Inter Variable
+</p>
+<p className="color-muted" style={{ fontFamily: 'var(--font-sans)' }}>
+	ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 £ % – → ·
+</p>
+
+**Inter Variable** is self-hosted through `@fontsource-variable/inter` (Latin subset preloaded in `+layout.svelte`). Fallback stack: <code>{value('--font-sans')}</code>.
+
+## Weights
+
+<div style={{ display: 'grid', gap: '0.75rem', margin: '1.5rem 0' }}>
+	{[
+		[400, 'Regular', 'Body copy, role in quotes'],
+		[500, 'Medium', 'Nav links'],
+		[600, 'Semibold', 'Eyebrows, labels, outline buttons (.weight-semibold)'],
+		[700, 'Bold', 'Headings h1–h3, primary buttons, section titles'],
+		[800, 'Extrabold', 'Hero title, stats, step numbers (.weight-extrabold)']
+	].map(([weight, name, use]) => (
+		<div
+			key={weight}
+			style={{
+				display: 'flex',
+				gap: '1.5rem',
+				alignItems: 'baseline',
+				fontFamily: 'var(--font-sans)'
+			}}
+		>
+			<span style={{ fontWeight: weight, fontSize: 'var(--text-2xl)', minWidth: '12rem' }}>
+				{name} {weight}
+			</span>
+			<span className="text-sm color-muted">{use}</span>
+		</div>
+	))}
+</div>
+
+## Type scale
+
+Each `--text-*` size pairs with a `--leading-*` line height of the same name where one exists. The utilities `.text-xs`, `.text-sm` and `.text-lg` set both.
+
+<table>
+	<thead>
+		<tr>
+			<th>Size</th>
+			<th>Value</th>
+			<th>Leading</th>
+			<th>Sample</th>
+		</tr>
+	</thead>
+	<tbody>
+		{typeScale().map((t) => (
+			<tr key={t.name}>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>{t.value}</td>
+				<td>
+					{t.leading ? (
+						<>
+							<code>{t.leading.name}</code> {t.leading.value}
+						</>
+					) : (
+						'–'
+					)}
+				</td>
+				<td
+					style={{
+						fontFamily: 'var(--font-sans)',
+						fontSize: `var(${t.name})`,
+						lineHeight: t.leading ? `var(${t.leading.name})` : 1.2,
+						whiteSpace: 'nowrap'
+					}}
+				>
+					Managed EV charging
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+### Relative line heights
+
+<table>
+	<tbody>
+		{tokensWith('--leading-')
+			.filter((t) => !t.value.endsWith('rem'))
+			.map((t) => (
+				<tr key={t.name}>
+					<td>
+						<code>{t.name}</code>
+					</td>
+					<td>{t.value}</td>
+				</tr>
+			))}
+	</tbody>
+</table>
+
+`--leading-snug` is the body default; `--leading-tight` the heading default; `.leading-relaxed` is for longer paragraphs such as leads and FAQ answers.
+
+## Hierarchy on the site
+
+<div
+	className="sb-unstyled flow"
+	style={{ '--flow-space': 'var(--space-6)', margin: '2rem 0', fontFamily: 'var(--font-sans)' }}
+>
+	<div>
+		<span className="eyebrow">Eyebrow · text-sm 600, uppercase, 0.05em tracking</span>
+	</div>
+	<h1
+		className="weight-extrabold"
+		style={{ fontSize: 'var(--text-6xl)', lineHeight: 'var(--leading-none)' }}
+	>
+		Hero title
+	</h1>
+	<p className="text-xs color-muted">
+		h1 · text-4xl → 5xl at 768px → 6xl at 1280px, 800, leading-tight then none
+	</p>
+	<h2 className="section-title" style={{ margin: 0 }}>
+		Section title
+	</h2>
+	<p className="text-xs color-muted">
+		h2 .section-title · text-4xl / leading-4xl, 700; md: 3xl → 4xl; sm: 3xl
+	</p>
+	<h3 style={{ fontSize: 'var(--text-lg)' }}>Card and panel title</h3>
+	<p className="text-xs color-muted">h3 · inherits size from its block, 700, leading-tight</p>
+	<p className="section-lead" style={{ margin: 0 }}>
+		Section lead: text-lg in --color-text-subtle, at most 42rem wide.
+	</p>
+	<p>Body: text-base (1rem) on leading-snug, in --color-text.</p>
+	<p className="text-sm color-muted">Small: .text-sm for cards, lists, labels and captions.</p>
+	<p className="text-xs color-subtle">
+		Extra small: .text-xs for the footer legal line and labels.
+	</p>
+</div>
+
+## Rules
+
+- No literal `font-size` or `line-height` in blocks: use the scale. `--text-13` and `--text-15` exist for a few dense components.
+- Headings follow the document outline (one `h1` per page, an `h2` per section, `h3` inside), whatever their visual size.
