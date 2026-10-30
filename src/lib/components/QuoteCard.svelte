@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Icon from './Icon.svelte';
+
 	type Props = {
 		quote: string;
 		author: string;
@@ -10,7 +12,7 @@
 </script>
 
 <figure class="card quote shadow-sm">
-	<div class="quote__mark color-accent" aria-hidden="true">“</div>
+	<div class="quote__mark color-accent"><Icon name="quote" size="2.5rem" /></div>
 	<blockquote class="quote__text">{quote}</blockquote>
 	<figcaption class="quote__author text-sm weight-semibold color-subtle">
 		— {author}{#if role}<span class="quote__role">, {role}</span>{/if}
@@ -22,9 +24,12 @@
 		margin: 0;
 	}
 	.quote__mark {
+		display: flex;
 		margin-bottom: var(--space-3);
-		font-size: var(--text-2xl);
-		line-height: var(--leading-2xl);
+	}
+	/* Lucide's quote is a closing mark (”): mirror it to face the text */
+	.quote__mark :global(.icon) {
+		transform: scaleX(-1);
 	}
 	.quote__text {
 		margin: 0 0 var(--space-4);
