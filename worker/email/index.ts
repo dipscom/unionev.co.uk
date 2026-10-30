@@ -7,7 +7,7 @@ import type { EmailProvider } from './types';
  *   1. add worker/email/<name>.ts that returns an EmailProvider (see brevo.ts),
  *   2. add a case below,
  *   3. set EMAIL_PROVIDER and the provider's secret.
- * Alternative from docs/feedback-plan.md: Lettermint (POST /v1/send, `x-lettermint-token` header).
+ * Alternative: Lettermint (POST /v1/send, `x-lettermint-token` header).
  */
 export function createEmailProvider(env: Env): EmailProvider {
 	switch (env.EMAIL_PROVIDER ?? 'brevo') {

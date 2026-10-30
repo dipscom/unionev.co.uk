@@ -13,17 +13,17 @@ The marketing site for Union Electric Vehicle Charging: managed EV charging for 
 
 ## Project layout
 
-| Path                  | What is there                                                                                               |
-| --------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `src/routes/`         | Pages (`+page.svelte`, `privacy/`, `thank-you/`, `+error.svelte`), the sitemap, and the e2e tests           |
-| `src/lib/components/` | Svelte components, each with its own scoped block styles                                                    |
-| `src/lib/content/`    | Site copy and data as TypeScript: `site.ts` (name, email, Turnstile key, claims), FAQs, audiences, partners |
-| `src/lib/enquiry/`    | `schema.ts`: the form's fields, limits and validation, shared by the page and the Worker                    |
-| `src/lib/client/`     | The browser scripts, plain JavaScript                                                                       |
-| `src/styles/`         | Tokens and the global CSS layers                                                                            |
-| `worker/`             | The Cloudflare Worker: enquiry API, page stamping, rate limits, email, Turnstile check                      |
-| `static/`             | Copied as-is: favicon, OG image, `robots.txt`, web manifest, `_headers`                                     |
-| `docs/`               | Plans and audits: [open points](docs/open-points.md) lists what is still to do before launch                |
+| Path                  | What is there                                                                                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/routes/`         | Pages (`+page.svelte`, `privacy/`, `thank-you/`, `+error.svelte`), the sitemap, and the e2e tests                                                               |
+| `src/lib/components/` | Svelte components, each with its own scoped block styles                                                                                                        |
+| `src/lib/content/`    | Site copy and data as TypeScript: `site.ts` (name, email, Turnstile key, claims), FAQs, audiences, partners                                                     |
+| `src/lib/enquiry/`    | `schema.ts`: the form's fields, limits and validation, shared by the page and the Worker                                                                        |
+| `src/lib/client/`     | The browser scripts, plain JavaScript                                                                                                                           |
+| `src/styles/`         | Tokens and the global CSS layers                                                                                                                                |
+| `worker/`             | The Cloudflare Worker: enquiry API, page stamping, rate limits, email, Turnstile check                                                                          |
+| `static/`             | Copied as-is: favicon, OG image, `robots.txt`, web manifest, `_headers`                                                                                         |
+| `docs/`               | Open work: [open points](docs/open-points.md) lists what is left before launch; [accessibility audit](docs/accessibility-audit.md) lists the outstanding checks |
 
 ## Getting started
 
@@ -70,7 +70,7 @@ Before the first deploy, set the Worker's secrets with `npx wrangler secret put 
 
 ## CSS conventions
 
-The CSS follows [CUBE CSS](https://cube.fyi): Composition, Utility, Block, Exception. Global styles and the cascade do most of the work; blocks hold only what makes a component unique. The migration is described in [docs/cube-css-migration.md](docs/cube-css-migration.md).
+The CSS follows [CUBE CSS](https://cube.fyi): Composition, Utility, Block, Exception. Global styles and the cascade do most of the work; blocks hold only what makes a component unique.
 
 ### Where rules live
 
