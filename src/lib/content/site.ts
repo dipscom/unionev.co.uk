@@ -28,8 +28,3 @@ export const site = {
 	insurance: '£10M liability insurance',
 	year: 2026
 } as const;
-
-export const mailto = `mailto:${site.email}?subject=${encodeURIComponent(site.enquirySubject)}`;
-
-/** Route for existing drivers, kept apart from new-site enquiries until a dedicated support page exists */
-export const driverSupport = `mailto:${site.email}?subject=${encodeURIComponent('Driver support')}`;

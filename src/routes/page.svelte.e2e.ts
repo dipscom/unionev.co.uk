@@ -97,13 +97,6 @@ test.describe('home page', () => {
 		await expect(page.locator('#case-study')).toBeInViewport();
 	});
 
-	test('footer offers a separate driver support route', async ({ page }) => {
-		await page.goto('/');
-		await expect(
-			page.getByRole('contentinfo').getByRole('link', { name: 'Driver support' })
-		).toHaveAttribute('href', /^mailto:.+\?subject=Driver%20support$/);
-	});
-
 	test('contact section offers the enquiry form', async ({ page }) => {
 		await page.goto('/');
 		await expect(page.locator('#contact form')).toBeVisible();

@@ -54,9 +54,8 @@
 				when you start filling in the form and may use your browser and device details to decide; it
 				is subject to Cloudflare's own privacy policy. We use Brevo (a French company with EU data
 				centres) to deliver the enquiry to us and your confirmation email to you, so it processes
-				your enquiry and email address on our behalf. Our LinkedIn link takes you to LinkedIn, which
-				has its own privacy policy. Our images and fonts are served from this website, not from a
-				third party.
+				your enquiry and email address on our behalf. Our images and fonts are served from this
+				website, not from a third party.
 			</p>
 
 			<h2>Our legal basis and how long we keep information</h2>

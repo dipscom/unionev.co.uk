@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { navLinks } from '../content/nav';
-	import { driverSupport, mailto, site } from '../content/site';
+	import { site } from '../content/site';
 	import Logo from './Logo.svelte';
-	import NewTabHint from './NewTabHint.svelte';
 
 	type Props = {
 		/** Prefix for in-page anchors; use "/" on pages other than the home page */
@@ -28,18 +27,6 @@
 			<div>
 				<div class="footer__logo"><Logo size="footer" /></div>
 				<p class="footer__tagline text-sm leading-relaxed">{site.tagline}</p>
-			</div>
-
-			<div class="footer__col text-sm">
-				<h2 class="footer__heading text-xs weight-semibold">Contact</h2>
-				<a href={mailto}>{site.email}</a>
-				<a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<NewTabHint /></a>
-			</div>
-
-			<div class="footer__col text-sm">
-				<h2 class="footer__heading text-xs weight-semibold">Drivers</h2>
-				<p class="footer__note">Already charging with us?</p>
-				<a href={driverSupport}>Driver support</a>
 			</div>
 
 			<div class="footer__col text-sm">
@@ -102,11 +89,6 @@
 	.footer__col a[aria-current='page'] {
 		text-decoration: underline;
 		text-underline-offset: 0.2em;
-	}
-	/* Same padding as the links, so it lines up with the first link in the other columns */
-	.footer__note {
-		padding-block: var(--space-3);
-		color: var(--color-text-on-inverse);
 	}
 	.footer__heading {
 		margin-bottom: var(--space-1);
