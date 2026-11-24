@@ -10,14 +10,15 @@ export interface Assets {
 
 export interface Env {
 	ASSETS: Assets;
-	/** Which email provider to use; see worker/email/index.ts. Defaults to "brevo" */
+	/** Which email provider to use; see worker/email/index.ts. Defaults to "lettermint" */
 	EMAIL_PROVIDER?: string;
 	/** Where enquiries are sent (the hello@ mailbox) */
 	ENQUIRY_TO: string;
 	/** Sender verified with the provider, e.g. "Union EV <hello@unionev.co.uk>" */
 	ENQUIRY_FROM: string;
 	/** Secrets: `wrangler secret put <NAME>`, or .dev.vars locally */
-	BREVO_API_KEY: string;
+	/** Lettermint project API token (lm_...) */
+	LETTERMINT_API_TOKEN: string;
 	TURNSTILE_SECRET: string;
 	/** Signs the form's timestamp (worker/formToken.ts); any long random string */
 	FORM_SECRET: string;

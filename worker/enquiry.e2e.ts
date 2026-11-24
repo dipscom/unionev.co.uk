@@ -3,7 +3,7 @@ import worker from './index';
 import type { Env, RateLimiter } from './env';
 import { issueFormToken, MAX_AGE_MS, MIN_AGE_MS } from './formToken';
 
-// Runs the Worker's fetch handler directly: no browser, with Brevo, Cloudflare and the built site
+// Runs the Worker's fetch handler directly: no browser, with Lettermint, Cloudflare and the built site
 // stubbed
 
 const SECRET = 'test-secret';
@@ -34,7 +34,7 @@ const env = (overrides: Partial<Env> = {}): Env => ({
 	ASSETS: assets,
 	ENQUIRY_TO: 'inbox@example.com',
 	ENQUIRY_FROM: 'Union EV <hello@example.com>',
-	BREVO_API_KEY: 'key',
+	LETTERMINT_API_TOKEN: 'key',
 	TURNSTILE_SECRET: 'turnstile-secret',
 	FORM_SECRET: SECRET,
 	ENQUIRY_LIMITER: allow,
@@ -51,7 +51,7 @@ const valid = {
 	siteType: 'fleet-operators'
 };
 
-type Sent = { to: { email: string }[]; subject: string; textContent: string };
+type Sent = { to: string[]; reply_to?: string[]; subject: string; text: string };
 let sent: Sent[];
 let turnstilePasses: boolean;
 const realFetch = globalThis.fetch;
@@ -64,7 +64,7 @@ test.beforeEach(() => {
 		if (url.includes('challenges.cloudflare.com')) {
 			return Response.json({ success: turnstilePasses });
 		}
-		if (url.includes('api.brevo.com')) {
+		if (url.includes('api.lettermint.co')) {
 			sent.push(JSON.parse(String(init?.body)));
 			return Response.json({});
 		}
@@ -123,8 +123,8 @@ test.describe('without Turnstile (no JavaScript, or it was blocked)', () => {
 		expect(response.status).toBe(303);
 		expect(response.headers.get('location')).toBe('https://example.com/thank-you');
 		expect(sent).toHaveLength(1);
-		expect(sent[0].to[0].email).toBe('inbox@example.com');
-		expect(sent[0].textContent).toContain('Bot check: Not run');
+		expect(sent[0].to[0]).toBe('inbox@example.com');
+		expect(sent[0].text).toContain('Bot check: Not run');
 	});
 
 	test('a script gets JSON saying no confirmation is on its way', async () => {
@@ -199,11 +199,11 @@ test.describe('with Turnstile', () => {
 		const response = await post({ ...valid, ...token }, { Accept: 'application/json' });
 		expect(response.status).toBe(200);
 		expect(await response.json()).toEqual({ ok: true, confirmation: true });
-		expect(sent.map((message) => message.to[0].email)).toEqual([
-			'inbox@example.com',
-			'ada@example.com'
-		]);
-		expect(sent[0].textContent).not.toContain('Bot check');
+		expect(sent.map((message) => message.to[0])).toEqual(['inbox@example.com', 'ada@example.com']);
+		expect(sent[0].text).not.toContain('Bot check');
+		// Replies to the enquiry reach the visitor; replies to the confirmation reach the team
+		expect(sent[0].reply_to).toEqual(['ada@example.com']);
+		expect(sent[1].reply_to).toEqual(['inbox@example.com']);
 	});
 
 	test('rejects a token Cloudflare does not accept', async () => {
@@ -220,7 +220,7 @@ test.describe('with Turnstile', () => {
 			env({ RECIPIENT_LIMITER: deny })
 		);
 		expect(response.status).toBe(200);
-		expect(sent.map((message) => message.to[0].email)).toEqual(['inbox@example.com']);
+		expect(sent.map((message) => message.to[0])).toEqual(['inbox@example.com']);
 	});
 
 	test('is rate limited per IP', async () => {

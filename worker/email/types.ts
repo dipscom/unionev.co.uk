@@ -6,7 +6,7 @@ export type EmailMessage = {
 	subject: string;
 	text: string;
 	html?: string;
-	/** Same key = same email, so a retried submission isn't sent twice (only where the provider supports it; Brevo ignores it) */
+	/** Same key = same email, so a retried submission isn't sent twice (only where the provider supports it) */
 	idempotencyKey?: string;
 };
 

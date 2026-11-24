@@ -1,5 +1,7 @@
 {
 	"name": "unionev-preview",
+	// Union EV's Cloudflare account (Grant@uevcl.com's Account)
+	"account_id": "e746411b2e407da7fb65515e39086183",
 	"compatibility_date": "2026-10-27",
 	"main": "worker/index.ts",
 	"assets": {
@@ -11,9 +13,9 @@
 		"run_worker_first": ["/api/*", "/"]
 	},
 	"vars": {
-		"EMAIL_PROVIDER": "brevo",
+		"EMAIL_PROVIDER": "lettermint",
 		"ENQUIRY_TO": "grant@uevcl.com",
-		"ENQUIRY_FROM": "Union EV <hello@unionev.co.uk>"
+		"ENQUIRY_FROM": "Grant Kennedy <grant@uevcl.com>"
 	},
 	// Rate limits, per client IP unless noted (worker/env.ts). A window can only be 10 or 60 seconds
 	"ratelimits": [

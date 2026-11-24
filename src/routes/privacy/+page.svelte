@@ -18,7 +18,7 @@
 				<p class="eyebrow">Legal</p>
 				<h1 class="section-title">Privacy &amp; Cookie Notice</h1>
 			</div>
-			<p class="privacy__updated text-sm color-subtle">Last updated: 30 October 2026</p>
+			<p class="privacy__updated text-sm color-subtle">Last updated: 24 November 2026</p>
 
 			<h2>Who we are</h2>
 			<p>
@@ -60,10 +60,10 @@
 				and stricter limits instead, and we do not send you a confirmation email.
 			</p>
 			<p>
-				We use Brevo (a French company with EU data centres) to deliver the enquiry to us and, where
-				the check above ran, your confirmation email to you, so it processes your enquiry and email
-				address on our behalf. Our images and fonts are served from this website, not from a third
-				party.
+				We use Lettermint (a Dutch company that hosts and processes email in the EU) to deliver the
+				enquiry to us and, where the check above ran, your confirmation email to you, so it
+				processes your enquiry and email address on our behalf. Our images and fonts are served from
+				this website, not from a third party.
 			</p>
 
 			<h2>Our legal basis and how long we keep information</h2>

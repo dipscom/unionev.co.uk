@@ -7,7 +7,7 @@ The marketing site for Union Electric Vehicle Charging: managed EV charging for 
 - **SvelteKit, prerendered to static files.** `adapter-static` writes plain HTML and CSS to `build/`. Svelte ships no runtime to the browser (`csr = false` in `src/routes/+layout.ts`).
 - **Two tiny inline scripts** (`src/lib/client/site.js` for the menu, FAQ and audience disclosures and the image fallback; `enquiry.js` for the form) are minified and inlined into the pages. Everything except the form's robot check reads and works without JavaScript.
 - **Cloudflare Workers** hosts it (`wrangler.jsonc`). The Worker in `worker/` serves the built files, stamps the home page for the enquiry form, and handles `POST /api/enquiry`.
-- **Enquiry emails** go through Brevo behind an `EmailProvider` interface (`worker/email/`), so another provider is one new file and one `case`.
+- **Enquiry emails** go through Lettermint behind an `EmailProvider` interface (`worker/email/`), so another provider is one new file and one `case`.
 - **Self-hosted everything:** Inter via `@fontsource-variable/inter`, and photos as responsive AVIF/WebP in `src/lib/images/`. There are no third-party requests, apart from Cloudflare Turnstile, which loads when someone starts the form.
 - **CSS** follows CUBE CSS (see [CSS conventions](#css-conventions)). There is no CSS framework.
 
@@ -39,7 +39,7 @@ npm run preview      # serve build/ with Vite
 npm run preview:cf   # serve build/ through the Worker, as in production (build first)
 ```
 
-`npm run dev` and `npm run preview` do not run the Worker, so the form cannot be sent there. Use `npm run preview:cf` for that. It needs the Worker's secrets: copy `.dev.vars.example` to `.dev.vars` (ignored by git). The example holds Cloudflare's always-pass Turnstile test secret and a throwaway form secret; put a Brevo API key and a sender and recipient you can read in it to receive real emails.
+`npm run dev` and `npm run preview` do not run the Worker, so the form cannot be sent there. Use `npm run preview:cf` for that. It needs the Worker's secrets: copy `.dev.vars.example` to `.dev.vars` (ignored by git). The example holds Cloudflare's always-pass Turnstile test secret and a throwaway form secret; put a Lettermint API token and a sender and recipient you can read in it to receive real emails.
 
 Other scripts: `npm run check` (svelte-check), `npm run lint` (Prettier and ESLint), `npm run format`.
 
@@ -82,7 +82,7 @@ npm run build
 npm run deploy     # wrangler deploy
 ```
 
-Before the first deploy, set the Worker's secrets with `npx wrangler secret put <NAME>`: `BREVO_API_KEY`, `TURNSTILE_SECRET` and `FORM_SECRET` (a long random string, for example from `openssl rand -hex 32`). The sender, recipient and email provider are plain variables in `wrangler.jsonc`, and the public Turnstile site key is in `src/lib/content/site.ts`. The site currently deploys as a noindex preview (`static/_headers`). [docs/open-points.md](docs/open-points.md) lists what to finish before launch.
+Before the first deploy, set the Worker's secrets with `npx wrangler secret put <NAME>`: `LETTERMINT_API_TOKEN`, `TURNSTILE_SECRET` and `FORM_SECRET` (a long random string, for example from `openssl rand -hex 32`). The sender, recipient and email provider are plain variables in `wrangler.jsonc`, and the public Turnstile site key is in `src/lib/content/site.ts`. The site currently deploys as a noindex preview (`static/_headers`). [docs/open-points.md](docs/open-points.md) lists what to finish before launch.
 
 ## CSS conventions
 

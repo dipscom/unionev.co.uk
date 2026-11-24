@@ -1,5 +1,5 @@
 # Copy to .dev.vars for `npm run preview:cf`. Production secrets: `npx wrangler secret put <NAME>`.
-BREVO_API_KEY=xkeysib-xxxxxxxx
+LETTERMINT_API_TOKEN=lm_xxxxxxxx
 # Cloudflare's always-passes test secret (pairs with the test site key in site.ts)
 TURNSTILE_SECRET=1x0000000000000000000000000000000AA
 # Signs the plain form's timestamp. Production: a long random string, e.g. `openssl rand -hex 32`
