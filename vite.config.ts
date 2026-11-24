@@ -45,9 +45,9 @@ export default defineConfig({
 			// (they would resolve against the page and 404, e.g. the font at /inter-latin-….woff2)
 			paths: { relative: false },
 
-			// Plain static output so the site deploys unchanged to any static host.
-			// fallback gives hosts a 404.html that renders +error.svelte.
-			adapter: adapter({ fallback: '404.html' }),
+			// Plain static output so the site deploys unchanged to any static host. No SPA fallback:
+			// with csr = false it would be an empty page. 404.html is prerendered from src/routes/404/.
+			adapter: adapter(),
 
 			prerender: {
 				// /api/* belongs to the Worker (worker/index.ts), so the crawler can't fetch the

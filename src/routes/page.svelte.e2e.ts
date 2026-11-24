@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 test.describe('home page', () => {
 	test('has title, description and canonical', async ({ page }) => {
@@ -148,6 +149,20 @@ test.describe('other routes', () => {
 		const response = await page.goto('/does-not-exist');
 		expect(response?.status()).toBe(404);
 		await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+		await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
+	});
+
+	// `npm run preview` renders +error.svelte on the server, so the test above can't see what
+	// Cloudflare serves for an unknown path: the prerendered build/404.html. Check that file directly.
+	test('the built 404.html is a complete page', async ({ page }) => {
+		const html = readFileSync('build/404.html', 'utf8');
+		await page.setContent(html);
+		await expect(page).toHaveTitle('Page not found | Union EV');
+		await expect(page.getByRole('heading', { level: 1 })).toHaveText('Page not found');
+		await expect(page.getByRole('link', { name: 'Back to the home page' })).toHaveAttribute(
+			'href',
+			'/'
+		);
 		await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
 	});
 
