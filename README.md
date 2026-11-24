@@ -82,7 +82,7 @@ npm run build
 npm run deploy     # wrangler deploy
 ```
 
-Before the first deploy, set the Worker's secrets with `npx wrangler secret put <NAME>`: `LETTERMINT_API_TOKEN`, `TURNSTILE_SECRET` and `FORM_SECRET` (a long random string, for example from `openssl rand -hex 32`). The sender, recipient and email provider are plain variables in `wrangler.jsonc`, and the public Turnstile site key is in `src/lib/content/site.ts`. It is served at `https://unionev.co.uk` (a custom domain in `wrangler.jsonc`); `www.unionev.co.uk` redirects there with a Cloudflare Redirect Rule. [docs/open-points.md](docs/open-points.md) lists what to finish before launch.
+Before the first deploy, set the Worker's secrets with `npx wrangler secret put <NAME>`: `LETTERMINT_API_TOKEN`, `TURNSTILE_SECRET` and `FORM_SECRET` (a long random string, for example from `openssl rand -hex 32`). The sender, recipient, reply-to address and email provider are plain variables in `wrangler.jsonc`, and the public Turnstile site key is in `src/lib/content/site.ts`. It is served at `https://unionev.co.uk` (a custom domain in `wrangler.jsonc`); `www.unionev.co.uk` redirects there with a Cloudflare Redirect Rule. [docs/open-points.md](docs/open-points.md) lists what to finish before launch.
 
 ## CSS conventions
 

@@ -16,6 +16,8 @@ export interface Env {
 	ENQUIRY_TO: string;
 	/** Sender verified with the provider, e.g. "Union EV <hello@unionev.co.uk>" */
 	ENQUIRY_FROM: string;
+	/** Where replies to the visitor's confirmation go; the sending address has no mailbox */
+	ENQUIRY_REPLY_TO: string;
 	/** Secrets: `wrangler secret put <NAME>`, or .dev.vars locally */
 	/** Lettermint project API token (lm_...) */
 	LETTERMINT_API_TOKEN: string;

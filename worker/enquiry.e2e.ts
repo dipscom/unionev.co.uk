@@ -34,6 +34,7 @@ const env = (overrides: Partial<Env> = {}): Env => ({
 	ASSETS: assets,
 	ENQUIRY_TO: 'inbox@example.com',
 	ENQUIRY_FROM: 'Union EV <hello@example.com>',
+	ENQUIRY_REPLY_TO: 'replies@example.com',
 	LETTERMINT_API_TOKEN: 'key',
 	TURNSTILE_SECRET: 'turnstile-secret',
 	FORM_SECRET: SECRET,
@@ -203,7 +204,7 @@ test.describe('with Turnstile', () => {
 		expect(sent[0].text).not.toContain('Bot check');
 		// Replies to the enquiry reach the visitor; replies to the confirmation reach the team
 		expect(sent[0].reply_to).toEqual(['ada@example.com']);
-		expect(sent[1].reply_to).toEqual(['inbox@example.com']);
+		expect(sent[1].reply_to).toEqual(['replies@example.com']);
 	});
 
 	test('rejects a token Cloudflare does not accept', async () => {

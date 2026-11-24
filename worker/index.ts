@@ -185,7 +185,7 @@ async function sendEnquiry(
 					...enquiryAcknowledgement(data),
 					idempotencyKey: `ack-${submissionId}`,
 					// The email invites a reply; send it to the team, not the unattended sending address
-					replyTo: env.ENQUIRY_TO
+					replyTo: env.ENQUIRY_REPLY_TO
 				});
 			}
 		} catch (error) {

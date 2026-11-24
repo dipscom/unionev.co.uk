@@ -21,7 +21,10 @@
 	"vars": {
 		"EMAIL_PROVIDER": "lettermint",
 		"ENQUIRY_TO": "grant@uevcl.com",
-		"ENQUIRY_FROM": "Grant Kennedy <grant@uevcl.com>"
+		// Must be on a domain verified in Lettermint (unionev.co.uk)
+		"ENQUIRY_FROM": "Grant Kennedy <hello@unionev.co.uk>",
+		// Where replies to the visitor's confirmation email go (hello@ has no mailbox)
+		"ENQUIRY_REPLY_TO": "grant@uevcl.com"
 	},
 	// Rate limits, per client IP unless noted (worker/env.ts). A window can only be 10 or 60 seconds
 	"ratelimits": [
