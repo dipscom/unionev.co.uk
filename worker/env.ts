@@ -1,3 +1,5 @@
+import type { CounterStore } from './dailyCap';
+
 /** Cloudflare's Rate Limiting binding; the window is 10 or 60 seconds, counted per key and per location */
 export interface RateLimiter {
 	limit(options: { key: string }): Promise<{ success: boolean }>;
@@ -31,4 +33,8 @@ export interface Env {
 	PLAIN_LIMITER: RateLimiter;
 	/** Per recipient address, for the confirmation email */
 	RECIPIENT_LIMITER: RateLimiter;
+	/** Daily count of enquiries without Turnstile (worker/dailyCap.ts); a KV namespace */
+	ENQUIRY_COUNTS: CounterStore;
+	/** How many enquiries without Turnstile a day before that path pauses; a number, as vars are strings */
+	PLAIN_DAILY_LIMIT: string;
 }

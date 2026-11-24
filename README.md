@@ -50,6 +50,7 @@ The form on the home page posts to `/api/enquiry`. The Worker validates it (with
 - **With JavaScript**, Turnstile runs in the background and the form posts with fetch, showing errors in an accessible summary.
 - **Without JavaScript**, the browser posts the form itself. Turnstile cannot run, so the Worker checks a signed timestamp instead. It stamps the home page with one as it serves it (`worker/formToken.ts`), and the post must come back between 15 seconds and 24 hours later. Those enquiries also need a clean honeypot field and no web links in the text fields, have stricter rate limits, and get no confirmation email. A post that needs another go gets the form back from the Worker with the visitor's answers kept.
 - **Rate limits** (per IP, and per recipient for the confirmation) are Cloudflare Rate Limiting bindings in `wrangler.jsonc`.
+- **A daily cap** (`PLAIN_DAILY_LIMIT`, 20) on enquiries sent without Turnstile, counted in the `ENQUIRY_COUNTS` KV namespace (`worker/dailyCap.ts`). Once it is reached, that path pauses until midnight UTC and asks the visitor to turn on JavaScript or email; enquiries that passed Turnstile are never capped. A refusal is logged as "Daily cap reached".
 
 Because the Worker serves `/`, the home page is not cached. See [docs/open-points.md](docs/open-points.md) for the remaining bot-protection work.
 

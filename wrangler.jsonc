@@ -24,8 +24,12 @@
 		// Must be on a domain verified in Lettermint (unionev.co.uk)
 		"ENQUIRY_FROM": "Grant Kennedy <hello@unionev.co.uk>",
 		// Where replies to the visitor's confirmation email go (hello@ has no mailbox)
-		"ENQUIRY_REPLY_TO": "grant@uevcl.com"
+		"ENQUIRY_REPLY_TO": "grant@uevcl.com",
+		// Enquiries without Turnstile allowed a day (UTC) before that path pauses (worker/dailyCap.ts)
+		"PLAIN_DAILY_LIMIT": "20"
 	},
+	// The daily count for PLAIN_DAILY_LIMIT
+	"kv_namespaces": [{ "binding": "ENQUIRY_COUNTS", "id": "27f5752ba7f6428bb45a8c2a6449059a" }],
 	// Rate limits, per client IP unless noted (worker/env.ts). A window can only be 10 or 60 seconds
 	"ratelimits": [
 		// Enquiries that passed Turnstile

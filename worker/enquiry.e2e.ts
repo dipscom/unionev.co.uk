@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import worker from './index';
 import type { Env, RateLimiter } from './env';
+import { capKey, DEFAULT_DAILY_LIMIT, parseLimit, type CounterStore } from './dailyCap';
 import { issueFormToken, MAX_AGE_MS, MIN_AGE_MS } from './formToken';
 
 // Runs the Worker's fetch handler directly: no browser, with Lettermint, Cloudflare and the built site
@@ -9,6 +10,21 @@ import { issueFormToken, MAX_AGE_MS, MIN_AGE_MS } from './formToken';
 const SECRET = 'test-secret';
 const allow: RateLimiter = { limit: async () => ({ success: true }) };
 const deny: RateLimiter = { limit: async () => ({ success: false }) };
+
+// KV, in memory; reset before each test
+let counts: Map<string, string>;
+const memoryStore: CounterStore = {
+	get: async (key) => counts.get(key) ?? null,
+	put: async (key, value) => void counts.set(key, value)
+};
+const brokenStore: CounterStore = {
+	get: async () => {
+		throw new Error('KV unavailable');
+	},
+	put: async () => {
+		throw new Error('KV unavailable');
+	}
+};
 
 // What the build puts in the prerendered form (EnquiryForm.svelte)
 const page = '<!doctype html><form><input type="hidden" name="ft" value=""/></form>';
@@ -41,6 +57,8 @@ const env = (overrides: Partial<Env> = {}): Env => ({
 	ENQUIRY_LIMITER: allow,
 	PLAIN_LIMITER: allow,
 	RECIPIENT_LIMITER: allow,
+	ENQUIRY_COUNTS: memoryStore,
+	PLAIN_DAILY_LIMIT: '3',
 	...overrides
 });
 
@@ -59,6 +77,7 @@ const realFetch = globalThis.fetch;
 
 test.beforeEach(() => {
 	sent = [];
+	counts = new Map();
 	turnstilePasses = true;
 	globalThis.fetch = async (input, init) => {
 		const url = String(input);
@@ -190,6 +209,58 @@ test.describe('without Turnstile (no JavaScript, or it was blocked)', () => {
 			ok: false,
 			errors: { form: 'We could not confirm you are not a robot. Please send the form again.' }
 		});
+	});
+});
+
+test.describe('the daily cap on enquiries without Turnstile', () => {
+	const sendPlain = async (e = env(), headers: Record<string, string> = {}) =>
+		post({ ...valid, ft: await agedToken(MIN_AGE_MS + 1000) }, headers, e);
+
+	test('pauses the path once the day is full, keeping what was typed', async () => {
+		for (let i = 0; i < 3; i++) expect((await sendPlain()).status).toBe(303);
+		const response = await sendPlain();
+		expect(response.status).toBe(503);
+		const page = await response.text();
+		expect(page).toContain('more enquiries without JavaScript today');
+		expect(page).toContain('value="Ada Lovelace"');
+		expect(sent).toHaveLength(3);
+	});
+
+	test('a script gets the same refusal as JSON', async () => {
+		counts.set(capKey(new Date()), '3');
+		const response = await sendPlain(env(), { Accept: 'application/json' });
+		expect(response.status).toBe(503);
+		expect((await response.json()).errors.form).toContain('without JavaScript today');
+		expect(sent).toHaveLength(0);
+	});
+
+	test('only counts enquiries that passed every other check', async () => {
+		const ft = await agedToken(MIN_AGE_MS + 1000);
+		await post({ ...valid, details: 'Cheap pills https://spam.example', ft });
+		await post(valid);
+		expect(counts.size).toBe(0);
+		await sendPlain();
+		expect(counts.get(capKey(new Date()))).toBe('1');
+	});
+
+	test('never limits enquiries that passed Turnstile', async () => {
+		counts.set(capKey(new Date()), '3');
+		const response = await post({ ...valid, 'cf-turnstile-response': 'token' });
+		expect(response.status).toBe(303);
+		expect(counts.get(capKey(new Date()))).toBe('3');
+	});
+
+	test('refuses rather than sends when the store fails', async () => {
+		expect((await sendPlain(env({ ENQUIRY_COUNTS: brokenStore }))).status).toBe(503);
+		expect(sent).toHaveLength(0);
+	});
+
+	test('falls back to the default when the limit is missing or not a number', () => {
+		expect(parseLimit('5')).toBe(5);
+		expect(parseLimit('0')).toBe(0);
+		for (const bad of [undefined, '', 'twenty', '-1', '2.5']) {
+			expect(parseLimit(bad)).toBe(DEFAULT_DAILY_LIMIT);
+		}
 	});
 });
 

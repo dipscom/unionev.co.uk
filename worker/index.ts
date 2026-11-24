@@ -4,6 +4,8 @@ import {
 	type Enquiry,
 	type Field
 } from '../src/lib/enquiry/schema';
+import { site } from '../src/lib/content/site';
+import { parseLimit, takeDailySlot } from './dailyCap';
 import { createEmailProvider } from './email';
 import { enquiryAcknowledgement, enquiryNotification } from './email/templates';
 import type { Env } from './env';
@@ -69,6 +71,9 @@ const tokenProblems: Record<Exclude<TokenCheck, 'valid'>, string> = {
 	expired: 'The form timed out. Check your details, then send it again.'
 };
 
+/** When the daily cap on enquiries without Turnstile is reached (worker/dailyCap.ts) */
+const capReachedMessage = `We can't take more enquiries without JavaScript today. Turn on JavaScript and send the form again, or email us at ${site.email}.`;
+
 /** The plain form again, with what the visitor typed, and what to fix */
 async function showPlainForm(
 	env: Env,
@@ -122,6 +127,12 @@ async function handleEnquiry(request: Request, env: Env): Promise<Response> {
 		if (Object.keys(errors).length) {
 			if (showForm) return showPlainForm(env, 400, body, errors, check === 'valid');
 			return respond(request, 400, { ok: false, errors });
+		}
+		// Counted only once everything else has passed, so typos and rejected spam don't use it up
+		if (!(await takeDailySlot(env.ENQUIRY_COUNTS, parseLimit(env.PLAIN_DAILY_LIMIT)))) {
+			const paused = { form: capReachedMessage };
+			if (showForm) return showPlainForm(env, 503, body, paused, true);
+			return respond(request, 503, { ok: false, errors: paused });
 		}
 	} else {
 		const ip = request.headers.get('CF-Connecting-IP');
