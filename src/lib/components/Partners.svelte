@@ -40,23 +40,23 @@
 
 <style>
 	.partners {
-		padding-block: var(--space-10);
+		padding-block: var(--space-l);
 		background: var(--color-surface);
 		border-bottom: 1px solid var(--color-border);
 	}
 	.partners__label {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-m);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 	}
 	.partners__list {
-		--cluster-gap: var(--space-10);
+		--cluster-gap: var(--space-l);
 	}
 	.partners__item {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: var(--space-1);
+		gap: var(--space-3xs);
 	}
 	.partners__name {
 		color: var(--color-text-strong);
@@ -67,8 +67,8 @@
 	}
 	/* 44px target (WCAG 2.5.5); the negative margin keeps the layout as it was */
 	a.partners__name {
-		margin-block: calc(var(--space-2) * -1);
-		padding-block: var(--space-2);
+		margin-block: calc(var(--space-2xs) * -1);
+		padding-block: var(--space-2xs);
 	}
 	a.partners__name:hover {
 		color: var(--color-brand);

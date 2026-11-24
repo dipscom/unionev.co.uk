@@ -46,21 +46,21 @@
 
 <style>
 	.hero {
-		padding-top: var(--space-28);
+		padding-top: var(--space-3xl);
 		background: var(--gradient-hero);
 		overflow: hidden;
 	}
 	.hero__grid {
 		/* The wrapper's gutter is inside its max width here, not outside it */
 		--wrapper-max: calc(var(--w-6xl) - var(--gutter) * 2);
-		--gap: var(--space-12);
+		--gap: var(--space-xl);
 		--grid-align: start;
 	}
 	.hero__copy {
-		padding-block: var(--space-12);
+		padding-block: var(--space-xl);
 	}
 	.hero__title {
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-m);
 		font-size: var(--text-4xl);
 		line-height: var(--leading-tight);
 	}
@@ -69,12 +69,12 @@
 		text-decoration: none;
 	}
 	.hero__lead {
-		margin-bottom: var(--space-10);
+		margin-bottom: var(--space-l);
 		color: var(--color-text-on-dark-muted);
 	}
 	/* Keep each label on one line; the secondary button wraps below when space runs out */
 	.hero__actions {
-		--btn-inline: var(--space-6);
+		--btn-inline: var(--space-m);
 		--btn-wrap: nowrap;
 	}
 	.hero__media {
@@ -111,7 +111,7 @@
 		.hero__media {
 			display: flex;
 			justify-content: center;
-			padding-block: var(--space-12);
+			padding-block: var(--space-xl);
 		}
 	}
 	@media (min-width: 1280px) {

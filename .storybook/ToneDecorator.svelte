@@ -47,6 +47,6 @@
 		background: var(--color-surface-brand);
 	}
 	.tone[data-padded='true'] {
-		padding: var(--space-8);
+		padding: var(--space-l);
 	}
 </style>

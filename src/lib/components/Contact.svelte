@@ -10,7 +10,7 @@
 	tone="dark"
 	width="text"
 	class="text-center"
-	style="--flow-space: var(--space-10); --title-leading: var(--leading-tight); --lead-leading: var(--leading-relaxed)"
+	style="--flow-space: var(--space-l); --title-leading: var(--leading-tight); --lead-leading: var(--leading-relaxed)"
 >
 	<SectionHeader
 		eyebrow="Get In Touch"
@@ -33,7 +33,7 @@
 		color: var(--color-text-on-dark-muted);
 	}
 	.contact__note {
-		margin-top: var(--space-8);
+		margin-top: var(--space-l);
 		color: var(--color-text-on-dark-muted);
 	}
 </style>

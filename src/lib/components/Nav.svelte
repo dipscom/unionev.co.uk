@@ -31,7 +31,7 @@
 					<li><a href={base + link.href} class="nav__link">{link.label}</a></li>
 				{/each}
 			</ul>
-			<Button href="{base}#contact" size="sm">{site.primaryCta}</Button>
+			<Button href="{base}#contact">{site.primaryCta}</Button>
 		</div>
 	</div>
 </nav>
@@ -41,8 +41,6 @@
 		position: fixed;
 		inset: 0 0 auto;
 		z-index: 50;
-		/* Where the mobile menu popover starts: the bar's padding, 44px toggle and border */
-		--nav-height: calc(var(--space-4) * 2 + 2.75rem + 1px);
 		background: var(--color-surface-translucent);
 		backdrop-filter: blur(4px);
 		border-bottom: 1px solid var(--color-border);
@@ -50,7 +48,7 @@
 	.nav__bar {
 		--wrapper-max: calc(var(--w-6xl) - var(--gutter) * 2);
 		flex-wrap: nowrap;
-		padding-block: var(--space-4);
+		padding-block: var(--space-s);
 	}
 	/* Popovers render in the top layer, so position under the bar rather than inside the nav */
 	.nav__menu {
@@ -63,12 +61,12 @@
 		border-top: 1px solid var(--color-border);
 		background: var(--color-surface);
 		color: inherit;
-		padding: var(--space-2) var(--gutter) var(--space-4);
+		padding: var(--space-2xs) var(--gutter) var(--space-s);
 	}
 	.nav__menu:popover-open {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-1);
+		gap: var(--space-3xs);
 	}
 	.nav__menu::backdrop {
 		background: transparent;
@@ -77,10 +75,11 @@
 		display: flex;
 		flex-direction: column;
 	}
-	/* 44px targets (WCAG 2.5.5) */
+	/* 44px targets (WCAG 2.5.5), fixed rather than fluid so the bar matches --nav-height */
 	.nav__link {
-		display: block;
-		padding-block: var(--space-3);
+		display: flex;
+		align-items: center;
+		min-height: 2.75rem;
 		color: var(--color-text-muted);
 		font-size: var(--text-sm);
 		font-weight: 500;
@@ -96,7 +95,7 @@
 		/* 44px tap target */
 		min-width: 2.75rem;
 		min-height: 2.75rem;
-		padding: var(--space-3);
+		padding: var(--space-xs);
 	}
 	.nav__bar-line {
 		display: block;
@@ -105,7 +104,7 @@
 		background: var(--color-text);
 	}
 	.nav__bar-line + .nav__bar-line {
-		margin-top: var(--space-1);
+		margin-top: var(--space-3xs);
 	}
 
 	@media (min-width: 768px) {
@@ -117,7 +116,7 @@
 		.nav__links {
 			flex-direction: row;
 			align-items: center;
-			gap: var(--space-8);
+			gap: var(--space-l);
 		}
 		.nav__toggle {
 			display: none;

@@ -2,7 +2,7 @@
 	background: var(--color-surface);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-2xl);
-	padding: var(--space-8);
+	padding: var(--space-l);
 }
 /* Only cards that go somewhere get a hover state */
 a.card,

@@ -32,8 +32,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: var(--space-4);
-		padding: var(--space-5) var(--space-6);
+		gap: var(--space-s);
+		padding: var(--space-s) var(--space-m);
 		list-style: none;
 		cursor: pointer;
 		transition: background-color var(--transition);
@@ -63,6 +63,6 @@
 		transform: rotate(45deg);
 	}
 	.faq__answer {
-		padding: 0 var(--space-6) var(--space-5);
+		padding: 0 var(--space-m) var(--space-s);
 	}
 </style>

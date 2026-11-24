@@ -1,43 +1,61 @@
 import { Meta } from '@storybook/addon-docs/blocks';
-import { tokensWith, toPx } from '../tokens';
+import { tokensWith, pxRange } from '../tokens';
 
 <Meta title="Foundations/Spacing" />
+
+export const Bar = ({ width, opacity = 1 }) => (
+	<div
+		style={{
+			width,
+			height: '0.5rem',
+			background: 'var(--color-brand)',
+			opacity,
+			borderRadius: '2px'
+		}}
+	/>
+);
 
 # Spacing and layout
 
 ## Space scale
 
-`--space-N` is N quarter-rems (`--space-4` = 1rem = 16px). Use it for every margin, padding and gap; compositions take it through custom properties such as `--flow-space` and `--gap`.
+The scale is fluid (Utopia style). Each step is a multiple of a base that grows from 16px at a 375px viewport to 22px at 1280px, and stays put outside that range. Every step grows ×1.375 between the two, so spacing needs no breakpoints: pick one step and it adapts.
+
+Use it for every margin, padding and gap; compositions take it through custom properties such as `--flow-space` and `--gap`. As a guide: `3xs`–`xs` inside components (labels, icons, small controls), `s`–`l` for component padding and gaps between items, `xl`–`3xl` between blocks and for page bands.
+
+The first two bars show each step at 375px and 1280px; the third is its size at the current width of this page.
 
 <table>
 	<thead>
 		<tr>
 			<th>Token</th>
-			<th>Value</th>
-			<th>px</th>
-			<th style={{ width: '50%' }}></th>
+			<th>× base</th>
+			<th>375px</th>
+			<th>1280px</th>
+			<th style={{ width: '40%' }}></th>
 		</tr>
 	</thead>
 	<tbody>
-		{tokensWith('--space-').map((t) => (
-			<tr key={t.name}>
-				<td>
-					<code>{t.name}</code>
-				</td>
-				<td>{t.value}</td>
-				<td>{toPx(t.value)}</td>
-				<td>
-					<div
-						style={{
-							width: `var(${t.name})`,
-							height: '1rem',
-							background: 'var(--color-brand)',
-							borderRadius: '2px'
-						}}
-					/>
-				</td>
-			</tr>
-		))}
+		{tokensWith('--space-').map((t) => {
+			const range = pxRange(t.value);
+			return (
+				<tr key={t.name}>
+					<td>
+						<code>{t.name}</code>
+					</td>
+					<td>{range && range.min / 16}</td>
+					<td>{range?.min}</td>
+					<td>{range?.max}</td>
+					<td>
+						<div style={{ display: 'grid', gap: '2px' }}>
+							<Bar width={`${range?.min}px`} opacity={0.4} />
+							<Bar width={`${range?.max}px`} opacity={0.4} />
+							<Bar width={`var(${t.name})`} />
+						</div>
+					</td>
+				</tr>
+			);
+		})}
 	</tbody>
 </table>
 
@@ -52,32 +70,35 @@ import { tokensWith, toPx } from '../tokens';
 		</tr>
 	</thead>
 	<tbody>
-		{tokensWith('--w-', '--gutter', '--section-y', '--nav-height').map((t) => (
-			<tr key={t.name}>
-				<td>
-					<code>{t.name}</code>
-				</td>
-				<td>
-					{t.value} ({toPx(t.value)}px)
-				</td>
-				<td>
-					{
+		{tokensWith('--w-', '--gutter', '--nav-height').map((t) => {
+			const range = pxRange(t.value);
+			return (
+				<tr key={t.name}>
+					<td>
+						<code>{t.name}</code>
+					</td>
+					<td>
+						{t.value}
+						{range && ` (${range.min}px)`}
+					</td>
+					<td>
 						{
-							'--w-6xl': 'Default content width (.wrapper, Section width="wide")',
-							'--w-4xl': 'Section width="narrow", partners, case-study preview',
-							'--w-3xl': 'Section width="text", contact, privacy page',
-							'--gutter': 'Inline padding of .wrapper and the mobile menu',
-							'--section-y':
-								'Vertical rhythm reference for page bands (.region defaults to --space-24)',
-							'--nav-height': 'Height of the fixed nav; scroll margin for in-page anchors'
-						}[t.name]
-					}
-				</td>
-			</tr>
-		))}
+							{
+								'--w-6xl': 'Default content width (.wrapper, Section width="wide")',
+								'--w-4xl': 'Section width="narrow", partners, case-study preview',
+								'--w-3xl': 'Section width="text", contact, privacy page',
+								'--gutter': 'Inline padding of .wrapper and the mobile menu',
+								'--nav-height':
+									'Height of the fixed nav (grows with --space-s); scroll margin for in-page anchors'
+							}[t.name]
+						}
+					</td>
+				</tr>
+			);
+		})}
 	</tbody>
 </table>
 
 ## Section padding
 
-`Section size` picks the `.region` padding: `lg` = `--space-24` (default), `md` = `--space-20`, `sm` = `--space-16`. The gap after a section header is `--space-16` unless the section sets `--flow-space`.
+`Section size` picks the `.region` padding: `lg` = `--space-3xl` (default), `md` = `--space-2xl`, `sm` = `--space-xl`. The gap after a section header is `--space-2xl` unless the section sets `--flow-space`.

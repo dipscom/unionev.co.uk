@@ -49,21 +49,21 @@
 
 <style>
 	.footer {
-		padding-block: var(--space-14);
+		padding-block: var(--space-xl);
 		background: var(--color-surface-inverse);
 		color: var(--color-text-on-inverse);
 	}
 	.footer__top {
 		--repel-align: flex-start;
-		--repel-gap: var(--space-10);
-		margin-bottom: var(--space-10);
+		--repel-gap: var(--space-l);
+		margin-bottom: var(--space-l);
 	}
 	.footer__logo {
 		display: flex;
 		align-items: center;
 		width: fit-content;
-		margin-bottom: var(--space-4);
-		padding: var(--space-1-5) var(--space-3);
+		margin-bottom: var(--space-s);
+		padding: var(--space-2xs) var(--space-xs);
 		background: var(--color-surface);
 		border-radius: var(--radius-lg);
 	}
@@ -91,7 +91,7 @@
 		text-underline-offset: 0.2em;
 	}
 	.footer__heading {
-		margin-bottom: var(--space-1);
+		margin-bottom: var(--space-3xs);
 		color: var(--color-text-on-inverse);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
@@ -101,8 +101,8 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		gap: var(--space-3);
-		padding-top: var(--space-6);
+		gap: var(--space-xs);
+		padding-top: var(--space-m);
 		border-top: 1px solid var(--color-border-inverse);
 		color: var(--color-text-on-inverse);
 	}

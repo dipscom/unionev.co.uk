@@ -159,7 +159,7 @@
 
 	<div data-turnstile></div>
 
-	<button class="btn enquiry__submit" data-variant="primary" type="submit">Send enquiry</button>
+	<button class="btn enquiry__submit" data-variant="primary" data-size="sm" type="submit">Send enquiry</button>
 </form>
 
 <style>
@@ -169,9 +169,9 @@
 	}
 	.enquiry__form,
 	.enquiry__success {
-		margin-top: var(--space-8);
+		margin-top: var(--space-l);
 		border-radius: var(--radius-2xl);
-		padding: var(--space-8);
+		padding: var(--space-l);
 		background: var(--color-surface);
 		color: var(--color-text);
 		text-align: left;
@@ -182,18 +182,18 @@
 		display: none;
 	}
 	.enquiry__form {
-		--flow-space: var(--space-5);
+		--flow-space: var(--space-s);
 	}
 	.field label {
 		display: block;
-		margin-bottom: var(--space-1-5);
+		margin-bottom: var(--space-2xs);
 		font-weight: 600;
 	}
 	.field__hint {
-		margin-bottom: var(--space-1-5);
+		margin-bottom: var(--space-2xs);
 	}
 	.field__error {
-		margin-top: var(--space-1-5);
+		margin-top: var(--space-2xs);
 		color: var(--color-danger);
 	}
 	.enquiry__summary[hidden] {
@@ -202,7 +202,7 @@
 	.enquiry__summary {
 		border: 2px solid var(--color-danger);
 		border-radius: var(--radius-lg);
-		padding: var(--space-4) var(--space-5);
+		padding: var(--space-s) var(--space-s);
 		color: var(--color-danger);
 	}
 	.enquiry__summary h3 {
@@ -211,8 +211,8 @@
 		line-height: var(--leading-snug);
 	}
 	.enquiry__summary ul {
-		margin-top: var(--space-2);
-		padding-left: var(--space-5);
+		margin-top: var(--space-2xs);
+		padding-left: var(--space-s);
 		list-style: disc;
 	}
 	.enquiry__summary :global(a) {
@@ -235,7 +235,7 @@
 		opacity: 0.8;
 	}
 	.enquiry__success {
-		--flow-space: var(--space-4);
+		--flow-space: var(--space-s);
 	}
 	.enquiry__success h3 {
 		font-size: var(--text-xl);
@@ -247,7 +247,7 @@
 		font-size: var(--text-sm);
 	}
 	.enquiry__success dd {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-2xs);
 		font-weight: 600;
 	}
 </style>

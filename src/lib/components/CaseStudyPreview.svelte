@@ -35,14 +35,14 @@
 
 <style>
 	.preview {
-		--region-space: var(--space-20);
+		--region-space: var(--space-2xl);
 	}
 	.preview__card {
-		--gap: var(--space-8);
+		--gap: var(--space-l);
 		--grid-cols: 3fr 2fr;
 		--grid-align: center;
 		position: relative;
-		padding: var(--space-8);
+		padding: var(--space-l);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-2xl);
 		transition:
@@ -54,12 +54,12 @@
 		box-shadow: var(--shadow-md);
 	}
 	.preview__title {
-		margin: var(--space-2) 0 var(--space-3);
+		margin: var(--space-2xs) 0 var(--space-xs);
 		font-size: var(--text-2xl);
 		line-height: var(--leading-2xl);
 	}
 	.preview__summary {
-		margin-bottom: var(--space-5);
+		margin-bottom: var(--space-s);
 	}
 	.preview__link {
 		text-decoration: underline;
@@ -73,13 +73,13 @@
 	}
 	.preview__stats {
 		display: grid;
-		gap: var(--space-4);
+		gap: var(--space-s);
 		margin: 0;
 	}
 	.preview__stat {
 		display: flex;
 		flex-direction: column-reverse;
-		padding-bottom: var(--space-4);
+		padding-bottom: var(--space-s);
 		border-bottom: 1px solid var(--color-border-strong);
 	}
 	.preview__stat:last-of-type {
@@ -92,12 +92,6 @@
 		line-height: var(--leading-3xl);
 	}
 	.preview__asof {
-		margin-top: var(--space-4);
-	}
-	@media (min-width: 768px) {
-		.preview__card {
-			--gap: var(--space-12);
-			padding: var(--space-10);
-		}
+		margin-top: var(--space-s);
 	}
 </style>

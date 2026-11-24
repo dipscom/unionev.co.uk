@@ -17,7 +17,7 @@
 		border-color: var(--color-border-brand-subtle);
 	}
 	.stat__value {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-2xs);
 		font-size: var(--text-4xl);
 		line-height: var(--leading-4xl);
 	}

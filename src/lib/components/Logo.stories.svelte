@@ -25,7 +25,7 @@
 
 <Story name="On dark (white plate)" parameters={{ tone: 'dark' }} asChild>
 	<div
-		style="display: flex; width: fit-content; padding: var(--space-1-5) var(--space-3); background: var(--color-surface); border-radius: var(--radius-lg)"
+		style="display: flex; width: fit-content; padding: var(--space-2xs) var(--space-xs); background: var(--color-surface); border-radius: var(--radius-lg)"
 	>
 		<Logo size="footer" />
 	</div>

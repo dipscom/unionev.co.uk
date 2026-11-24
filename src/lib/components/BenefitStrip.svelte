@@ -17,17 +17,17 @@
 
 <style>
 	.strip {
-		padding-block: var(--space-4);
+		padding-block: var(--space-s);
 		color: var(--color-text-on-dark);
 		font-weight: 500;
 	}
 	.strip__list {
-		--cluster-gap: var(--space-8);
+		--cluster-gap: var(--space-l);
 	}
 	.strip__item {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--space-1-5);
+		gap: var(--space-2xs);
 	}
 	.strip__divider {
 		display: none;

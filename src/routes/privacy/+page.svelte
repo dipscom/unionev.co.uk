@@ -96,7 +96,7 @@
 
 <style>
 	.privacy {
-		padding-top: calc(var(--nav-height) + var(--space-16));
+		padding-top: calc(var(--nav-height) + var(--space-2xl));
 	}
 	.privacy .wrapper {
 		--wrapper-max: var(--w-3xl);
@@ -106,11 +106,11 @@
 		text-align: left;
 	}
 	.privacy__updated {
-		margin-top: var(--space-4);
-		margin-bottom: var(--space-8);
+		margin-top: var(--space-s);
+		margin-bottom: var(--space-l);
 	}
 	h2 {
-		margin: var(--space-8) 0 var(--space-3);
+		margin: var(--space-l) 0 var(--space-xs);
 		color: var(--color-heading);
 		font-size: var(--text-xl);
 		line-height: var(--leading-lg);

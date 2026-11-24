@@ -2,10 +2,10 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--space-2);
+	gap: var(--space-2xs);
 	border: 0;
 	border-radius: var(--radius-xl);
-	padding: var(--space-4) var(--btn-inline, var(--space-8));
+	padding: var(--space-s) var(--btn-inline, var(--space-m));
 	font-size: var(--text-base);
 	font-weight: 700;
 	line-height: var(--leading-base);
@@ -37,16 +37,16 @@
 	background: var(--color-surface-brand-soft);
 }
 .btn[data-size='sm'] {
-	/* 44px target (WCAG 2.5.5) */
+	/* 44px target (WCAG 2.5.5); the min-height sets it, so the nav bar matches --nav-height */
 	min-height: 2.75rem;
 	border-radius: var(--radius-lg);
-	padding: var(--space-2-5) var(--space-5);
+	padding: var(--space-3xs) var(--space-s);
 	font-size: var(--text-sm);
 	line-height: var(--leading-sm);
 }
 .btn[data-size='lg'] {
 	border-radius: var(--radius-2xl);
-	padding: var(--space-5) var(--space-10);
+	padding: var(--space-s) var(--space-l);
 	font-size: var(--text-lg);
 	line-height: var(--leading-lg);
 }

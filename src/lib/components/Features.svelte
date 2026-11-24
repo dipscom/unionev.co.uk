@@ -26,11 +26,11 @@
 
 <style>
 	.feature {
-		--with-icon-gap: var(--space-5);
-		padding: var(--space-7);
+		--with-icon-gap: var(--space-s);
+		padding: var(--space-m);
 	}
 	.feature__title {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-2xs);
 		font-size: var(--text-base);
 		line-height: var(--leading-base);
 	}

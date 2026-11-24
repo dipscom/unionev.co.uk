@@ -10,7 +10,7 @@
 	size="md"
 	width="narrow"
 	class="text-center"
-	style="--flow-space: var(--space-8)"
+	style="--flow-space: var(--space-l)"
 >
 	<SectionHeader
 		eyebrow="Free. No obligation. No commitment."
@@ -35,7 +35,7 @@
 		--switcher-wrap: nowrap;
 	}
 	.cta__next {
-		margin-top: var(--space-8);
+		margin-top: var(--space-l);
 		color: var(--color-text-on-dark-muted);
 		font-size: var(--text-15);
 		line-height: var(--leading-relaxed);
@@ -44,7 +44,7 @@
 		color: var(--color-text-on-dark);
 	}
 	.cta__note {
-		margin-top: var(--space-4);
+		margin-top: var(--space-s);
 		color: var(--color-text-on-inverse);
 	}
 </style>

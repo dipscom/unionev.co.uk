@@ -50,7 +50,7 @@ The wordmark is a single-colour SVG in brand green, <strong><code>{value('--colo
 	>
 		<div
 			style={{
-				padding: 'var(--space-1-5) var(--space-3)',
+				padding: 'var(--space-2xs) var(--space-xs)',
 				background: 'var(--color-surface)',
 				borderRadius: 'var(--radius-lg)'
 			}}
@@ -68,7 +68,7 @@ The wordmark is a single-colour SVG in brand green, <strong><code>{value('--colo
 
 - **Sizes:** 2.5rem tall in the nav (`size="nav"`, loaded eagerly), 2rem in the footer (`size="footer"`, lazy). Don't go below 2rem: the "CHARGING" line stops being legible.
 - **On light backgrounds** (white, `--color-surface-alt`) use it as is.
-- **On dark backgrounds** the green mark has too little contrast, so it sits on a white plate with `--space-1-5` × `--space-3` padding and `--radius-lg`, as in the footer. Don't recolour the SVG.
+- **On dark backgrounds** the green mark has too little contrast, so it sits on a white plate with `--space-2xs` × `--space-xs` padding and `--radius-lg`, as in the footer. Don't recolour the SVG.
 - **Clear space:** keep at least the plate padding clear around it; never crowd it with text.
 - **Alt text** is "Union Electric Vehicle Charging". The SVG also carries its own `<title>`.
 

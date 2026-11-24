@@ -55,7 +55,7 @@
 </Story>
 
 <Story name="All variants and sizes" asChild>
-	<div class="flow" style="--flow-space: var(--space-6)">
+	<div class="flow" style="--flow-space: var(--space-m)">
 		{#each ['primary', 'outline'] as const as variant (variant)}
 			<div class="cluster" style="--cluster-justify: flex-start">
 				{#each ['sm', 'md', 'lg'] as const as size (size)}

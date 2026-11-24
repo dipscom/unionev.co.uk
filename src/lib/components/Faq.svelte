@@ -24,12 +24,12 @@
 
 <style>
 	.faq-list {
-		--flow-space: var(--space-4);
+		--flow-space: var(--space-s);
 		/* Below the header, which the wrapper's flow would space by 4rem */
-		margin-top: var(--space-14);
+		margin-top: var(--space-xl);
 	}
 	.faq-more {
-		margin-top: var(--space-10);
+		margin-top: var(--space-l);
 	}
 	.faq-more a {
 		color: var(--color-brand);

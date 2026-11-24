@@ -27,7 +27,7 @@
 <Story name="Gallery" asChild>
 	<ul class="icon-gallery">
 		{#each iconNames as name (name)}
-			<li class="card text-center flow" style="--flow-space: var(--space-3)">
+			<li class="card text-center flow" style="--flow-space: var(--space-xs)">
 				<span class="color-brand" style="display: flex; justify-content: center">
 					<Icon {name} size="2rem" />
 				</span>
@@ -40,7 +40,7 @@
 <Story name="Sizes" asChild>
 	<div class="cluster" style="--cluster-justify: flex-start; --cluster-align: flex-end">
 		{#each ['0.875rem', '1rem', '1.25rem', '1.5rem', '1.75rem'] as size (size)}
-			<div class="text-center flow" style="--flow-space: var(--space-2)">
+			<div class="text-center flow" style="--flow-space: var(--space-2xs)">
 				<span class="color-brand" style="display: flex; justify-content: center">
 					<Icon name="plug" {size} />
 				</span>
@@ -54,9 +54,9 @@
 	.icon-gallery {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-		gap: var(--space-4);
+		gap: var(--space-s);
 	}
 	.icon-gallery :global(.card) {
-		padding: var(--space-5);
+		padding: var(--space-s);
 	}
 </style>

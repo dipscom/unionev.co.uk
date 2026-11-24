@@ -94,12 +94,21 @@ export const typeScale = () =>
 		leading: tokens.find((t) => t.name === size.name.replace('--text-', '--leading-')) ?? null
 	}));
 
-/** rem/px value in px, for drawing the scales */
-export const toPx = (value: string) => {
-	const number = parseFloat(value);
-	if (value.endsWith('rem')) return number * 16;
-	if (value.endsWith('px')) return number;
-	return number;
+const lengthPx = (length: string) => {
+	const number = parseFloat(length);
+	if (length.endsWith('rem')) return number * 16;
+	if (length.endsWith('px')) return number;
+	return null;
+};
+
+/**
+ * Smallest and largest size in px, for drawing the scales: both ends of a `clamp()`, or the same
+ * number twice for a rem/px length. `null` for anything else, such as a `calc()`.
+ */
+export const pxRange = (value: string) => {
+	const clamp = value.match(/^clamp\(\s*([^,]+),[^,]+,\s*([^)]+)\)$/);
+	const [min, max] = (clamp ? [clamp[1], clamp[2]] : [value, value]).map((v) => lengthPx(v.trim()));
+	return min === null || max === null ? null : { min, max };
 };
 
 /* WCAG 2 contrast, for opaque hex colours only */

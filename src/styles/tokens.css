@@ -1,5 +1,6 @@
 /*
- * Design tokens. Values mirror the Tailwind classes used on the original site.
+ * Design tokens. Most values mirror the Tailwind classes used on the original site; spacing is
+ * a fluid scale of its own.
  * Breakpoints cannot be CSS variables inside @media, so they are documented here
  * and used literally: md = 768px, lg = 1024px, xl = 1280px.
  *
@@ -97,24 +98,20 @@
 	--leading-snug: 1.5;
 	--leading-relaxed: 1.625;
 
-	/* Space scale: 0.25rem steps, named by quarter-rems */
-	--space-1: 0.25rem;
-	--space-1-5: 0.375rem;
-	--space-2: 0.5rem;
-	--space-2-5: 0.625rem;
-	--space-3: 0.75rem;
-	--space-4: 1rem;
-	--space-5: 1.25rem;
-	--space-6: 1.5rem;
-	--space-7: 1.75rem;
-	--space-8: 2rem;
-	--space-10: 2.5rem;
-	--space-12: 3rem;
-	--space-14: 3.5rem;
-	--space-16: 4rem;
-	--space-20: 5rem;
-	--space-24: 6rem;
-	--space-28: 7rem;
+	/*
+	 * Space scale, fluid (Utopia style): each step is a multiple of a base that grows from 16px at a
+	 * 375px viewport to 22px at 1280px, so every step grows x1.375 and none needs a breakpoint.
+	 * clamp(min, intercept + slope vw, max), slope = (max - min) / (1280 - 375).
+	 */
+	--space-3xs: clamp(0.25rem, 0.2112rem + 0.1657vw, 0.3438rem);
+	--space-2xs: clamp(0.5rem, 0.4223rem + 0.3315vw, 0.6875rem);
+	--space-xs: clamp(0.75rem, 0.6335rem + 0.4972vw, 1.0312rem);
+	--space-s: clamp(1rem, 0.8446rem + 0.663vw, 1.375rem);
+	--space-m: clamp(1.5rem, 1.2669rem + 0.9945vw, 2.0625rem);
+	--space-l: clamp(2rem, 1.6892rem + 1.326vw, 2.75rem);
+	--space-xl: clamp(3rem, 2.5338rem + 1.989vw, 4.125rem);
+	--space-2xl: clamp(4rem, 3.3785rem + 2.6519vw, 5.5rem);
+	--space-3xl: clamp(6rem, 5.0677rem + 3.9779vw, 8.25rem);
 
 	/* Radii */
 	--radius-lg: 0.5rem;
@@ -128,8 +125,8 @@
 	--w-4xl: 56rem;
 	--w-3xl: 48rem;
 	--gutter: 1.5rem;
-	--section-y: 6rem;
-	--nav-height: 4.5625rem;
+	/* The nav bar's padding, 44px toggle and bottom border */
+	--nav-height: calc(var(--space-s) * 2 + 2.75rem + 1px);
 
 	/* Shadows */
 	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);

@@ -11,7 +11,7 @@
 			docs: {
 				description: {
 					component:
-						'The `.card` block (`src/styles/blocks/card.css`): white surface, hairline border, `--radius-2xl`, `--space-8` padding. Only cards that go somewhere (`a.card`, `button.card`, `summary.card`) get the hover state. `StatCard`, `QuoteCard` and the audience cards build on it.'
+						'The `.card` block (`src/styles/blocks/card.css`): white surface, hairline border, `--radius-2xl`, `--space-l` padding. Only cards that go somewhere (`a.card`, `button.card`, `summary.card`) get the hover state. `StatCard`, `QuoteCard` and the audience cards build on it.'
 				}
 			}
 		},

@@ -1,6 +1,6 @@
 .check-list {
 	display: grid;
-	gap: var(--space-3);
+	gap: var(--space-xs);
 	color: var(--color-text-muted);
 }
 .check-list__text {

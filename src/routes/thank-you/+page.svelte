@@ -26,9 +26,9 @@
 
 <style>
 	.thanks {
-		padding-top: calc(var(--nav-height) + var(--space-24));
+		padding-top: calc(var(--nav-height) + var(--space-3xl));
 	}
 	.thanks__action {
-		margin-top: var(--space-8);
+		margin-top: var(--space-l);
 	}
 </style>

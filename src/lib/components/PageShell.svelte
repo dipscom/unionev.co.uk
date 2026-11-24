@@ -26,7 +26,7 @@
 		top: 0.75rem;
 		left: 0.75rem;
 		z-index: 100;
-		padding: var(--space-3) var(--space-4);
+		padding: var(--space-xs) var(--space-s);
 		background: var(--color-surface);
 		border-radius: var(--radius-lg);
 		box-shadow: var(--shadow-md);

@@ -5,13 +5,13 @@
 	import SectionHeader from './SectionHeader.svelte';
 </script>
 
-<Section style="--flow-space: var(--space-12)">
+<Section style="--flow-space: var(--space-xl)">
 	<SectionHeader
 		eyebrow="Who We Work With"
 		title="Powering people where they live, work and connect"
 		lead="Choose the one that describes you to see how we can help."
 	/>
-	<ul class="grid audiences" data-layout="quarters-2up" style="--gap: var(--space-4)">
+	<ul class="grid audiences" data-layout="quarters-2up" style="--gap: var(--space-s)">
 		{#each audiences as audience (audience.slug)}
 			<li class="audiences__item">
 				<AudienceItem {audience} />

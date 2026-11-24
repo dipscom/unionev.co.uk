@@ -13,7 +13,7 @@
 	let {
 		href,
 		variant = 'primary',
-		size = 'md',
+		size = 'sm',
 		class: className = '',
 		children,
 		...rest

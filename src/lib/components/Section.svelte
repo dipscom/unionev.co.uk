@@ -31,8 +31,8 @@
 
 	const regionSpace = {
 		lg: '',
-		md: '--region-space: var(--space-20);',
-		sm: '--region-space: var(--space-16);'
+		md: '--region-space: var(--space-2xl);',
+		sm: '--region-space: var(--space-xl);'
 	};
 	const wrapperMax = {
 		wide: '',
@@ -65,6 +65,6 @@
 <style>
 	/* The gap after the header; a caller's `style` can set another */
 	.flow {
-		--flow-space: var(--space-16);
+		--flow-space: var(--space-2xl);
 	}
 </style>

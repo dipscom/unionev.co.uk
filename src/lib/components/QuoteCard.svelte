@@ -25,14 +25,14 @@
 	}
 	.quote__mark {
 		display: flex;
-		margin-bottom: var(--space-3);
+		margin-bottom: var(--space-xs);
 	}
 	/* Lucide's quote is a closing mark (”): mirror it to face the text */
 	.quote__mark :global(.icon) {
 		transform: scaleX(-1);
 	}
 	.quote__text {
-		margin: 0 0 var(--space-4);
+		margin: 0 0 var(--space-s);
 		color: var(--color-text-soft);
 		font-size: var(--text-base);
 		line-height: var(--leading-relaxed);

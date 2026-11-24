@@ -12,7 +12,7 @@
 			docs: {
 				description: {
 					component:
-						'A page band: `.region` padding, a centred `.wrapper` and a `.flow` with `--space-16` after the header. `tone` sets the background (`dark` applies `.theme-dark`, which reassigns the colour roles inside), `size` the vertical padding (24, 20 or 16 on the space scale) and `width` the content width (`--w-6xl`, `--w-4xl`, `--w-3xl`). Every Section contains a `SectionHeader`, which names it.'
+						'A page band: `.region` padding, a centred `.wrapper` and a `.flow` with `--space-2xl` after the header. `tone` sets the background (`dark` applies `.theme-dark`, which reassigns the colour roles inside), `size` the vertical padding (`--space-3xl`, `--space-2xl` or `--space-xl`) and `width` the content width (`--w-6xl`, `--w-4xl`, `--w-3xl`). Every Section contains a `SectionHeader`, which names it.'
 				}
 			}
 		},

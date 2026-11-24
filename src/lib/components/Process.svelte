@@ -47,24 +47,24 @@
 	.step__card {
 		position: relative;
 		height: 100%;
-		padding: var(--space-6);
+		padding: var(--space-m);
 		background: var(--color-surface);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius-2xl);
 	}
 	.step__number {
-		margin-bottom: var(--space-4);
+		margin-bottom: var(--space-s);
 		font-size: var(--text-3xl);
 		line-height: var(--leading-3xl);
 	}
 	.step__title {
-		margin-bottom: var(--space-2);
+		margin-bottom: var(--space-2xs);
 		font-size: var(--text-base);
 		line-height: var(--leading-base);
 	}
 	.step__needs {
-		margin-top: var(--space-4);
-		padding-top: var(--space-4);
+		margin-top: var(--space-s);
+		padding-top: var(--space-s);
 		border-top: 1px solid var(--color-border);
 		font-size: var(--text-13);
 		line-height: var(--leading-snug);

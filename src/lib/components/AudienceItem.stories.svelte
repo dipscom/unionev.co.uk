@@ -22,7 +22,7 @@
 </script>
 
 {#snippet template(args: { audience: (typeof audiences)[number] })}
-	<ul class="grid" data-layout="quarters-2up" style="--gap: var(--space-4); grid-auto-flow: dense">
+	<ul class="grid" data-layout="quarters-2up" style="--gap: var(--space-s); grid-auto-flow: dense">
 		<li style="display: contents"><AudienceItem {...args} /></li>
 	</ul>
 {/snippet}
@@ -39,7 +39,7 @@
 />
 
 <Story name="All audiences" asChild>
-	<ul class="grid" data-layout="quarters-2up" style="--gap: var(--space-4); grid-auto-flow: dense">
+	<ul class="grid" data-layout="quarters-2up" style="--gap: var(--space-s); grid-auto-flow: dense">
 		{#each audiences as audience (audience.slug)}
 			<li style="display: contents"><AudienceItem {audience} /></li>
 		{/each}
