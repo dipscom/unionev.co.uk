@@ -18,8 +18,13 @@ export const site = {
 	responseCommitment: 'We aim to reply within one working day.',
 	/** Not yet supplied; the contact section only shows it once set */
 	phone: null as string | null,
-	/** Public Cloudflare Turnstile site key. This is Cloudflare's always-passes test key; replace for production */
-	turnstileSiteKey: '1x00000000000000000000AA',
+	/**
+	 * Public Cloudflare Turnstile site key ("Union EV enquiry form" widget, hostname unionev.co.uk).
+	 * Pairs with the TURNSTILE_SECRET Worker secret. It does not work on localhost: to send the form
+	 * through `npm run preview:cf`, swap in Cloudflare's test key '1x00000000000000000000AA' locally
+	 * (it pairs with the test secret in .dev.vars.example)
+	 */
+	turnstileSiteKey: '0x4AAAAAAGQ9AEC3q0E9B-6T',
 	linkedin: 'https://www.linkedin.com/company/union-ev',
 	registered: 'Registered in England & Wales',
 	// Not yet supplied (see docs/open-points.md); the footer only shows them once set
