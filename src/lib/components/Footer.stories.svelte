@@ -26,7 +26,7 @@
 	args={{ base: '/' }}
 	parameters={{
 		sveltekit_experimental: {
-			state: { page: { url: new URL('https://www.unionev.co.uk/privacy') } }
+			state: { page: { url: new URL('https://unionev.co.uk/privacy') } }
 		}
 	}}
 />

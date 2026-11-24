@@ -1,7 +1,7 @@
 export const site = {
 	name: 'Union EV',
 	legalName: 'Union Electric Vehicle Charging Limited',
-	origin: 'https://www.unionev.co.uk',
+	origin: 'https://unionev.co.uk',
 	title: 'Union EV | Managed EV Charging for Residential Sites, Workplaces & Depots',
 	description:
 		'Managed EV charging for residential sites, workplaces, destinations and fleet depots across the UK, with flexible funding. We survey, install, operate and maintain.',

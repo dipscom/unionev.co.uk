@@ -12,7 +12,7 @@ test.describe('home page', () => {
 		);
 		await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
 			'href',
-			'https://www.unionev.co.uk/'
+			'https://unionev.co.uk/'
 		);
 		await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1);
 		await expect(page.locator('h1')).toBeVisible();
@@ -153,11 +153,11 @@ test.describe('other routes', () => {
 
 	test('robots.txt and sitemap.xml are served', async ({ request }) => {
 		const robots = await request.get('/robots.txt');
-		expect(await robots.text()).toContain('Sitemap: https://www.unionev.co.uk/sitemap.xml');
+		expect(await robots.text()).toContain('Sitemap: https://unionev.co.uk/sitemap.xml');
 		const sitemap = await request.get('/sitemap.xml');
 		const xml = await sitemap.text();
-		expect(xml).toContain('<loc>https://www.unionev.co.uk/</loc>');
-		expect(xml).toContain('<loc>https://www.unionev.co.uk/privacy</loc>');
+		expect(xml).toContain('<loc>https://unionev.co.uk/</loc>');
+		expect(xml).toContain('<loc>https://unionev.co.uk/privacy</loc>');
 	});
 });
 

@@ -3,6 +3,12 @@
 	// Union EV's Cloudflare account (Grant@uevcl.com's Account)
 	"account_id": "e746411b2e407da7fb65515e39086183",
 	"compatibility_date": "2026-10-27",
+	// The live site is unionev.co.uk. www is attached too, but a Cloudflare Redirect Rule (dashboard)
+	// sends it to unionev.co.uk before the Worker runs; if the rule is off, www still serves the site
+	"routes": [
+		{ "pattern": "unionev.co.uk", "custom_domain": true },
+		{ "pattern": "www.unionev.co.uk", "custom_domain": true }
+	],
 	"main": "worker/index.ts",
 	"assets": {
 		"directory": "./build",
